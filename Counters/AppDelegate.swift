@@ -2,8 +2,6 @@
 //  AppDelegate.swift
 //  Counters
 //
-//  Created by Fabio Cezar Salata on 31/05/21.
-//
 
 import UIKit
 
@@ -17,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
 
         let navigationController = UINavigationController()
+
+        appCoordinator = AppCoordinator(navigationController: navigationController)
+        appCoordinator.start()
 
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

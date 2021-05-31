@@ -3,7 +3,6 @@ import UIKit
 final class Button: UIButton {
 
     // MARK: - Properties
-
     override var isEnabled: Bool {
         get { super.isEnabled }
         set {
@@ -21,7 +20,6 @@ final class Button: UIButton {
     }
 
     // MARK: - Initialization
-
     init() {
         super.init(frame: .zero)
         configureUI()
@@ -32,11 +30,12 @@ final class Button: UIButton {
         self.setTitle(title, for: .normal)
     }
 
-    @available(*, unavailable)
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configureUI()
+    }
     
     // MARK: - Internal Methods
-    
     override func setTitle(_ title: String?, for state: UIControl.State) {
         guard let title = title else {
             return super.setTitle(nil, for: state)
@@ -46,7 +45,6 @@ final class Button: UIButton {
 }
 
 // MARK: - Private definitions
-
 private extension Button {
 
     enum ColorConstants {

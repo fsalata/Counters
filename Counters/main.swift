@@ -1,8 +1,6 @@
 //
 //  main.swift
-//  MoodDetector
-//
-//  Created by Fabio Cezar Salata on 16/04/21.
+//  Counters
 //
 
 import UIKit

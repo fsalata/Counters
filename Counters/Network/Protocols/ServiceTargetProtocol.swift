@@ -1,8 +1,6 @@
 //
 //  ServiceTargetProtocol.swift
-//  MovieDB
-//
-//  Created by Fábio Salata on 05/11/20.
+//  Counters
 //
 
 import Foundation

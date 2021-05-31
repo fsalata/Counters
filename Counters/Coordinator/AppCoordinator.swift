@@ -1,6 +1,6 @@
 //
 //  AppCoordiantor.swift
-//  MoodDetector
+//  Counters
 //
 //  Created by Fabio Cezar Salata on 14/04/21.
 //
@@ -15,6 +15,7 @@ class AppCoordinator: Coordinator {
     }
 
     func start() {
-        
+        let welcomeCoordinator = WelcomeCoordinator(navigationController: navigationController)
+        welcomeCoordinator.start()
     }
 }
