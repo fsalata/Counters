@@ -11,6 +11,11 @@
 		00A103012665113500E661CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00A103002665113500E661CD /* Assets.xcassets */; };
 		00A103042665113500E661CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00A103022665113500E661CD /* LaunchScreen.storyboard */; };
 		00A1030F2665113500E661CD /* CountersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1030E2665113500E661CD /* CountersTests.swift */; };
+		00A1033E2665189A00E661CD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1033D2665189A00E661CD /* Button.swift */; };
+		00A10342266518D000E661CD /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A10341266518D000E661CD /* main.swift */; };
+		00A10346266518DD00E661CD /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A10345266518DD00E661CD /* TestingAppDelegate.swift */; };
+		00A1034E2665196400E661CD /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1034C2665196400E661CD /* AppCoordinator.swift */; };
+		00A1034F2665196400E661CD /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1034D2665196400E661CD /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +37,11 @@
 		00A1030A2665113500E661CD /* CountersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00A1030E2665113500E661CD /* CountersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersTests.swift; sourceTree = "<group>"; };
 		00A103102665113500E661CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00A1033D2665189A00E661CD /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		00A10341266518D000E661CD /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		00A10345266518DD00E661CD /* TestingAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
+		00A1034C2665196400E661CD /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		00A1034D2665196400E661CD /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,10 +83,13 @@
 		00A102F62665113400E661CD /* Counters */ = {
 			isa = PBXGroup;
 			children = (
+				00A10341266518D000E661CD /* main.swift */,
 				00A102F72665113400E661CD /* AppDelegate.swift */,
-				00A103002665113500E661CD /* Assets.xcassets */,
+				00A1034B2665196400E661CD /* Coordinator */,
 				00A103022665113500E661CD /* LaunchScreen.storyboard */,
 				00A103052665113500E661CD /* Info.plist */,
+				00A1033C2665188100E661CD /* UIComponents */,
+				00A10339266517A300E661CD /* Resources */,
 			);
 			path = Counters;
 			sourceTree = "<group>";
@@ -84,10 +97,36 @@
 		00A1030D2665113500E661CD /* CountersTests */ = {
 			isa = PBXGroup;
 			children = (
+				00A10345266518DD00E661CD /* TestingAppDelegate.swift */,
 				00A1030E2665113500E661CD /* CountersTests.swift */,
 				00A103102665113500E661CD /* Info.plist */,
 			);
 			path = CountersTests;
+			sourceTree = "<group>";
+		};
+		00A10339266517A300E661CD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				00A103002665113500E661CD /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		00A1033C2665188100E661CD /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				00A1033D2665189A00E661CD /* Button.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		00A1034B2665196400E661CD /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				00A1034C2665196400E661CD /* AppCoordinator.swift */,
+				00A1034D2665196400E661CD /* Coordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,7 +228,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00A1034E2665196400E661CD /* AppCoordinator.swift in Sources */,
 				00A102F82665113400E661CD /* AppDelegate.swift in Sources */,
+				00A1034F2665196400E661CD /* Coordinator.swift in Sources */,
+				00A1033E2665189A00E661CD /* Button.swift in Sources */,
+				00A10342266518D000E661CD /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00A1030F2665113500E661CD /* CountersTests.swift in Sources */,
+				00A10346266518DD00E661CD /* TestingAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
