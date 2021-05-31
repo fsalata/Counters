@@ -25,6 +25,17 @@
 		00A1036826651BF200E661CD /* ServiceTargetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1035E26651BF200E661CD /* ServiceTargetProtocol.swift */; };
 		00A1036926651BF200E661CD /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1035F26651BF200E661CD /* APIProtocol.swift */; };
 		00A1036A26651BF200E661CD /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1036026651BF200E661CD /* URLSessionProtocol.swift */; };
+		00A1038526651EDC00E661CD /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1037F26651EDC00E661CD /* WelcomeViewModel.swift */; };
+		00A1038626651EDC00E661CD /* WelcomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1038126651EDC00E661CD /* WelcomeCoordinator.swift */; };
+		00A1038726651EDC00E661CD /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1038326651EDC00E661CD /* WelcomeViewController.swift */; };
+		00A1038826651EDC00E661CD /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A1038426651EDC00E661CD /* WelcomeViewController.xib */; };
+		00A103922665204200E661CD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1038E2665204100E661CD /* CustomTextField.swift */; };
+		00A103932665204200E661CD /* RoundCornersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1038F2665204100E661CD /* RoundCornersView.swift */; };
+		00A103942665204200E661CD /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103902665204100E661CD /* FeedbackView.swift */; };
+		00A103952665204200E661CD /* FeedbackMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103912665204100E661CD /* FeedbackMessage.swift */; };
+		00A1039F2665206900E661CD /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1039B2665206900E661CD /* UIStackView+Extensions.swift */; };
+		00A103AA266522C800E661CD /* UIImage+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103A9266522C800E661CD /* UIImage+Badge.swift */; };
+		00A103AF266526A600E661CD /* WelcomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103AE266526A600E661CD /* WelcomeFeature.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +71,17 @@
 		00A1035E26651BF200E661CD /* ServiceTargetProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceTargetProtocol.swift; sourceTree = "<group>"; };
 		00A1035F26651BF200E661CD /* APIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		00A1036026651BF200E661CD /* URLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
+		00A1037F26651EDC00E661CD /* WelcomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		00A1038126651EDC00E661CD /* WelcomeCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeCoordinator.swift; sourceTree = "<group>"; };
+		00A1038326651EDC00E661CD /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		00A1038426651EDC00E661CD /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
+		00A1038E2665204100E661CD /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		00A1038F2665204100E661CD /* RoundCornersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundCornersView.swift; sourceTree = "<group>"; };
+		00A103902665204100E661CD /* FeedbackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
+		00A103912665204100E661CD /* FeedbackMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackMessage.swift; sourceTree = "<group>"; };
+		00A1039B2665206900E661CD /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
+		00A103A9266522C800E661CD /* UIImage+Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Badge.swift"; sourceTree = "<group>"; };
+		00A103AE266526A600E661CD /* WelcomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFeature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +127,12 @@
 				00A102F72665113400E661CD /* AppDelegate.swift */,
 				00A1035426651BF200E661CD /* Network */,
 				00A1034B2665196400E661CD /* Coordinator */,
-				00A103022665113500E661CD /* LaunchScreen.storyboard */,
-				00A103052665113500E661CD /* Info.plist */,
+				00A1037D26651EDC00E661CD /* Welcome */,
+				00A1038B26651EF600E661CD /* Launch */,
 				00A1033C2665188100E661CD /* UIComponents */,
+				00A103982665206900E661CD /* Extensions */,
 				00A10339266517A300E661CD /* Resources */,
+				00A103052665113500E661CD /* Info.plist */,
 			);
 			path = Counters;
 			sourceTree = "<group>";
@@ -135,6 +159,10 @@
 			isa = PBXGroup;
 			children = (
 				00A1033D2665189A00E661CD /* Button.swift */,
+				00A1038E2665204100E661CD /* CustomTextField.swift */,
+				00A103912665204100E661CD /* FeedbackMessage.swift */,
+				00A103902665204100E661CD /* FeedbackView.swift */,
+				00A1038F2665204100E661CD /* RoundCornersView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -178,6 +206,67 @@
 				00A1035826651BF200E661CD /* URLRequest+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		00A1037D26651EDC00E661CD /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				00A103AD2665268500E661CD /* Model */,
+				00A1038026651EDC00E661CD /* Coordinator */,
+				00A1037E26651EDC00E661CD /* ViewModel */,
+				00A1038226651EDC00E661CD /* Views */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		00A1037E26651EDC00E661CD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				00A1037F26651EDC00E661CD /* WelcomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		00A1038026651EDC00E661CD /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				00A1038126651EDC00E661CD /* WelcomeCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		00A1038226651EDC00E661CD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				00A1038326651EDC00E661CD /* WelcomeViewController.swift */,
+				00A1038426651EDC00E661CD /* WelcomeViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		00A1038B26651EF600E661CD /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				00A103022665113500E661CD /* LaunchScreen.storyboard */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		00A103982665206900E661CD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				00A1039B2665206900E661CD /* UIStackView+Extensions.swift */,
+				00A103A9266522C800E661CD /* UIImage+Badge.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		00A103AD2665268500E661CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00A103AE266526A600E661CD /* WelcomeFeature.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +351,7 @@
 			files = (
 				00A103042665113500E661CD /* LaunchScreen.storyboard in Resources */,
 				00A103012665113500E661CD /* Assets.xcassets in Resources */,
+				00A1038826651EDC00E661CD /* WelcomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,19 +370,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				00A1036A26651BF200E661CD /* URLSessionProtocol.swift in Sources */,
+				00A103942665204200E661CD /* FeedbackView.swift in Sources */,
+				00A1038526651EDC00E661CD /* WelcomeViewModel.swift in Sources */,
 				00A1036626651BF200E661CD /* API.swift in Sources */,
+				00A103952665204200E661CD /* FeedbackMessage.swift in Sources */,
+				00A1038626651EDC00E661CD /* WelcomeCoordinator.swift in Sources */,
 				00A1036726651BF200E661CD /* URL+Extensions.swift in Sources */,
+				00A1038726651EDC00E661CD /* WelcomeViewController.swift in Sources */,
+				00A1039F2665206900E661CD /* UIStackView+Extensions.swift in Sources */,
 				00A1034E2665196400E661CD /* AppCoordinator.swift in Sources */,
 				00A1036226651BF200E661CD /* APIClient.swift in Sources */,
+				00A103922665204200E661CD /* CustomTextField.swift in Sources */,
+				00A103AA266522C800E661CD /* UIImage+Badge.swift in Sources */,
 				00A102F82665113400E661CD /* AppDelegate.swift in Sources */,
 				00A1036426651BF200E661CD /* URLRequest+Extensions.swift in Sources */,
 				00A1034F2665196400E661CD /* Coordinator.swift in Sources */,
 				00A1036826651BF200E661CD /* ServiceTargetProtocol.swift in Sources */,
 				00A1036926651BF200E661CD /* APIProtocol.swift in Sources */,
+				00A103AF266526A600E661CD /* WelcomeFeature.swift in Sources */,
 				00A1033E2665189A00E661CD /* Button.swift in Sources */,
 				00A10342266518D000E661CD /* main.swift in Sources */,
 				00A1036526651BF200E661CD /* RequestMethod.swift in Sources */,
 				00A1036126651BF200E661CD /* APIError.swift in Sources */,
+				00A103932665204200E661CD /* RoundCornersView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

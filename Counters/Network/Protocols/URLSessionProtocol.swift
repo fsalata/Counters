@@ -1,8 +1,6 @@
 //
 //  URLSessionProtocol.swift
-//  PublicGists
-//
-//  Created by Fabio Cezar Salata on 13/04/21.
+//  Counters
 //
 
 import Foundation
