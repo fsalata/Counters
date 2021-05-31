@@ -91,4 +91,4 @@ iOSInjectionProject/
 
 # Others
 .DS_Store 
-*/node_modules
+Backend-node/node_modules
