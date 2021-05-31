@@ -1,0 +1,18 @@
+{
+  "name": "cornershop-toy-backend",
+  "version": "0.0.2",
+  "description": "Toy backend for Cornershop's frontend/mobile tests",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Osvaldo Mena",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "compression": "^1.6.2",
+    "express": "^4.14.1",
+    "lodash": "^4.17.4",
+    "morgan": "^1.8.1"
+  }
+}
