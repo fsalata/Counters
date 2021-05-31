@@ -17,8 +17,9 @@ final class WelcomeCoordinator: Coordinator {
     func start() {
         let viewModel = WelcomeViewModel()
         let welcomeViewController = WelcomeViewController(coordinator: self, viewModel: viewModel)
+        welcomeViewController.modalPresentationStyle = .fullScreen
         navigationController.navigationBar.isHidden = true
-        navigationController.pushViewController(welcomeViewController, animated: true)
+        navigationController.present(welcomeViewController, animated: true)
     }
 }
 
