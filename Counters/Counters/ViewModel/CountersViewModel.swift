@@ -126,25 +126,6 @@ extension CountersViewModel {
         let selectedCountersIds = indexPaths.compactMap {  indexPath in
             return counters[indexPath.row].id
         }
-
-//        service.delete(ids: selectedCountersIds)
-//            .sink {[weak self] completion in
-//                guard let self = self else { return }
-//
-//                if case .failure(let error) = completion {
-//                    self.receiveCompletionHandler(error, in: .delete)
-//                }
-//
-//            } receiveValue: { [weak self] counters in
-//                guard let self = self else { return }
-//
-//                if let lastCounters = counters.last {
-//                    self.receiveValueHandle(lastCounters)
-//                    completion()
-//                }
-//
-//            }
-//            .store(in: &subscriptions)
     }
 }
 
