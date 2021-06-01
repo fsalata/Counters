@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIStackView {
-    /// Add multiple arranjed subviews
+    /// Add multiple arranged subviews
     /// - Parameter subviews: subviews to be added.
     func addArrangedSubviews(_ subviews: UIView...) {
         subviews.forEach(addArrangedSubview)

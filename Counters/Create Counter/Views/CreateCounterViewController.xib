@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateCounterViewController" customModule="Counters" customModuleProvider="target">
+            <connections>
+                <outlet property="examplesButton" destination="Ckb-od-742" id="xvG-Hm-8MF"/>
+                <outlet property="titleTextField" destination="0Sc-Tq-OMS" id="5mX-Uq-4HW"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="lvX-wM-ulB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cups of coffee" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Sc-Tq-OMS" customClass="CustomTextField" customModule="Counters" customModuleProvider="target">
+                    <rect key="frame" x="12" y="69" width="390" height="55"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="6ja-vD-UpE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ckb-od-742">
+                    <rect key="frame" x="24" y="137" width="366" height="30"/>
+                    <state key="normal">
+                        <attributedString key="attributedTitle">
+                            <fragment content="Give it a name. Creative block? See ">
+                                <attributes>
+                                    <color key="NSColor" name="darkSilver"/>
+                                    <font key="NSFont" size="15" name="SFPro-Regular"/>
+                                    <font key="NSOriginalFont" size="15" name="SFPro-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="examples">
+                                <attributes>
+                                    <color key="NSColor" name="darkSilver"/>
+                                    <font key="NSFont" size="15" name="SFPro-Regular"/>
+                                    <font key="NSOriginalFont" size="15" name="SFPro-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content=".">
+                                <attributes>
+                                    <color key="NSColor" name="darkSilver"/>
+                                    <font key="NSFont" size="15" name="SFPro-Regular"/>
+                                    <font key="NSOriginalFont" size="15" name="SFPro-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </state>
+                    <connections>
+                        <action selector="exampleButtonHandler:" destination="-1" eventType="touchUpInside" id="ygy-lz-HgV"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="lighterGrey"/>
+            <constraints>
+                <constraint firstItem="Ckb-od-742" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Ph2-Gq-3L0"/>
+                <constraint firstItem="Ckb-od-742" firstAttribute="top" secondItem="0Sc-Tq-OMS" secondAttribute="bottom" constant="13" id="RtC-nS-wIu"/>
+                <constraint firstItem="0Sc-Tq-OMS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="Wfi-GC-Z5E"/>
+                <constraint firstItem="0Sc-Tq-OMS" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="25" id="bF3-To-VQQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ckb-od-742" secondAttribute="trailing" constant="24" id="fwc-ps-yus"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0Sc-Tq-OMS" secondAttribute="trailing" constant="12" id="pRH-8q-E9n"/>
+            </constraints>
+            <point key="canvasLocation" x="131.8840579710145" y="124.55357142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="darkSilver">
+            <color red="0.53333333333333333" green="0.54509803921568623" blue="0.56470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="lighterGrey">
+            <color red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

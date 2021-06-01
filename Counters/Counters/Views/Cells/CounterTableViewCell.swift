@@ -46,14 +46,6 @@ class CounterTableViewCell: UITableViewCell {
         self.indexPath = indexPath
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        countLabel.text = nil
-        titleLabel.text = nil
-        indexPath = nil
-    }
-
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
 

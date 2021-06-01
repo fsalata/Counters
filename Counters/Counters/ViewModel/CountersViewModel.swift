@@ -72,7 +72,7 @@ extension CountersViewModel {
     }
 }
 
-// MARK: - API calls
+// API calls
 extension CountersViewModel {
     // MARK: - Fetch counters
     func fetchCounters() {
@@ -126,13 +126,57 @@ extension CountersViewModel {
         let selectedCountersIds = indexPaths.compactMap {  indexPath in
             return counters[indexPath.row].id
         }
+
+        let dispatchGroup = DispatchGroup()
+
+        var remainingCounters: [Counter] = []
+        var failedToDelete: (error: APIError, counter: Counter)?
+
+        for id in selectedCountersIds {
+            dispatchGroup.enter()
+
+            service.delete(id: id) { result, response in
+                switch result {
+                case .success(let counters):
+                    remainingCounters = counters
+                case .failure(let error):
+                    if let counter = self.counters.first(where: { $0.id == id }) {
+                        failedToDelete = (error: error, counter: counter)
+                    }
+                }
+
+                dispatchGroup.leave()
+            }
+        }
+
+        dispatchGroup.notify(queue: .main) {
+            if let failedToDelete = failedToDelete {
+                let (error, counter) = failedToDelete
+                self.errorHandler(error, in: .delete(counter))
+            } else {
+                self.receiveValueHandler(remainingCounters)
+            }
+
+            completion()
+        }
     }
 }
 
 // MARK: - Private methods
-extension CountersViewModel {
+private extension CountersViewModel {
+    func updateFilteredCounters() {
+        guard filteredCounters.count > 0 else { return }
+
+        filteredCounters = filteredCounters.map { filteredCounter in
+            return counters.first { $0.id == filteredCounter.id } ?? filteredCounter
+        }
+    }
+}
+
+// MARK: Error handler
+private extension CountersViewModel {
     // MARK: - Received value handler
-    private func receiveValueHandler(_ counters: [Counter]) {
+    func receiveValueHandler(_ counters: [Counter]) {
         error = nil
         self.counters = counters
         updateFilteredCounters()
@@ -140,7 +184,7 @@ extension CountersViewModel {
     }
 
     // MARK: - Received completion handler
-    private func errorHandler(_ error: APIError, in type: ErrorType) {
+    func errorHandler(_ error: APIError, in type: ErrorType) {
         var title: String?
         var message: String? = "The Internet connection appears to be offline."
 
@@ -155,8 +199,8 @@ extension CountersViewModel {
         case .decrement(let counter):
             title = "Couldn’t update the \"\(counter.title ?? "")\" counter to \(counter.count - 1)"
 
-        case .delete:
-            title = "Couldn’t delete the counter"
+        case .delete(let counter):
+            title = "Couldn’t delete the counter \"\(counter.title ?? "")\""
 
         case .none:
             title = nil
@@ -165,13 +209,5 @@ extension CountersViewModel {
 
         self.error = (error: error, title: title, message: message, type: type)
         didError?(type)
-    }
-
-    private func updateFilteredCounters() {
-        guard filteredCounters.count > 0 else { return }
-
-        filteredCounters = filteredCounters.map { filteredCounter in
-            return counters.first { $0.id == filteredCounter.id } ?? filteredCounter
-        }
     }
 }
