@@ -28,5 +28,7 @@ extension CountersCoordinator {
     }
 
     func presentCreateItem() {
+        let createItemCoordinator = CreateCounterCoordinator(navigationController: navigationController)
+        createItemCoordinator.start()
     }
 }
