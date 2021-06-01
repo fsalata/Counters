@@ -36,6 +36,22 @@
 		00A1039F2665206900E661CD /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A1039B2665206900E661CD /* UIStackView+Extensions.swift */; };
 		00A103AA266522C800E661CD /* UIImage+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103A9266522C800E661CD /* UIImage+Badge.swift */; };
 		00A103AF266526A600E661CD /* WelcomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103AE266526A600E661CD /* WelcomeFeature.swift */; };
+		00A103D0266556CE00E661CD /* CountersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C0266556CE00E661CD /* CountersViewModel.swift */; };
+		00A103D1266556CE00E661CD /* CountersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C2266556CE00E661CD /* CountersCoordinator.swift */; };
+		00A103D2266556CE00E661CD /* CounterStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C4266556CE00E661CD /* CounterStrings.swift */; };
+		00A103D3266556CE00E661CD /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C5266556CE00E661CD /* Counter.swift */; };
+		00A103D4266556CE00E661CD /* CounterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C6266556CE00E661CD /* CounterActions.swift */; };
+		00A103D5266556CE00E661CD /* CountersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C8266556CE00E661CD /* CountersService.swift */; };
+		00A103D6266556CE00E661CD /* CounterServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C9266556CE00E661CD /* CounterServiceTarget.swift */; };
+		00A103D7266556CE00E661CD /* CounterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A103CC266556CE00E661CD /* CounterTableViewCell.xib */; };
+		00A103D8266556CE00E661CD /* CounterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103CD266556CE00E661CD /* CounterTableViewCell.swift */; };
+		00A103D9266556CE00E661CD /* CountersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103CE266556CE00E661CD /* CountersViewController.swift */; };
+		00A103DA266556CE00E661CD /* CountersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A103CF266556CE00E661CD /* CountersViewController.xib */; };
+		00A103DF2665570A00E661CD /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103DE2665570A00E661CD /* ViewState.swift */; };
+		00A103E52665573F00E661CD /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103E22665573F00E661CD /* UIViewController+Extensions.swift */; };
+		00A103E62665573F00E661CD /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103E32665573F00E661CD /* UIColor+Extensions.swift */; };
+		00A103E72665573F00E661CD /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103E42665573F00E661CD /* UITableView+Extensions.swift */; };
+		00A103ED26655A0400E661CD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00A103EC26655A0400E661CD /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +98,22 @@
 		00A1039B2665206900E661CD /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
 		00A103A9266522C800E661CD /* UIImage+Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Badge.swift"; sourceTree = "<group>"; };
 		00A103AE266526A600E661CD /* WelcomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFeature.swift; sourceTree = "<group>"; };
+		00A103C0266556CE00E661CD /* CountersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountersViewModel.swift; sourceTree = "<group>"; };
+		00A103C2266556CE00E661CD /* CountersCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountersCoordinator.swift; sourceTree = "<group>"; };
+		00A103C4266556CE00E661CD /* CounterStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterStrings.swift; sourceTree = "<group>"; };
+		00A103C5266556CE00E661CD /* Counter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
+		00A103C6266556CE00E661CD /* CounterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterActions.swift; sourceTree = "<group>"; };
+		00A103C8266556CE00E661CD /* CountersService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountersService.swift; sourceTree = "<group>"; };
+		00A103C9266556CE00E661CD /* CounterServiceTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterServiceTarget.swift; sourceTree = "<group>"; };
+		00A103CC266556CE00E661CD /* CounterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CounterTableViewCell.xib; sourceTree = "<group>"; };
+		00A103CD266556CE00E661CD /* CounterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterTableViewCell.swift; sourceTree = "<group>"; };
+		00A103CE266556CE00E661CD /* CountersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountersViewController.swift; sourceTree = "<group>"; };
+		00A103CF266556CE00E661CD /* CountersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountersViewController.xib; sourceTree = "<group>"; };
+		00A103DE2665570A00E661CD /* ViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		00A103E22665573F00E661CD /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		00A103E32665573F00E661CD /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		00A103E42665573F00E661CD /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		00A103EC26655A0400E661CD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,10 +160,12 @@
 				00A1035426651BF200E661CD /* Network */,
 				00A1034B2665196400E661CD /* Coordinator */,
 				00A1037D26651EDC00E661CD /* Welcome */,
-				00A1038B26651EF600E661CD /* Launch */,
+				00A103BE266556CE00E661CD /* Counters */,
 				00A1033C2665188100E661CD /* UIComponents */,
 				00A103982665206900E661CD /* Extensions */,
+				00A103DD266556FD00E661CD /* Common */,
 				00A10339266517A300E661CD /* Resources */,
+				00A1038B26651EF600E661CD /* Launch */,
 				00A103052665113500E661CD /* Info.plist */,
 			);
 			path = Counters;
@@ -151,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				00A103002665113500E661CD /* Assets.xcassets */,
+				00A103EC26655A0400E661CD /* Colors.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -255,6 +290,9 @@
 		00A103982665206900E661CD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				00A103E32665573F00E661CD /* UIColor+Extensions.swift */,
+				00A103E42665573F00E661CD /* UITableView+Extensions.swift */,
+				00A103E22665573F00E661CD /* UIViewController+Extensions.swift */,
 				00A1039B2665206900E661CD /* UIStackView+Extensions.swift */,
 				00A103A9266522C800E661CD /* UIImage+Badge.swift */,
 			);
@@ -267,6 +305,80 @@
 				00A103AE266526A600E661CD /* WelcomeFeature.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		00A103BE266556CE00E661CD /* Counters */ = {
+			isa = PBXGroup;
+			children = (
+				00A103C7266556CE00E661CD /* Service */,
+				00A103C3266556CE00E661CD /* Model */,
+				00A103C1266556CE00E661CD /* Coordinator */,
+				00A103BF266556CE00E661CD /* ViewModel */,
+				00A103CA266556CE00E661CD /* Views */,
+			);
+			path = Counters;
+			sourceTree = "<group>";
+		};
+		00A103BF266556CE00E661CD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				00A103C0266556CE00E661CD /* CountersViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		00A103C1266556CE00E661CD /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				00A103C2266556CE00E661CD /* CountersCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		00A103C3266556CE00E661CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00A103C4266556CE00E661CD /* CounterStrings.swift */,
+				00A103C5266556CE00E661CD /* Counter.swift */,
+				00A103C6266556CE00E661CD /* CounterActions.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		00A103C7266556CE00E661CD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				00A103C8266556CE00E661CD /* CountersService.swift */,
+				00A103C9266556CE00E661CD /* CounterServiceTarget.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		00A103CA266556CE00E661CD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				00A103CB266556CE00E661CD /* Cells */,
+				00A103CE266556CE00E661CD /* CountersViewController.swift */,
+				00A103CF266556CE00E661CD /* CountersViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		00A103CB266556CE00E661CD /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				00A103CD266556CE00E661CD /* CounterTableViewCell.swift */,
+				00A103CC266556CE00E661CD /* CounterTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		00A103DD266556FD00E661CD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				00A103DE2665570A00E661CD /* ViewState.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,7 +461,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00A103DA266556CE00E661CD /* CountersViewController.xib in Resources */,
+				00A103D7266556CE00E661CD /* CounterTableViewCell.xib in Resources */,
 				00A103042665113500E661CD /* LaunchScreen.storyboard in Resources */,
+				00A103ED26655A0400E661CD /* Colors.xcassets in Resources */,
 				00A103012665113500E661CD /* Assets.xcassets in Resources */,
 				00A1038826651EDC00E661CD /* WelcomeViewController.xib in Resources */,
 			);
@@ -373,25 +488,38 @@
 				00A103942665204200E661CD /* FeedbackView.swift in Sources */,
 				00A1038526651EDC00E661CD /* WelcomeViewModel.swift in Sources */,
 				00A1036626651BF200E661CD /* API.swift in Sources */,
+				00A103D4266556CE00E661CD /* CounterActions.swift in Sources */,
 				00A103952665204200E661CD /* FeedbackMessage.swift in Sources */,
+				00A103D0266556CE00E661CD /* CountersViewModel.swift in Sources */,
+				00A103E62665573F00E661CD /* UIColor+Extensions.swift in Sources */,
+				00A103D2266556CE00E661CD /* CounterStrings.swift in Sources */,
 				00A1038626651EDC00E661CD /* WelcomeCoordinator.swift in Sources */,
 				00A1036726651BF200E661CD /* URL+Extensions.swift in Sources */,
 				00A1038726651EDC00E661CD /* WelcomeViewController.swift in Sources */,
+				00A103D1266556CE00E661CD /* CountersCoordinator.swift in Sources */,
 				00A1039F2665206900E661CD /* UIStackView+Extensions.swift in Sources */,
 				00A1034E2665196400E661CD /* AppCoordinator.swift in Sources */,
 				00A1036226651BF200E661CD /* APIClient.swift in Sources */,
 				00A103922665204200E661CD /* CustomTextField.swift in Sources */,
 				00A103AA266522C800E661CD /* UIImage+Badge.swift in Sources */,
+				00A103E52665573F00E661CD /* UIViewController+Extensions.swift in Sources */,
 				00A102F82665113400E661CD /* AppDelegate.swift in Sources */,
 				00A1036426651BF200E661CD /* URLRequest+Extensions.swift in Sources */,
 				00A1034F2665196400E661CD /* Coordinator.swift in Sources */,
 				00A1036826651BF200E661CD /* ServiceTargetProtocol.swift in Sources */,
+				00A103D3266556CE00E661CD /* Counter.swift in Sources */,
 				00A1036926651BF200E661CD /* APIProtocol.swift in Sources */,
+				00A103D9266556CE00E661CD /* CountersViewController.swift in Sources */,
 				00A103AF266526A600E661CD /* WelcomeFeature.swift in Sources */,
+				00A103D8266556CE00E661CD /* CounterTableViewCell.swift in Sources */,
+				00A103D5266556CE00E661CD /* CountersService.swift in Sources */,
 				00A1033E2665189A00E661CD /* Button.swift in Sources */,
+				00A103D6266556CE00E661CD /* CounterServiceTarget.swift in Sources */,
 				00A10342266518D000E661CD /* main.swift in Sources */,
 				00A1036526651BF200E661CD /* RequestMethod.swift in Sources */,
+				00A103E72665573F00E661CD /* UITableView+Extensions.swift in Sources */,
 				00A1036126651BF200E661CD /* APIError.swift in Sources */,
+				00A103DF2665570A00E661CD /* ViewState.swift in Sources */,
 				00A103932665204200E661CD /* RoundCornersView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

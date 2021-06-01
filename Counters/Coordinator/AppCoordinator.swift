@@ -15,7 +15,7 @@ class AppCoordinator: Coordinator {
     }
 
     func start() {
-        let welcomeCoordinator = WelcomeCoordinator(navigationController: navigationController)
-        welcomeCoordinator.start()
+        let countersCoordinator = CountersCoordinator(navigationController: navigationController)
+        countersCoordinator.start()
     }
 }
