@@ -126,6 +126,39 @@ extension CountersViewModel {
         let selectedCountersIds = indexPaths.compactMap {  indexPath in
             return counters[indexPath.row].id
         }
+
+        let dispatchGroup = DispatchGroup()
+
+        var remainingCounters: [Counter] = []
+        var failedToDelete: (error: APIError, counter: Counter)?
+
+        for id in selectedCountersIds {
+            dispatchGroup.enter()
+
+            service.delete(id: id) { result, response in
+                switch result {
+                case .success(let counters):
+                    remainingCounters = counters
+                case .failure(let error):
+                    if let counter = self.counters.first(where: { $0.id == id }) {
+                        failedToDelete = (error: error, counter: counter)
+                    }
+                }
+
+                dispatchGroup.leave()
+            }
+        }
+
+        dispatchGroup.notify(queue: .main) {
+            if let failedToDelete = failedToDelete {
+                let (error, counter) = failedToDelete
+                self.errorHandler(error, in: .delete(counter))
+            } else {
+                self.receiveValueHandler(remainingCounters)
+            }
+
+            completion()
+        }
     }
 }
 
@@ -155,8 +188,8 @@ extension CountersViewModel {
         case .decrement(let counter):
             title = "Couldn’t update the \"\(counter.title ?? "")\" counter to \(counter.count - 1)"
 
-        case .delete:
-            title = "Couldn’t delete the counter"
+        case .delete(let counter):
+            title = "Couldn’t delete the counter \"\(counter.title ?? "")\""
 
         case .none:
             title = nil

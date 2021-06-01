@@ -24,6 +24,6 @@ enum ErrorType: Equatable {
     case fetch
     case increment(_ counter: Counter)
     case decrement(_ counter: Counter)
-    case delete
+    case delete(_ counter: Counter)
     case none
 }
