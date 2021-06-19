@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class CreateCounterViewController: UIViewController, ViewStateProtocol {
+class CreateCounterViewController: UIViewController {
     @IBOutlet weak var titleTextField: CustomTextField!
     @IBOutlet weak var examplesButton: UIButton!
 

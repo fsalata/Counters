@@ -11,7 +11,17 @@ final class CountersViewModel: ObservableObject {
     private let service: CountersService
 
     private(set) var counters: [Counter] = []
-    private(set) var error: TargetError?
+
+    private(set) var viewState: ViewStateVM = .noContent {
+        didSet {
+            switch viewState {
+            case .error(let stateError):
+                didChangeState?(viewState, totalCountersText, stateError)
+            default:
+                didChangeState?(viewState, totalCountersText, nil)
+            }
+        }
+    }
 
     private var totalCountersText: String {
         guard counters.count > 0 else {
@@ -31,8 +41,8 @@ final class CountersViewModel: ObservableObject {
 
     private var isFirstTimeUse: Bool = true
 
-    var didUpdateCounters: ((String) -> Void)?
-    var didError: ((ErrorType) -> Void)?
+    // View bindings
+    var didChangeState: ((ViewStateVM, String, ViewStateError?) -> Void)?
 
     var isCountersEmpty: Bool {
         return counters.count == 0
@@ -41,8 +51,6 @@ final class CountersViewModel: ObservableObject {
     var isFilteredCountersEmpty: Bool {
         return filteredCounters.count == 0
     }
-
-    typealias TargetError = (error: APIError?, title: String?, message: String?, type: ErrorType)
 
     // Init
     init(service: CountersService = CountersService()) {
@@ -62,9 +70,13 @@ extension CountersViewModel {
         return false
     }
 
-    func filterCounters(title: String, refresh: () -> Void) {
+    func filterCounters(title: String) {
+        viewState = .searching
         filteredCounters = counters.filter { $0.title?.lowercased().contains(title.lowercased()) ?? false }
-        refresh()
+    }
+
+    func didEndFiltering() {
+        viewState = .hasContent
     }
 
     func shareItems(at indexPaths: [IndexPath]) -> [String] {
@@ -76,6 +88,7 @@ extension CountersViewModel {
 extension CountersViewModel {
     // MARK: - Fetch counters
     func fetchCounters() {
+        viewState = .loading
         service.fetch {[weak self] result, _ in
             guard let self = self else { return }
 
@@ -164,6 +177,13 @@ extension CountersViewModel {
 
 // MARK: - Private methods
 private extension CountersViewModel {
+    // Received value handler
+    func receiveValueHandler(_ counters: [Counter]) {
+        self.counters = counters
+        updateFilteredCounters()
+        viewState = counters.isEmpty ? .noContent : .hasContent
+    }
+
     func updateFilteredCounters() {
         guard filteredCounters.count > 0 else { return }
 
@@ -171,20 +191,9 @@ private extension CountersViewModel {
             return counters.first { $0.id == filteredCounter.id } ?? filteredCounter
         }
     }
-}
-
-// MARK: Error handler
-private extension CountersViewModel {
-    // MARK: - Received value handler
-    func receiveValueHandler(_ counters: [Counter]) {
-        error = nil
-        self.counters = counters
-        updateFilteredCounters()
-        didUpdateCounters?(totalCountersText)
-    }
 
     // MARK: - Received completion handler
-    func errorHandler(_ error: APIError, in type: ErrorType) {
+    func errorHandler(_ error: APIError, in type: ViewErrorType) {
         var title: String?
         var message: String? = "The Internet connection appears to be offline."
 
@@ -207,7 +216,32 @@ private extension CountersViewModel {
             message = nil
         }
 
-        self.error = (error: error, title: title, message: message, type: type)
-        didError?(type)
+        let viewStateError = ViewStateError(title: title, message: message, type: type)
+        viewState = .error(viewStateError)
+    }
+}
+
+// MARK: View State
+extension CountersViewModel {
+    enum ViewStateVM: Equatable {
+        case noContent
+        case loading
+        case hasContent
+        case searching
+        case error(ViewStateError)
+    }
+
+    struct ViewStateError: Equatable {
+        let title: String?
+        let message: String?
+        let type: ViewErrorType
+    }
+
+    enum ViewErrorType: Equatable {
+        case fetch
+        case increment(_ counter: Counter)
+        case decrement(_ counter: Counter)
+        case delete(_ counter: Counter)
+        case none
     }
 }
