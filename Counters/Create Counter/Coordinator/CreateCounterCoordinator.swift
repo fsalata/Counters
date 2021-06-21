@@ -9,6 +9,7 @@ import UIKit
 
 final class CreateCounterCoordinator: Coordinator {
     let navigationController: UINavigationController
+    var innerNavigationController: UINavigationController!
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -18,9 +19,16 @@ final class CreateCounterCoordinator: Coordinator {
         let viewModel = CreateCounterViewModel()
         let createItemViewController = CreateCounterViewController(coordinator: self, viewModel: viewModel)
 
-        let innerNavigationController = UINavigationController(rootViewController: createItemViewController)
+        innerNavigationController = UINavigationController(rootViewController: createItemViewController)
         innerNavigationController.modalPresentationStyle = .fullScreen
 
         navigationController.present(innerNavigationController, animated: true)
+    }
+}
+
+extension CreateCounterCoordinator {
+    func presentExamplesScreen() {
+        let examplesCoordinator = ExamplesCoordinator(navigationController: innerNavigationController)
+        examplesCoordinator.start()
     }
 }

@@ -14,6 +14,10 @@
 		002ABA3526666F5500F5B3C9 /* CreateCounterServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002ABA2D26666F5500F5B3C9 /* CreateCounterServiceTarget.swift */; };
 		002ABA3626666F5500F5B3C9 /* CreateCounterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 002ABA2F26666F5500F5B3C9 /* CreateCounterViewController.xib */; };
 		002ABA3726666F5500F5B3C9 /* CreateCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002ABA3026666F5500F5B3C9 /* CreateCounterViewController.swift */; };
+		007C16612680D48200EB74C5 /* ExamplesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C16602680D48200EB74C5 /* ExamplesCoordinator.swift */; };
+		007C16642680D4D600EB74C5 /* ExamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C16622680D4D600EB74C5 /* ExamplesViewController.swift */; };
+		007C16652680D4D600EB74C5 /* ExamplesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007C16632680D4D600EB74C5 /* ExamplesViewController.xib */; };
+		007C16672680D4EC00EB74C5 /* ExamplesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C16662680D4EC00EB74C5 /* ExamplesViewModel.swift */; };
 		00A102F82665113400E661CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A102F72665113400E661CD /* AppDelegate.swift */; };
 		00A103012665113500E661CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00A103002665113500E661CD /* Assets.xcassets */; };
 		00A103042665113500E661CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00A103022665113500E661CD /* LaunchScreen.storyboard */; };
@@ -78,6 +82,10 @@
 		002ABA2D26666F5500F5B3C9 /* CreateCounterServiceTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCounterServiceTarget.swift; sourceTree = "<group>"; };
 		002ABA2F26666F5500F5B3C9 /* CreateCounterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateCounterViewController.xib; sourceTree = "<group>"; };
 		002ABA3026666F5500F5B3C9 /* CreateCounterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCounterViewController.swift; sourceTree = "<group>"; };
+		007C16602680D48200EB74C5 /* ExamplesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesCoordinator.swift; sourceTree = "<group>"; };
+		007C16622680D4D600EB74C5 /* ExamplesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesViewController.swift; sourceTree = "<group>"; };
+		007C16632680D4D600EB74C5 /* ExamplesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExamplesViewController.xib; sourceTree = "<group>"; };
+		007C16662680D4EC00EB74C5 /* ExamplesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesViewModel.swift; sourceTree = "<group>"; };
 		00A102F42665113400E661CD /* Counters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Counters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00A102F72665113400E661CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00A103002665113500E661CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -200,6 +208,49 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		007C165B2680D43B00EB74C5 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				007C165C2680D45400EB74C5 /* Model */,
+				007C165D2680D45900EB74C5 /* Coordinator */,
+				007C165E2680D46000EB74C5 /* ViewModel */,
+				007C165F2680D46500EB74C5 /* Views */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
+		007C165C2680D45400EB74C5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		007C165D2680D45900EB74C5 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				007C16602680D48200EB74C5 /* ExamplesCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		007C165E2680D46000EB74C5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				007C16662680D4EC00EB74C5 /* ExamplesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		007C165F2680D46500EB74C5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				007C16622680D4D600EB74C5 /* ExamplesViewController.swift */,
+				007C16632680D4D600EB74C5 /* ExamplesViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		00A102EB2665113400E661CD = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +279,7 @@
 				00A1037D26651EDC00E661CD /* Welcome */,
 				00A103BE266556CE00E661CD /* Counters */,
 				002ABA2426666F5500F5B3C9 /* Create Counter */,
+				007C165B2680D43B00EB74C5 /* Examples */,
 				00A1033C2665188100E661CD /* UIComponents */,
 				00A103982665206900E661CD /* Extensions */,
 				00A10339266517A300E661CD /* Resources */,
@@ -520,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00A103DA266556CE00E661CD /* CountersViewController.xib in Resources */,
+				007C16652680D4D600EB74C5 /* ExamplesViewController.xib in Resources */,
 				00A103D7266556CE00E661CD /* CounterTableViewCell.xib in Resources */,
 				00A103042665113500E661CD /* LaunchScreen.storyboard in Resources */,
 				00A103ED26655A0400E661CD /* Colors.xcassets in Resources */,
@@ -554,6 +607,7 @@
 				002ABA3126666F5500F5B3C9 /* CreateCounterViewModel.swift in Sources */,
 				00A103E62665573F00E661CD /* UIColor+Extensions.swift in Sources */,
 				00A103D2266556CE00E661CD /* CounterStrings.swift in Sources */,
+				007C16612680D48200EB74C5 /* ExamplesCoordinator.swift in Sources */,
 				00A1038626651EDC00E661CD /* WelcomeCoordinator.swift in Sources */,
 				00A1036726651BF200E661CD /* URL+Extensions.swift in Sources */,
 				00A1038726651EDC00E661CD /* WelcomeViewController.swift in Sources */,
@@ -575,6 +629,7 @@
 				00A103D3266556CE00E661CD /* Counter.swift in Sources */,
 				00A1036926651BF200E661CD /* APIProtocol.swift in Sources */,
 				00A103D9266556CE00E661CD /* CountersViewController.swift in Sources */,
+				007C16672680D4EC00EB74C5 /* ExamplesViewModel.swift in Sources */,
 				00A103AF266526A600E661CD /* WelcomeFeature.swift in Sources */,
 				00A103D8266556CE00E661CD /* CounterTableViewCell.swift in Sources */,
 				00A103D5266556CE00E661CD /* CountersService.swift in Sources */,
@@ -583,6 +638,7 @@
 				00A10342266518D000E661CD /* main.swift in Sources */,
 				00A1036526651BF200E661CD /* RequestMethod.swift in Sources */,
 				00A103E72665573F00E661CD /* UITableView+Extensions.swift in Sources */,
+				007C16642680D4D600EB74C5 /* ExamplesViewController.swift in Sources */,
 				00A1036126651BF200E661CD /* APIError.swift in Sources */,
 				00A103932665204200E661CD /* RoundCornersView.swift in Sources */,
 			);

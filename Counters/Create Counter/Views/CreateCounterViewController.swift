@@ -98,7 +98,7 @@ class CreateCounterViewController: UIViewController {
     }
 
     @IBAction func exampleButtonHandler(_ sender: Any) {
-
+        coordinator.presentExamplesScreen()
     }
 }
 
