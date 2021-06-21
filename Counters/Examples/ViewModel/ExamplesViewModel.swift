@@ -8,5 +8,9 @@
 import Foundation
 
 final class ExamplesViewModel {
-    
+    let examples: [String: [Example]] = Example.getExamples()
+
+    lazy var sectionKeys: [String] = {
+        return Array(examples.keys).sorted(by: <)
+    }()
 }

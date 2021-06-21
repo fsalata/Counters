@@ -18,6 +18,10 @@
 		007C16642680D4D600EB74C5 /* ExamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C16622680D4D600EB74C5 /* ExamplesViewController.swift */; };
 		007C16652680D4D600EB74C5 /* ExamplesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007C16632680D4D600EB74C5 /* ExamplesViewController.xib */; };
 		007C16672680D4EC00EB74C5 /* ExamplesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C16662680D4EC00EB74C5 /* ExamplesViewModel.swift */; };
+		007C16692680F9B100EB74C5 /* ExamplesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C16682680F9B100EB74C5 /* ExamplesModel.swift */; };
+		007C166C2681046800EB74C5 /* ExampleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C166B2681046800EB74C5 /* ExampleCollectionViewCell.swift */; };
+		007C166E2681061600EB74C5 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C166D2681061600EB74C5 /* UICollectionView+Extensions.swift */; };
+		007C167026811AFD00EB74C5 /* ExampleHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C166F26811AFD00EB74C5 /* ExampleHeaderCollectionReusableView.swift */; };
 		00A102F82665113400E661CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A102F72665113400E661CD /* AppDelegate.swift */; };
 		00A103012665113500E661CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00A103002665113500E661CD /* Assets.xcassets */; };
 		00A103042665113500E661CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00A103022665113500E661CD /* LaunchScreen.storyboard */; };
@@ -86,6 +90,10 @@
 		007C16622680D4D600EB74C5 /* ExamplesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesViewController.swift; sourceTree = "<group>"; };
 		007C16632680D4D600EB74C5 /* ExamplesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExamplesViewController.xib; sourceTree = "<group>"; };
 		007C16662680D4EC00EB74C5 /* ExamplesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesViewModel.swift; sourceTree = "<group>"; };
+		007C16682680F9B100EB74C5 /* ExamplesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesModel.swift; sourceTree = "<group>"; };
+		007C166B2681046800EB74C5 /* ExampleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCollectionViewCell.swift; sourceTree = "<group>"; };
+		007C166D2681061600EB74C5 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		007C166F26811AFD00EB74C5 /* ExampleHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		00A102F42665113400E661CD /* Counters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Counters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00A102F72665113400E661CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00A103002665113500E661CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -222,6 +230,7 @@
 		007C165C2680D45400EB74C5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				007C16682680F9B100EB74C5 /* ExamplesModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,10 +254,20 @@
 		007C165F2680D46500EB74C5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				007C166A2681044D00EB74C5 /* Cells */,
 				007C16622680D4D600EB74C5 /* ExamplesViewController.swift */,
 				007C16632680D4D600EB74C5 /* ExamplesViewController.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		007C166A2681044D00EB74C5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				007C166B2681046800EB74C5 /* ExampleCollectionViewCell.swift */,
+				007C166F26811AFD00EB74C5 /* ExampleHeaderCollectionReusableView.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		00A102EB2665113400E661CD = {
@@ -413,6 +432,7 @@
 				00A103E22665573F00E661CD /* UIViewController+Extensions.swift */,
 				00A1039B2665206900E661CD /* UIStackView+Extensions.swift */,
 				00A103A9266522C800E661CD /* UIImage+Badge.swift */,
+				007C166D2681061600EB74C5 /* UICollectionView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -602,6 +622,7 @@
 				00A1036626651BF200E661CD /* API.swift in Sources */,
 				00A103D4266556CE00E661CD /* CounterActions.swift in Sources */,
 				002ABA3426666F5500F5B3C9 /* CreateCounterService.swift in Sources */,
+				007C16692680F9B100EB74C5 /* ExamplesModel.swift in Sources */,
 				00A103952665204200E661CD /* FeedbackMessage.swift in Sources */,
 				00A103D0266556CE00E661CD /* CountersViewModel.swift in Sources */,
 				002ABA3126666F5500F5B3C9 /* CreateCounterViewModel.swift in Sources */,
@@ -615,7 +636,9 @@
 				00A1039F2665206900E661CD /* UIStackView+Extensions.swift in Sources */,
 				00A1034E2665196400E661CD /* AppCoordinator.swift in Sources */,
 				002ABA3726666F5500F5B3C9 /* CreateCounterViewController.swift in Sources */,
+				007C166E2681061600EB74C5 /* UICollectionView+Extensions.swift in Sources */,
 				00A1036226651BF200E661CD /* APIClient.swift in Sources */,
+				007C166C2681046800EB74C5 /* ExampleCollectionViewCell.swift in Sources */,
 				002ABA3526666F5500F5B3C9 /* CreateCounterServiceTarget.swift in Sources */,
 				00A103922665204200E661CD /* CustomTextField.swift in Sources */,
 				00A103AA266522C800E661CD /* UIImage+Badge.swift in Sources */,
@@ -641,6 +664,7 @@
 				007C16642680D4D600EB74C5 /* ExamplesViewController.swift in Sources */,
 				00A1036126651BF200E661CD /* APIError.swift in Sources */,
 				00A103932665204200E661CD /* RoundCornersView.swift in Sources */,
+				007C167026811AFD00EB74C5 /* ExampleHeaderCollectionReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

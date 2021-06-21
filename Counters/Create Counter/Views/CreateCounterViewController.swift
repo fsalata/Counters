@@ -55,6 +55,7 @@ class CreateCounterViewController: UIViewController {
 
     private func setupNavigation() {
         title = "Create a counter"
+        navigationItem.backButtonTitle = "Create"
         navigationItem.leftBarButtonItems = [cancelBarButtonItem]
         navigationItem.rightBarButtonItem = saveBarButtonItem
     }
