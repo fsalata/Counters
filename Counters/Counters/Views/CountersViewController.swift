@@ -258,26 +258,17 @@ extension CountersViewController: FeedbackViewDelegate {
 
 // MARK: - View States
 extension CountersViewController {
-    private func updateButtonsState() {
-        editButtonItem.isEnabled = !isCountersEmpty || isEditing
-        totalCountLabel.isHidden = isCountersEmpty
-        addNewButton.isHidden = isEditing
-        deleteButton.isHidden = !isEditing
-        shareButton.isHidden = !isEditing
-
-        searchController.searchBar.isUserInteractionEnabled = !isCountersEmpty && !isEditing
-        searchController.searchBar.alpha = (isCountersEmpty || isEditing) ? 0.5 : 1
-
-        navigationItem.rightBarButtonItem = isEditing ? selectAllBarButtonItem : nil
-    }
-
-    func update(_ viewState: CountersViewModel.ViewStateVM,
+    func update(_ viewState: CountersViewModel.ViewState,
                 _ totalCountString: String,
                 _ error: CountersViewModel.ViewStateError?) {
         print("=== Current state: \(viewState) ===")
 
         DispatchQueue.main.async {
             self.tableView.backgroundView = nil
+            self.loadingIndicator.stopAnimating()
+            self.refreshControl.endRefreshing()
+            self.updateButtonsState()
+            self.totalCountLabel.text = totalCountString
 
             switch viewState {
             // MARK: - Loading
@@ -332,12 +323,21 @@ extension CountersViewController {
 
                 self.handleError(title: error.title, message: error.message, type: error.type)
             }
-
-            self.loadingIndicator.stopAnimating()
-            self.refreshControl.endRefreshing()
-            self.updateButtonsState()
-            self.totalCountLabel.text = totalCountString
         }
+    }
+
+    // MARK: - Button states
+    private func updateButtonsState() {
+        editButtonItem.isEnabled = !isCountersEmpty || isEditing
+        totalCountLabel.isHidden = isCountersEmpty
+        addNewButton.isHidden = isEditing
+        deleteButton.isHidden = !isEditing
+        shareButton.isHidden = !isEditing
+
+        searchController.searchBar.isUserInteractionEnabled = !isCountersEmpty && !isEditing
+        searchController.searchBar.alpha = (isCountersEmpty || isEditing) ? 0.5 : 1
+
+        navigationItem.rightBarButtonItem = isEditing ? selectAllBarButtonItem : nil
     }
 
     // MARK: - Error handler

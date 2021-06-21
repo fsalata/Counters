@@ -12,7 +12,7 @@ final class CountersViewModel: ObservableObject {
 
     private(set) var counters: [Counter] = []
 
-    private(set) var viewState: ViewStateVM = .noContent {
+    private(set) var viewState: ViewState = .noContent {
         didSet {
             switch viewState {
             case .error(let stateError):
@@ -42,7 +42,7 @@ final class CountersViewModel: ObservableObject {
     private var isFirstTimeUse: Bool = true
 
     // View bindings
-    var didChangeState: ((ViewStateVM, String, ViewStateError?) -> Void)?
+    var didChangeState: ((ViewState, String, ViewStateError?) -> Void)?
 
     var isCountersEmpty: Bool {
         return counters.count == 0
@@ -223,7 +223,7 @@ private extension CountersViewModel {
 
 // MARK: View State
 extension CountersViewModel {
-    enum ViewStateVM: Equatable {
+    enum ViewState: Equatable {
         case noContent
         case loading
         case hasContent
