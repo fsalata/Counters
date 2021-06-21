@@ -6,22 +6,13 @@
 //
 
 import UIKit
-import Combine
 
-class CreateCounterViewController: UIViewController, ViewStateProtocol {
+class CreateCounterViewController: UIViewController {
     @IBOutlet weak var titleTextField: CustomTextField!
     @IBOutlet weak var examplesButton: UIButton!
 
     private let coordinator: CreateCounterCoordinator
     private let viewModel: CreateCounterViewModel
-
-    private var subscriptions = Set<AnyCancellable>()
-
-    var state: ViewState = .loading {
-        didSet {
-            update()
-        }
-    }
 
     private lazy var cancelBarButtonItem: UIBarButtonItem = {
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel,
@@ -59,6 +50,7 @@ class CreateCounterViewController: UIViewController, ViewStateProtocol {
 
         setupNavigation()
         setupView()
+        bindToViewModel()
     }
 
     private func setupNavigation() {
@@ -77,6 +69,12 @@ class CreateCounterViewController: UIViewController, ViewStateProtocol {
         view.addGestureRecognizer(hideKeyboardTap)
     }
 
+    private func bindToViewModel() {
+        viewModel.didSaveCounter = {[weak self] in
+            self?.update()
+        }
+    }
+
     @objc private func dismissViewController() {
         DispatchQueue.main.async {
             self.navigationController?.dismiss(animated: true)
@@ -87,7 +85,6 @@ class CreateCounterViewController: UIViewController, ViewStateProtocol {
         if let text = titleTextField.text,
            !text.isEmpty {
             hideKeyboard()
-            self.state = .loading
             save(title: text)
         }
     }
@@ -97,16 +94,7 @@ class CreateCounterViewController: UIViewController, ViewStateProtocol {
     }
 
     private func save(title: String) {
-        viewModel.save(title: title) {[weak self] result, _ in
-            guard let self = self else { return }
-
-            switch result {
-            case .success:
-                self.state = .loaded(message: nil)
-            case .failure:
-                self.state = .loading
-            }
-        }
+        viewModel.save(title: title)
     }
 
     @IBAction func exampleButtonHandler(_ sender: Any) {
@@ -118,20 +106,18 @@ class CreateCounterViewController: UIViewController, ViewStateProtocol {
 extension CreateCounterViewController {
     func update() {
         DispatchQueue.main.async {
-            switch self.state {
+            switch self.viewModel.viewState {
             case .loading:
                 self.titleTextField.showLoading()
 
             case .loaded:
                 self.titleTextField.text = nil
                 self.titleTextField.hideLoading()
+                self.dismissViewController()
 
             case .error:
                 self.titleTextField.hideLoading()
                 self.handleError()
-
-            default:
-                break
             }
         }
     }

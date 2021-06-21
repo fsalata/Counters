@@ -54,7 +54,6 @@
 		00A103D8266556CE00E661CD /* CounterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103CD266556CE00E661CD /* CounterTableViewCell.swift */; };
 		00A103D9266556CE00E661CD /* CountersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103CE266556CE00E661CD /* CountersViewController.swift */; };
 		00A103DA266556CE00E661CD /* CountersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A103CF266556CE00E661CD /* CountersViewController.xib */; };
-		00A103DF2665570A00E661CD /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103DE2665570A00E661CD /* ViewState.swift */; };
 		00A103E52665573F00E661CD /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103E22665573F00E661CD /* UIViewController+Extensions.swift */; };
 		00A103E62665573F00E661CD /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103E32665573F00E661CD /* UIColor+Extensions.swift */; };
 		00A103E72665573F00E661CD /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103E42665573F00E661CD /* UITableView+Extensions.swift */; };
@@ -123,7 +122,6 @@
 		00A103CD266556CE00E661CD /* CounterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterTableViewCell.swift; sourceTree = "<group>"; };
 		00A103CE266556CE00E661CD /* CountersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountersViewController.swift; sourceTree = "<group>"; };
 		00A103CF266556CE00E661CD /* CountersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountersViewController.xib; sourceTree = "<group>"; };
-		00A103DE2665570A00E661CD /* ViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		00A103E22665573F00E661CD /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		00A103E32665573F00E661CD /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		00A103E42665573F00E661CD /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
@@ -196,8 +194,8 @@
 		002ABA2E26666F5500F5B3C9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				002ABA2F26666F5500F5B3C9 /* CreateCounterViewController.xib */,
 				002ABA3026666F5500F5B3C9 /* CreateCounterViewController.swift */,
+				002ABA2F26666F5500F5B3C9 /* CreateCounterViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -232,7 +230,6 @@
 				002ABA2426666F5500F5B3C9 /* Create Counter */,
 				00A1033C2665188100E661CD /* UIComponents */,
 				00A103982665206900E661CD /* Extensions */,
-				00A103DD266556FD00E661CD /* Common */,
 				00A10339266517A300E661CD /* Resources */,
 				00A1038B26651EF600E661CD /* Launch */,
 				00A103052665113500E661CD /* Info.plist */,
@@ -442,14 +439,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		00A103DD266556FD00E661CD /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				00A103DE2665570A00E661CD /* ViewState.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -595,7 +584,6 @@
 				00A1036526651BF200E661CD /* RequestMethod.swift in Sources */,
 				00A103E72665573F00E661CD /* UITableView+Extensions.swift in Sources */,
 				00A1036126651BF200E661CD /* APIError.swift in Sources */,
-				00A103DF2665570A00E661CD /* ViewState.swift in Sources */,
 				00A103932665204200E661CD /* RoundCornersView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
