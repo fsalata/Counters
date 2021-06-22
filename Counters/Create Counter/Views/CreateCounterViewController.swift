@@ -41,9 +41,7 @@ class CreateCounterViewController: UIViewController {
     }
 
     @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,6 +113,7 @@ extension CreateCounterViewController {
                 self.titleTextField.text = nil
                 self.titleTextField.hideLoading()
                 self.dismissViewController()
+                self.coordinator.stop()
 
             case .error:
                 self.titleTextField.hideLoading()
@@ -150,13 +149,11 @@ extension CreateCounterViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - UITextViewDelegate
-extension CreateCounterViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView,
-                  shouldInteractWith URL: URL,
-                  in characterRange: NSRange,
-                  interaction: UITextItemInteraction) -> Bool {
-        print("textview button pressed")
-        return false
+// MARK: -
+extension CreateCounterViewController: ExamplesViewModelDelegate {
+    func examplesViewModel(didSelect item: Example, _ viewModel: ExamplesViewModel) {
+        let title = item.name
+        titleTextField.text = title.capitalizingFirstLetter()
+        save(title: title)
     }
 }

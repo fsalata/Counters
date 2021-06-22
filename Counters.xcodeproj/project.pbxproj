@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00039F6C268210520061B2A2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00039F6B268210520061B2A2 /* String+Extensions.swift */; };
 		002ABA3126666F5500F5B3C9 /* CreateCounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002ABA2626666F5500F5B3C9 /* CreateCounterViewModel.swift */; };
 		002ABA3226666F5500F5B3C9 /* CreateCounterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002ABA2826666F5500F5B3C9 /* CreateCounterCoordinator.swift */; };
 		002ABA3326666F5500F5B3C9 /* CreateCounterStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002ABA2A26666F5500F5B3C9 /* CreateCounterStrings.swift */; };
@@ -79,6 +80,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00039F6B268210520061B2A2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		002ABA2626666F5500F5B3C9 /* CreateCounterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCounterViewModel.swift; sourceTree = "<group>"; };
 		002ABA2826666F5500F5B3C9 /* CreateCounterCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCounterCoordinator.swift; sourceTree = "<group>"; };
 		002ABA2A26666F5500F5B3C9 /* CreateCounterStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCounterStrings.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				00A1039B2665206900E661CD /* UIStackView+Extensions.swift */,
 				00A103A9266522C800E661CD /* UIImage+Badge.swift */,
 				007C166D2681061600EB74C5 /* UICollectionView+Extensions.swift */,
+				00039F6B268210520061B2A2 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				00A103AF266526A600E661CD /* WelcomeFeature.swift in Sources */,
 				00A103D8266556CE00E661CD /* CounterTableViewCell.swift in Sources */,
 				00A103D5266556CE00E661CD /* CountersService.swift in Sources */,
+				00039F6C268210520061B2A2 /* String+Extensions.swift in Sources */,
 				00A1033E2665189A00E661CD /* Button.swift in Sources */,
 				00A103D6266556CE00E661CD /* CounterServiceTarget.swift in Sources */,
 				00A10342266518D000E661CD /* main.swift in Sources */,

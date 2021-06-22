@@ -39,7 +39,7 @@ final class CountersViewModel: ObservableObject {
 
     private(set) var filteredCounters: [Counter] = []
 
-    private var isFirstTimeUse: Bool = true
+    private let firstTimeOpenKey = "FirstOpen"
 
     // View bindings
     var didChangeState: ((ViewState, String, ViewStateError?) -> Void)?
@@ -62,8 +62,8 @@ final class CountersViewModel: ObservableObject {
 extension CountersViewModel {
     // TODO: check first time use and save in user defaults
     func checkFirstTimeUse() -> Bool {
-        if isFirstTimeUse {
-            isFirstTimeUse = false
+        if UserDefaults.standard.object(forKey: firstTimeOpenKey) == nil {
+            UserDefaults.standard.setValue(false, forKey: firstTimeOpenKey)
             return true
         }
 
@@ -136,6 +136,8 @@ extension CountersViewModel {
 
     // MARK: - Delete counter(s)
     func deleteCounters(at indexPaths: [IndexPath], completion: @escaping () -> Void) {
+        viewState = .loading
+        
         let selectedCountersIds = indexPaths.compactMap {  indexPath in
             return counters[indexPath.row].id
         }

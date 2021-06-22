@@ -38,6 +38,6 @@ class ExampleCollectionViewCell: UICollectionViewCell {
     }
 
     func configure(example: Example) {
-        titleLabel.text = example.name.capitalized
+        titleLabel.text = example.name.capitalizingFirstLetter()
     }
 }

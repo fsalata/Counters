@@ -84,7 +84,14 @@ extension ExamplesViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 extension ExamplesViewController: UICollectionViewDelegate {
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let section = viewModel.sectionKeys[indexPath.section]
+        if let items = viewModel.examples[section] {
+            let item = items[indexPath.row]
+            viewModel.didSelect(item: item)
+            navigationController?.popViewController(animated: true)
+        }
+    }
 }
 
 // MARK: - UICollectionView Layout

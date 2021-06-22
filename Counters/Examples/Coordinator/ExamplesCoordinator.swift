@@ -10,12 +10,14 @@ import UIKit
 class ExamplesCoordinator: Coordinator {
     var navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
+    var viewModel: ExamplesViewModel
+
+    init(navigationController: UINavigationController, viewModel: ExamplesViewModel = ExamplesViewModel()) {
         self.navigationController = navigationController
+        self.viewModel = viewModel
     }
 
     func start() {
-        let viewModel = ExamplesViewModel()
         let examplesViewControler = ExamplesViewController(coordinator: self, viewModel: viewModel)
         navigationController.pushViewController(examplesViewControler, animated: true)
     }

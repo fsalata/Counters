@@ -11,24 +11,34 @@ final class CreateCounterCoordinator: Coordinator {
     let navigationController: UINavigationController
     var innerNavigationController: UINavigationController!
 
+    var createCounterViewController: CreateCounterViewController!
+
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
     func start() {
         let viewModel = CreateCounterViewModel()
-        let createItemViewController = CreateCounterViewController(coordinator: self, viewModel: viewModel)
+        createCounterViewController = CreateCounterViewController(coordinator: self, viewModel: viewModel)
 
-        innerNavigationController = UINavigationController(rootViewController: createItemViewController)
+        innerNavigationController = UINavigationController(rootViewController: createCounterViewController)
         innerNavigationController.modalPresentationStyle = .fullScreen
 
         navigationController.present(innerNavigationController, animated: true)
+    }
+
+    func stop() {
+        self.innerNavigationController = nil
+        self.createCounterViewController = nil
     }
 }
 
 extension CreateCounterCoordinator {
     func presentExamplesScreen() {
-        let examplesCoordinator = ExamplesCoordinator(navigationController: innerNavigationController)
+        let examplesViewModel = ExamplesViewModel()
+        examplesViewModel.delegate = createCounterViewController
+
+        let examplesCoordinator = ExamplesCoordinator(navigationController: innerNavigationController, viewModel: examplesViewModel)
         examplesCoordinator.start()
     }
 }
