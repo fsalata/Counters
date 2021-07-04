@@ -8,7 +8,7 @@ import Combine
 
 class APIClient {
     private var session: URLSessionProtocol
-    private var api: APIProtocol
+    private(set) var api: APIProtocol
 
     init(session: URLSessionProtocol = URLSession.shared,
          api: APIProtocol) {
@@ -20,16 +20,17 @@ class APIClient {
     /// - Parameters:
     ///   - target: ServiceTargetProtocol
     ///   - completion: (Result<T, APIError>, URLResponse?) -> Void
+    @discardableResult
     func request<T: Decodable>(target: ServiceTargetProtocol,
-                               completion: @escaping (Result<T, APIError>, URLResponse?) -> Void) {
+                               completion: @escaping (Result<T, APIError>, URLResponse?) -> Void) -> URLSessionDataTask? {
         guard var urlRequest = try? URLRequest(baseURL: api.baseURL, target: target) else {
             completion(.failure(.network(.badURL)), nil)
-            return
+            return nil
         }
 
         urlRequest.allHTTPHeaderFields = target.header
 
-        session.dataTask(with: urlRequest) {[weak self] data, response, error in
+        let dataTask = session.dataTask(with: urlRequest) {[weak self] data, response, error in
             self?.debugResponse(request: urlRequest, data: data, response: response, error: error)
 
             if let error = error {
@@ -53,7 +54,11 @@ class APIClient {
                     completion(.failure(APIError(error)), response)
                 }
             }
-        }.resume()
+        }
+
+        dataTask.resume()
+
+        return dataTask
     }
 }
 

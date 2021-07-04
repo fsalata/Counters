@@ -1,4 +1,6 @@
 line_length: 140
 
 disabled_rules:
-- identifier_name
+- identifier_name 
+- unused_closure_parameter
+- force_cast

@@ -13,7 +13,7 @@ struct Counter: Decodable, Equatable {
     var count: Int = 0
 }
 
-struct CounterPayload: Codable {
+struct CounterPayload: Codable, Equatable {
     let id: String?
     let title: String?
 }
