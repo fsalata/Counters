@@ -34,7 +34,7 @@ final class Button: UIButton {
         super.init(coder: coder)
         configureUI()
     }
-    
+
     // MARK: - Internal Methods
     override func setTitle(_ title: String?, for state: UIControl.State) {
         guard let title = title else {
@@ -57,7 +57,7 @@ private extension Button {
         static let cornerRadius: CGFloat = 8.0
         static let edgeInsets: CGFloat = 8.0
     }
-    
+
     enum Font {
         static let kern: CGFloat = 0.51
         static let title = UIFont.systemFont(ofSize: 17, weight: .semibold)

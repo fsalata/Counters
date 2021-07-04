@@ -35,6 +35,7 @@ final class CountersService {
     }
 
     func delete(id: String, completion: @escaping (Result<[Counter], APIError>, URLResponse?) -> Void) {
-        client.request(target: CounterServiceTarget.delete(payload: CounterPayload(id: id, title: nil)), completion: completion)
+        client.request(target: CounterServiceTarget.delete(payload: CounterPayload(id: id, title: nil)),
+                       completion: completion)
     }
 }

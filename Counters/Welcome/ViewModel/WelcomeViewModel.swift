@@ -14,4 +14,3 @@ final class WelcomeViewModel {
         self.features = features
     }
 }
-

@@ -22,8 +22,8 @@ extension UICollectionView {
     ///   - configure: closure to handle cell configuration
     /// - Returns: returns configured cell
     func dequeueCell<T: UICollectionViewCell>(of type: T.Type,
-                                         for indexPath: IndexPath,
-                                         configure: @escaping ((T) -> Void) = { _ in }) -> UICollectionViewCell {
+                                              for indexPath: IndexPath,
+                                              configure: @escaping ((T) -> Void) = { _ in }) -> UICollectionViewCell {
 
         let cell = self.dequeueReusableCell(withReuseIdentifier: String(describing: T.self), for: indexPath)
 

@@ -123,11 +123,9 @@ extension CreateCounterViewController {
     }
 
     private func handleError() {
-        DispatchQueue.main.async {
-            self.showAlert(title: CreateCounterStrings.ErrorMessage.title,
-                           message: CreateCounterStrings.ErrorMessage.message,
-                           actionButtons: nil)
-        }
+        self.showAlert(title: CreateCounterStrings.ErrorMessage.title,
+                       message: CreateCounterStrings.ErrorMessage.message,
+                       actionButtons: nil)
     }
 }
 

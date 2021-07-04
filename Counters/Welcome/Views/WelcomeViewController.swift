@@ -9,7 +9,7 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     @IBOutlet weak var contentStackView: UIStackView!
-    
+
     private let coordinator: WelcomeCoordinator
     private let viewModel: WelcomeViewModel
 
@@ -56,10 +56,12 @@ private extension WelcomeViewController {
         badgeImageView.contentMode = .center
 
         let titleLabel = UILabel()
-        titleLabel.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: .systemFont(ofSize: 17, weight: .semibold))
+        titleLabel.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: .systemFont(ofSize: 17,
+                                                                                             weight: .semibold))
 
         let descriptionLabel = UILabel()
-        descriptionLabel.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: .systemFont(ofSize: 17, weight: .regular))
+        descriptionLabel.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: .systemFont(ofSize: 17,
+                                                                                               weight: .regular))
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textColor = UIColor(named: "DescriptionText")
 

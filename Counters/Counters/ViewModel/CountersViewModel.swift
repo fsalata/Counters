@@ -60,7 +60,6 @@ final class CountersViewModel: ObservableObject {
 
 // MARK: - Public methods
 extension CountersViewModel {
-    // TODO: check first time use and save in user defaults
     func checkFirstTimeUse() -> Bool {
         if UserDefaults.standard.object(forKey: firstTimeOpenKey) == nil {
             UserDefaults.standard.setValue(false, forKey: firstTimeOpenKey)
@@ -137,7 +136,7 @@ extension CountersViewModel {
     // MARK: - Delete counter(s)
     func deleteCounters(at indexPaths: [IndexPath], completion: @escaping () -> Void) {
         viewState = .loading
-        
+
         let selectedCountersIds = indexPaths.compactMap {  indexPath in
             return counters[indexPath.row].id
         }
@@ -150,7 +149,7 @@ extension CountersViewModel {
         for id in selectedCountersIds {
             dispatchGroup.enter()
 
-            service.delete(id: id) { result, response in
+            service.delete(id: id) { result, _ in
                 switch result {
                 case .success(let counters):
                     remainingCounters = counters

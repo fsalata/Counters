@@ -9,8 +9,8 @@ import UIKit
 
 class ExamplesViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    //MARK: Properties
+
+    // MARK: Properties
     private let coordinator: ExamplesCoordinator
     private let viewModel: ExamplesViewModel
 
@@ -57,7 +57,8 @@ extension ExamplesViewController: UICollectionViewDataSource {
         return viewModel.examples[viewModel.sectionKeys[section]]?.count ?? 0
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueCell(of: ExampleCollectionViewCell.self, for: indexPath) {[weak self] cell in
             guard let self = self else { return }
 
@@ -70,14 +71,17 @@ extension ExamplesViewController: UICollectionViewDataSource {
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        let identifier = String(describing: ExampleHeaderCollectionReusableView.self)
         if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                    withReuseIdentifier: String(describing: ExampleHeaderCollectionReusableView.self),
-                                                                    for: indexPath) as? ExampleHeaderCollectionReusableView {
+                                                                        withReuseIdentifier: identifier,
+                                                                        for: indexPath) as? ExampleHeaderCollectionReusableView {
             header.configure(title: viewModel.sectionKeys[indexPath.section])
             return header
         }
-        
+
         return UICollectionReusableView()
     }
 }
@@ -97,7 +101,7 @@ extension ExamplesViewController: UICollectionViewDelegate {
 // MARK: - UICollectionView Layout
 private extension ExamplesViewController {
     func createLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { section, environment in
+        return UICollectionViewCompositionalLayout { section, _ in
             let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
 

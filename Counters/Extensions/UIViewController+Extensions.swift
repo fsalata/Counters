@@ -29,6 +29,8 @@ extension UIViewController {
 
         alertController.view.tintColor = .orange
 
-        self.present(alertController, animated: true)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
     }
 }

@@ -38,7 +38,8 @@ extension CreateCounterCoordinator {
         let examplesViewModel = ExamplesViewModel()
         examplesViewModel.delegate = createCounterViewController
 
-        let examplesCoordinator = ExamplesCoordinator(navigationController: innerNavigationController, viewModel: examplesViewModel)
+        let examplesCoordinator = ExamplesCoordinator(navigationController: innerNavigationController,
+                                                      viewModel: examplesViewModel)
         examplesCoordinator.start()
     }
 }

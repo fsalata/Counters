@@ -14,7 +14,7 @@ class CountersViewController: UIViewController {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var totalCountLabel: UILabel!
 
-    //MARK: Properties
+    // MARK: Properties
     private let coordinator: CountersCoordinator
     private let viewModel: CountersViewModel
 
@@ -247,7 +247,7 @@ extension CountersViewController: UISearchResultsUpdating {
 // MARK: - FeedbackViewDelegate
 extension CountersViewController: FeedbackViewDelegate {
     func feedbackViewDidPerformAction(_ feedbackView: FeedbackView) {
-        guard case .error(_) = viewModel.viewState else {
+        guard case .error = viewModel.viewState else {
             presentCreateCounter()
             return
         }
@@ -367,6 +367,6 @@ extension CountersViewController {
             break
         }
 
-        self.showAlert(title: title, message: message, actionButtons: actionButtons)
+        showAlert(title: title, message: message, actionButtons: actionButtons)
     }
 }

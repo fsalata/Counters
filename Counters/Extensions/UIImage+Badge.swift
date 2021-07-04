@@ -14,7 +14,7 @@ internal extension UIImage {
         static let lineWidth: CGFloat = 1
         static let strokeColor = UIColor(white: 0, alpha: 0.05).cgColor
     }
-    
+
     static func badge(sytemIcon: String, color: UIColor?) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(Constants.size, false, 0)
         defer { UIGraphicsEndImageContext() }
