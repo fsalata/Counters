@@ -31,9 +31,8 @@ final class CreateCounterCoordinator: Coordinator {
         self.innerNavigationController = nil
         self.createCounterViewController = nil
     }
-}
 
-extension CreateCounterCoordinator {
+    // MARK: View controller methods
     func presentExamplesScreen() {
         let examplesViewModel = ExamplesViewModel()
         examplesViewModel.delegate = createCounterViewController

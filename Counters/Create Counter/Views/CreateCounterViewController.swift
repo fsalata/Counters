@@ -11,7 +11,7 @@ class CreateCounterViewController: UIViewController {
     @IBOutlet weak var titleTextField: CustomTextField!
     @IBOutlet weak var examplesButton: UIButton!
 
-    private let coordinator: CreateCounterCoordinator
+    private weak var coordinator: CreateCounterCoordinator?
     private let viewModel: CreateCounterViewModel
 
     private lazy var cancelBarButtonItem: UIBarButtonItem = {
@@ -97,7 +97,7 @@ class CreateCounterViewController: UIViewController {
     }
 
     @IBAction func exampleButtonHandler(_ sender: Any) {
-        coordinator.presentExamplesScreen()
+        coordinator?.presentExamplesScreen()
     }
 }
 
@@ -113,7 +113,7 @@ extension CreateCounterViewController {
                 self.titleTextField.text = nil
                 self.titleTextField.hideLoading()
                 self.dismissViewController()
-                self.coordinator.stop()
+                self.coordinator?.stop()
 
             case .error:
                 self.titleTextField.hideLoading()

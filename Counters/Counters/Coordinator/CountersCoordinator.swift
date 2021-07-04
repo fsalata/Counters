@@ -19,9 +19,8 @@ final class CountersCoordinator: Coordinator {
         let countersViewController = CountersViewController(coordinator: self, viewModel: viewModel)
         navigationController.pushViewController(countersViewController, animated: true)
     }
-}
 
-extension CountersCoordinator {
+    // MARK: - View controller methods
     func presentWelcomeScreen() {
         let welcomeCoordinator = WelcomeCoordinator(navigationController: navigationController)
         welcomeCoordinator.start()

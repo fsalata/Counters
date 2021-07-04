@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WelcomeCoordinator: Coordinator {
+class WelcomeCoordinator: Coordinator {
     var navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
@@ -21,9 +21,8 @@ final class WelcomeCoordinator: Coordinator {
         navigationController.navigationBar.isHidden = true
         navigationController.present(welcomeViewController, animated: true)
     }
-}
 
-extension WelcomeCoordinator {
+    // MARK: - View controller methods
     func dismiss() {
         navigationController.navigationBar.isHidden = false
         navigationController.dismiss(animated: true, completion: nil)

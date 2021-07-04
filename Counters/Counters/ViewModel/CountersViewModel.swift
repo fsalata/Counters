@@ -12,6 +12,10 @@ final class CountersViewModel: ObservableObject {
 
     private(set) var counters: [Counter] = []
 
+    private(set) var filteredCounters: [Counter] = []
+
+    private let firstTimeOpenKey = "FirstOpen"
+
     private(set) var viewState: ViewState = .noContent {
         didSet {
             switch viewState {
@@ -37,13 +41,6 @@ final class CountersViewModel: ObservableObject {
                """
     }
 
-    private(set) var filteredCounters: [Counter] = []
-
-    private let firstTimeOpenKey = "FirstOpen"
-
-    // View bindings
-    var didChangeState: ((ViewState, String, ViewStateError?) -> Void)?
-
     var isCountersEmpty: Bool {
         return counters.count == 0
     }
@@ -51,6 +48,9 @@ final class CountersViewModel: ObservableObject {
     var isFilteredCountersEmpty: Bool {
         return filteredCounters.count == 0
     }
+
+    // View bindings
+    var didChangeState: ((ViewState, String, ViewStateError?) -> Void)?
 
     // Init
     init(service: CountersService = CountersService()) {

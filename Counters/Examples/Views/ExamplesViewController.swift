@@ -11,7 +11,7 @@ class ExamplesViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
 
     // MARK: Properties
-    private let coordinator: ExamplesCoordinator
+    private weak var coordinator: ExamplesCoordinator?
     private let viewModel: ExamplesViewModel
 
     init(coordinator: ExamplesCoordinator, viewModel: ExamplesViewModel) {

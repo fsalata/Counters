@@ -15,7 +15,7 @@ class CountersViewController: UIViewController {
     @IBOutlet weak var totalCountLabel: UILabel!
 
     // MARK: Properties
-    private let coordinator: CountersCoordinator
+    private weak var coordinator: CountersCoordinator?
     private let viewModel: CountersViewModel
 
     private lazy var searchController: UISearchController = {
@@ -129,7 +129,7 @@ class CountersViewController: UIViewController {
 
     private func checkFirstTimeUse() {
         if viewModel.checkFirstTimeUse() {
-            coordinator.presentWelcomeScreen()
+            coordinator?.presentWelcomeScreen()
         }
     }
 
@@ -150,7 +150,7 @@ class CountersViewController: UIViewController {
     }
 
     private func presentCreateCounter() {
-        coordinator.presentCreateItem()
+        coordinator?.presentCreateItem()
     }
 
     // MARK: - Fetch data

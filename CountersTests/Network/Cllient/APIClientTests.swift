@@ -43,7 +43,7 @@ class APIClientTests: XCTestCase {
             expectation.fulfill()
         } as! URLSessionDataTaskSpy
 
-        wait(for: [expectation], timeout: 0.1)
+        wait(for: [expectation], timeout: timeout)
 
         XCTAssertTrue(dataTask.calledResume)
     }
@@ -71,7 +71,7 @@ class APIClientTests: XCTestCase {
             }
         }
 
-        wait(for: [expectation], timeout: 0.1)
+        wait(for: [expectation], timeout: timeout)
 
         XCTAssertEqual(session.method, expectedMethod)
         XCTAssertEqual(session.url?.absoluteString, expectedURL)
@@ -96,7 +96,7 @@ class APIClientTests: XCTestCase {
             }
         }
 
-        wait(for: [expectation], timeout: 0.1)
+        wait(for: [expectation], timeout: timeout)
 
         XCTAssertEqual(errorResponse, expectedResult)
     }
@@ -119,7 +119,7 @@ class APIClientTests: XCTestCase {
             }
         }
 
-        wait(for: [expectation], timeout: 0.1)
+        wait(for: [expectation], timeout: timeout)
 
         XCTAssertEqual(errorResponse, expectedResult)
     }
@@ -143,7 +143,7 @@ class APIClientTests: XCTestCase {
             }
         }
 
-        wait(for: [expectation], timeout: 0.1)
+        wait(for: [expectation], timeout: timeout)
 
         XCTAssertEqual(errorResponse, expectedResult)
     }
@@ -173,7 +173,7 @@ class APIClientTests: XCTestCase {
             }
         }
 
-        wait(for: [expectation], timeout: 0.1)
+        wait(for: [expectation], timeout: timeout)
 
         let httpBody = try? JSONDecoder().decode(User.self, from: session.dataTaskArgsRequest.first?.httpBody ?? Data())
 
