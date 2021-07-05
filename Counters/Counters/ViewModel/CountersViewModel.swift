@@ -41,6 +41,9 @@ final class CountersViewModel: ObservableObject {
 
     private let firstTimeOpenKey = "FirstOpen"
 
+    private var cache = Cache.shared
+    private var countersCacheKey = "counters"
+
     // View bindings
     var didChangeState: ((ViewState, String, ViewStateError?) -> Void)?
 
@@ -183,6 +186,7 @@ private extension CountersViewModel {
         self.counters = counters
         updateFilteredCounters()
         viewState = counters.isEmpty ? .noContent : .hasContent
+        cache.set(key: countersCacheKey, object: counters)
     }
 
     func updateFilteredCounters() {
@@ -195,6 +199,13 @@ private extension CountersViewModel {
 
     // MARK: - Received completion handler
     func errorHandler(_ error: APIError, in type: ViewErrorType) {
+        if type == .fetch,
+           case .network(_) = error,
+           let cachedCounters = self.cache.get(key: self.countersCacheKey) {
+            self.receiveValueHandler(cachedCounters)
+            return
+        }
+
         var title: String?
         var message: String? = "The Internet connection appears to be offline."
 

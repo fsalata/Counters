@@ -67,6 +67,7 @@
 		00A103E62665573F00E661CD /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103E32665573F00E661CD /* UIColor+Extensions.swift */; };
 		00A103E72665573F00E661CD /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103E42665573F00E661CD /* UITableView+Extensions.swift */; };
 		00A103ED26655A0400E661CD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00A103EC26655A0400E661CD /* Colors.xcassets */; };
+		00B3D00F2693409B00A83BEC /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D00E2693409B00A83BEC /* Cache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,7 @@
 		00A103E32665573F00E661CD /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		00A103E42665573F00E661CD /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		00A103EC26655A0400E661CD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		00B3D00E2693409B00A83BEC /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +303,7 @@
 				00A103BE266556CE00E661CD /* Counters */,
 				002ABA2426666F5500F5B3C9 /* Create Counter */,
 				007C165B2680D43B00EB74C5 /* Examples */,
+				00B3D00D2693408600A83BEC /* Common */,
 				00A1033C2665188100E661CD /* UIComponents */,
 				00A103982665206900E661CD /* Extensions */,
 				00A10339266517A300E661CD /* Resources */,
@@ -514,6 +517,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		00B3D00D2693408600A83BEC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				00B3D00E2693409B00A83BEC /* Cache.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -645,6 +656,7 @@
 				00A103942665204200E661CD /* FeedbackView.swift in Sources */,
 				00A1038526651EDC00E661CD /* WelcomeViewModel.swift in Sources */,
 				00A1036626651BF200E661CD /* API.swift in Sources */,
+				00B3D00F2693409B00A83BEC /* Cache.swift in Sources */,
 				00A103D4266556CE00E661CD /* CounterActions.swift in Sources */,
 				002ABA3426666F5500F5B3C9 /* CreateCounterService.swift in Sources */,
 				007C16692680F9B100EB74C5 /* ExamplesModel.swift in Sources */,
