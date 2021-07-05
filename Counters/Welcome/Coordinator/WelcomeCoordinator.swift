@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol WelcomeCoordinatorDelegate: AnyObject {
+    func welcomeCoordinatorDidFinish(_ coordinator: WelcomeCoordinator)
+}
+
 class WelcomeCoordinator: Coordinator {
     var navigationController: UINavigationController
+
+    weak var delegate: WelcomeCoordinatorDelegate?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -24,7 +30,10 @@ class WelcomeCoordinator: Coordinator {
 
     // MARK: - View controller methods
     func dismiss() {
-        navigationController.navigationBar.isHidden = false
-        navigationController.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.navigationController.navigationBar.isHidden = false
+            self.navigationController.dismiss(animated: true, completion: nil)
+            self.delegate?.welcomeCoordinatorDidFinish(self)
+        }
     }
 }

@@ -75,9 +75,7 @@ class CreateCounterViewController: UIViewController {
     }
 
     @objc private func dismissViewController() {
-        DispatchQueue.main.async {
-            self.navigationController?.dismiss(animated: true)
-        }
+        self.coordinator?.dismiss()
     }
 
     @objc private func saveButtonHandler() {
@@ -113,7 +111,6 @@ extension CreateCounterViewController {
                 self.titleTextField.text = nil
                 self.titleTextField.hideLoading()
                 self.dismissViewController()
-                self.coordinator?.stop()
 
             case .error:
                 self.titleTextField.hideLoading()

@@ -11,6 +11,7 @@ final class CountersCoordinator: Coordinator {
     var navigationController: UINavigationController
 
     var createCounterCoordinator: CreateCounterCoordinator!
+    var welcomeCoordinator: WelcomeCoordinator!
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -24,12 +25,28 @@ final class CountersCoordinator: Coordinator {
 
     // MARK: - View controller methods
     func presentWelcomeScreen() {
-        let welcomeCoordinator = WelcomeCoordinator(navigationController: navigationController)
+        welcomeCoordinator = WelcomeCoordinator(navigationController: navigationController)
         welcomeCoordinator.start()
+        welcomeCoordinator.delegate = self
     }
 
     func presentCreateItem() {
         createCounterCoordinator = CreateCounterCoordinator(navigationController: navigationController)
         createCounterCoordinator.start()
+        createCounterCoordinator.delegate = self
+    }
+}
+
+// MARK: - WelcomeCoordinatorDelegate
+extension CountersCoordinator: WelcomeCoordinatorDelegate {
+    func welcomeCoordinatorDidFinish(_ coordinator: WelcomeCoordinator) {
+        welcomeCoordinator = nil
+    }
+}
+
+// MARK: - CreateCounterCoordinatorDelegate
+extension CountersCoordinator: CreateCounterCoordinatorDelegate {
+    func createCounterCoordinatorDidFinish(_ coordinator: CreateCounterCoordinator) {
+        createCounterCoordinator = nil
     }
 }

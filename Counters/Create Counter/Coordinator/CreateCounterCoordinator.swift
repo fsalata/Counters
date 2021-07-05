@@ -7,13 +7,18 @@
 
 import UIKit
 
+protocol CreateCounterCoordinatorDelegate: AnyObject {
+    func createCounterCoordinatorDidFinish(_ coordinator: CreateCounterCoordinator)
+}
+
 final class CreateCounterCoordinator: Coordinator {
     let navigationController: UINavigationController
     var innerNavigationController: UINavigationController!
 
+    var examplesCoordinator: ExamplesCoordinator!
     var createCounterViewController: CreateCounterViewController!
 
-    var examplesCoordinator: ExamplesCoordinator!
+    weak var delegate: CreateCounterCoordinatorDelegate?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -29,12 +34,6 @@ final class CreateCounterCoordinator: Coordinator {
         navigationController.present(innerNavigationController, animated: true)
     }
 
-    func stop() {
-        innerNavigationController = nil
-        createCounterViewController = nil
-        examplesCoordinator = nil
-    }
-
     // MARK: View controller methods
     func presentExamplesScreen() {
         let examplesViewModel = ExamplesViewModel()
@@ -43,5 +42,21 @@ final class CreateCounterCoordinator: Coordinator {
         examplesCoordinator = ExamplesCoordinator(navigationController: innerNavigationController,
                                                       viewModel: examplesViewModel)
         examplesCoordinator.start()
+    }
+
+    func dismiss() {
+        DispatchQueue.main.async {
+            self.navigationController.dismiss(animated: true)
+            self.stop()
+            self.delegate?.createCounterCoordinatorDidFinish(self)
+        }
+    }
+}
+
+private extension CreateCounterCoordinator {
+    func stop() {
+        innerNavigationController = nil
+        createCounterViewController = nil
+        examplesCoordinator = nil
     }
 }
