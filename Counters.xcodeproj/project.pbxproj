@@ -20,6 +20,7 @@
 		006F64FC2692563A00722617 /* CountersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006F64FB2692563A00722617 /* CountersViewModelTests.swift */; };
 		00770D27269348640078C4B2 /* CreateCounterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00770D26269348640078C4B2 /* CreateCounterViewModelTests.swift */; };
 		00770D31269367E00078C4B2 /* CounterMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00770D30269367E00078C4B2 /* CounterMocks.swift */; };
+		00770D36269371650078C4B2 /* ExamplesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00770D35269371650078C4B2 /* ExamplesViewModelTests.swift */; };
 		007C16612680D48200EB74C5 /* ExamplesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C16602680D48200EB74C5 /* ExamplesCoordinator.swift */; };
 		007C16642680D4D600EB74C5 /* ExamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007C16622680D4D600EB74C5 /* ExamplesViewController.swift */; };
 		007C16652680D4D600EB74C5 /* ExamplesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007C16632680D4D600EB74C5 /* ExamplesViewController.xib */; };
@@ -102,6 +103,7 @@
 		006F64FB2692563A00722617 /* CountersViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersViewModelTests.swift; sourceTree = "<group>"; };
 		00770D26269348640078C4B2 /* CreateCounterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCounterViewModelTests.swift; sourceTree = "<group>"; };
 		00770D30269367E00078C4B2 /* CounterMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterMocks.swift; sourceTree = "<group>"; };
+		00770D35269371650078C4B2 /* ExamplesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesViewModelTests.swift; sourceTree = "<group>"; };
 		007C16602680D48200EB74C5 /* ExamplesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesCoordinator.swift; sourceTree = "<group>"; };
 		007C16622680D4D600EB74C5 /* ExamplesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesViewController.swift; sourceTree = "<group>"; };
 		007C16632680D4D600EB74C5 /* ExamplesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExamplesViewController.xib; sourceTree = "<group>"; };
@@ -275,6 +277,14 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		00770D34269371320078C4B2 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				00770D35269371650078C4B2 /* ExamplesViewModelTests.swift */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
 		007C165B2680D43B00EB74C5 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +386,7 @@
 				006F64F226924B5600722617 /* Welcome */,
 				006F64F92692561A00722617 /* Counters */,
 				006F64FA2692561F00722617 /* Create Counters */,
+				00770D34269371320078C4B2 /* Examples */,
 				00770D2D26934DD30078C4B2 /* Mocks */,
 				00770D2C26934DCD0078C4B2 /* Helpers */,
 				00A103102665113500E661CD /* Info.plist */,
@@ -804,6 +815,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00770D36269371650078C4B2 /* ExamplesViewModelTests.swift in Sources */,
 				00770D27269348640078C4B2 /* CreateCounterViewModelTests.swift in Sources */,
 				00A10346266518DD00E661CD /* TestingAppDelegate.swift in Sources */,
 				006F64F826924EC400722617 /* WelcomeViewControllerTests.swift in Sources */,
