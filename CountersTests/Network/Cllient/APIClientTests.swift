@@ -35,7 +35,7 @@ class APIClientTests: XCTestCase {
     }
 
     func test_calledResume() {
-        givenSession(url: URL(string: mockAPI.baseURL)!, data: nil)
+        givenSession(session: session, data: nil)
 
         let expectation = self.expectation(description: "Resume called")
 
@@ -57,7 +57,7 @@ class APIClientTests: XCTestCase {
                                   age: 39)
         var userResponse: User?
 
-        givenSession(url: URL(string: mockAPI.baseURL)!, data: userMock())
+        givenSession(session: session, data: userMock())
 
         let expectation = self.expectation(description: "Resume called")
 
@@ -82,7 +82,7 @@ class APIClientTests: XCTestCase {
         let expectedResult = APIError.service(.internalServerError)
         var errorResponse: APIError?
 
-        givenSession(url: URL(string: mockAPI.baseURL)!, data: userMock(), statusCode: 500)
+        givenSession(session: session, data: userMock(), statusCode: 500)
 
         let expectation = self.expectation(description: "Resume called")
 
@@ -105,7 +105,7 @@ class APIClientTests: XCTestCase {
         let expectedResult = APIError.network(.notConnectedToInternet)
         var errorResponse: APIError?
 
-        givenSession(url: URL(string: mockAPI.baseURL)!, data: userMock(), error: URLError(.notConnectedToInternet))
+        givenSession(session: session, data: userMock(), error: URLError(.notConnectedToInternet))
 
         let expectation = self.expectation(description: "Resume called")
 
@@ -129,7 +129,7 @@ class APIClientTests: XCTestCase {
         let expectedResult = APIError.parse(.keyNotFound(debugDescription: debugDescription))
         var errorResponse: APIError?
 
-        givenSession(url: URL(string: mockAPI.baseURL)!, data: malformedUserMock())
+        givenSession(session: session, data: malformedUserMock())
 
         let expectation = self.expectation(description: "Resume called")
 
@@ -157,7 +157,7 @@ class APIClientTests: XCTestCase {
                                   age: 39)
         var userResponse: User?
 
-        givenSession(url: URL(string: mockAPI.baseURL)!, data: userMock())
+        givenSession(session: session, data: userMock())
 
         let user = User(username: "fsalata", name: "Fábio Salata", age: 39)
 
@@ -181,17 +181,5 @@ class APIClientTests: XCTestCase {
         XCTAssertEqual(session.url?.absoluteString, expectedURL)
         XCTAssertEqual(httpBody, user)
         XCTAssertEqual(userResponse, expectedResult)
-    }
-}
-
-// MARK: - Helpers
-extension APIClientTests {
-    func givenSession(url: URL, data: Data?, statusCode: Int = 200, error: URLError? = nil) {
-        session.data = data
-        session.response = HTTPURLResponse(url: url,
-                                           statusCode: statusCode,
-                                           httpVersion: nil,
-                                           headerFields: nil)
-        session.error = error
     }
 }

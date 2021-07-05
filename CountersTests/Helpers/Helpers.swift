@@ -24,3 +24,12 @@ func cellForRow(in tableView: UITableView, row: Int, section: Int = 0) -> UITabl
 func didSelectRow(in tableView: UITableView, row: Int, section: Int = 0) {
     tableView.delegate?.tableView?(tableView, didSelectRowAt: IndexPath(row: row, section: section))
 }
+
+func givenSession(session: URLSessionSpy, data: Data?, statusCode: Int = 200, error: URLError? = nil) {
+    session.data = data
+    session.response = HTTPURLResponse(url: URL(string: MockAPI().baseURL)!,
+                                       statusCode: statusCode,
+                                       httpVersion: nil,
+                                       headerFields: nil)
+    session.error = error
+}
