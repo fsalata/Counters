@@ -8,7 +8,7 @@
 import UIKit
 
 class ExampleCollectionViewCell: UICollectionViewCell {
-    private lazy var titleLabel: UILabel = {
+    private(set) lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

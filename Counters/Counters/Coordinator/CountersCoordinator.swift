@@ -10,6 +10,8 @@ import UIKit
 final class CountersCoordinator: Coordinator {
     var navigationController: UINavigationController
 
+    var createCounterCoordinator: CreateCounterCoordinator!
+
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -27,7 +29,7 @@ final class CountersCoordinator: Coordinator {
     }
 
     func presentCreateItem() {
-        let createItemCoordinator = CreateCounterCoordinator(navigationController: navigationController)
-        createItemCoordinator.start()
+        createCounterCoordinator = CreateCounterCoordinator(navigationController: navigationController)
+        createCounterCoordinator.start()
     }
 }

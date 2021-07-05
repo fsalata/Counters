@@ -13,6 +13,8 @@ final class CreateCounterCoordinator: Coordinator {
 
     var createCounterViewController: CreateCounterViewController!
 
+    var examplesCoordinator: ExamplesCoordinator!
+
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -28,8 +30,9 @@ final class CreateCounterCoordinator: Coordinator {
     }
 
     func stop() {
-        self.innerNavigationController = nil
-        self.createCounterViewController = nil
+        innerNavigationController = nil
+        createCounterViewController = nil
+        examplesCoordinator = nil
     }
 
     // MARK: View controller methods
@@ -37,7 +40,7 @@ final class CreateCounterCoordinator: Coordinator {
         let examplesViewModel = ExamplesViewModel()
         examplesViewModel.delegate = createCounterViewController
 
-        let examplesCoordinator = ExamplesCoordinator(navigationController: innerNavigationController,
+        examplesCoordinator = ExamplesCoordinator(navigationController: innerNavigationController,
                                                       viewModel: examplesViewModel)
         examplesCoordinator.start()
     }
