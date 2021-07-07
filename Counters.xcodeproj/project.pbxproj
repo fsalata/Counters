@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		00039F6C268210520061B2A2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00039F6B268210520061B2A2 /* String+Extensions.swift */; };
+		001978632695D13B0092FFF1 /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001978622695D13B0092FFF1 /* UserDefaultsProtocol.swift */; };
+		001978692695D1D80092FFF1 /* UserDefaultsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001978682695D1D80092FFF1 /* UserDefaultsMock.swift */; };
 		002ABA3126666F5500F5B3C9 /* CreateCounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002ABA2626666F5500F5B3C9 /* CreateCounterViewModel.swift */; };
 		002ABA3226666F5500F5B3C9 /* CreateCounterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002ABA2826666F5500F5B3C9 /* CreateCounterCoordinator.swift */; };
 		002ABA3326666F5500F5B3C9 /* CreateCounterStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002ABA2A26666F5500F5B3C9 /* CreateCounterStrings.swift */; };
@@ -92,6 +94,8 @@
 
 /* Begin PBXFileReference section */
 		00039F6B268210520061B2A2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		001978622695D13B0092FFF1 /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
+		001978682695D1D80092FFF1 /* UserDefaultsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMock.swift; sourceTree = "<group>"; };
 		002ABA2626666F5500F5B3C9 /* CreateCounterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCounterViewModel.swift; sourceTree = "<group>"; };
 		002ABA2826666F5500F5B3C9 /* CreateCounterCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCounterCoordinator.swift; sourceTree = "<group>"; };
 		002ABA2A26666F5500F5B3C9 /* CreateCounterStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCounterStrings.swift; sourceTree = "<group>"; };
@@ -186,6 +190,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		001978612695D1270092FFF1 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				001978622695D13B0092FFF1 /* UserDefaultsProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		002ABA2426666F5500F5B3C9 /* Create Counter */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				00770D30269367E00078C4B2 /* CounterMocks.swift */,
+				001978682695D1D80092FFF1 /* UserDefaultsMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -374,6 +387,7 @@
 				00B3D00D2693408600A83BEC /* Common */,
 				00A1033C2665188100E661CD /* UIComponents */,
 				00A103982665206900E661CD /* Extensions */,
+				001978612695D1270092FFF1 /* Protocols */,
 				00A10339266517A300E661CD /* Resources */,
 				00A1038B26651EF600E661CD /* Launch */,
 				00A103052665113500E661CD /* Info.plist */,
@@ -776,6 +790,7 @@
 				00A103D2266556CE00E661CD /* CounterStrings.swift in Sources */,
 				007C16612680D48200EB74C5 /* ExamplesCoordinator.swift in Sources */,
 				00A1038626651EDC00E661CD /* WelcomeCoordinator.swift in Sources */,
+				001978632695D13B0092FFF1 /* UserDefaultsProtocol.swift in Sources */,
 				00A1036726651BF200E661CD /* URL+Extensions.swift in Sources */,
 				00A1038726651EDC00E661CD /* WelcomeViewController.swift in Sources */,
 				00A103D1266556CE00E661CD /* CountersCoordinator.swift in Sources */,
@@ -818,6 +833,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				001978692695D1D80092FFF1 /* UserDefaultsMock.swift in Sources */,
 				00770D36269371650078C4B2 /* ExamplesViewModelTests.swift in Sources */,
 				00770D27269348640078C4B2 /* CreateCounterViewModelTests.swift in Sources */,
 				00A10346266518DD00E661CD /* TestingAppDelegate.swift in Sources */,

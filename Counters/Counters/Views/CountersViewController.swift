@@ -122,8 +122,8 @@ class CountersViewController: UIViewController {
 
     // MARK: - Subscriptions
     private func bindToViewModel() {
-        viewModel.didChangeState = {[weak self] viewState, totalCountString, error in
-            self?.update(viewState, totalCountString, error)
+        viewModel.didChangeState = {[weak self] viewState, error in
+            self?.update(viewState, error)
         }
     }
 
@@ -258,9 +258,7 @@ extension CountersViewController: FeedbackViewDelegate {
 
 // MARK: - View States
 extension CountersViewController {
-    func update(_ viewState: CountersViewModel.ViewState,
-                _ totalCountString: String,
-                _ error: CountersViewModel.ViewStateError?) {
+    func update(_ viewState: CountersViewModel.ViewState, _ error: CountersViewModel.ViewStateError?) {
         print("=== Current state: \(viewState) ===")
 
         DispatchQueue.main.async {
@@ -268,7 +266,7 @@ extension CountersViewController {
             self.loadingIndicator.stopAnimating()
             self.refreshControl.endRefreshing()
             self.updateButtonsState()
-            self.totalCountLabel.text = totalCountString
+            self.totalCountLabel.text = self.viewModel.totalCountersText
 
             switch viewState {
             // MARK: - Loading

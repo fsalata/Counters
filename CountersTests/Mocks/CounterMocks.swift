@@ -28,6 +28,41 @@ struct CounterMocks {
                                     ]
                                     """.data(using: .utf8)!
 
+    static var incrementResponseBody: Data = """
+                                            [
+                                              {
+                                                "id" : "kqquwv6f",
+                                                "title" : "Coffee",
+                                                "count" : 1
+                                              },
+                                              {
+                                                "id" : "kqqux3m1",
+                                                "title" : "Tea",
+                                                "count" : 0
+                                              },
+                                              {
+                                                "id" : "kqqux9xa",
+                                                "title" : "Beer",
+                                                "count" : 0
+                                              }
+                                            ]
+                                            """.data(using: .utf8)!
+
+    static var deleteResponseBody: Data =   """
+                                            [
+                                              {
+                                                "id" : "kqqux3m1",
+                                                "title" : "Tea",
+                                                "count" : 0
+                                              },
+                                              {
+                                                "id" : "kqqux9xa",
+                                                "title" : "Beer",
+                                                "count" : 0
+                                              }
+                                            ]
+                                            """.data(using: .utf8)!
+
     static var responseEmptyBody: Data = """
                                     [
                                     ]
