@@ -9,6 +9,7 @@ import UIKit
 
 let timeout = 0.1
 
+// Buttons
 func tap(_ button: UIButton) {
     button.sendActions(for: .touchUpInside)
 }
@@ -39,6 +40,7 @@ func didSelectRow(in collectionView: UICollectionView, row: Int, section: Int) {
     collectionView.delegate?.collectionView?(collectionView, didSelectItemAt: IndexPath(row: row, section: section))
 }
 
+// Session
 func givenSession(session: URLSessionSpy, data: Data?, statusCode: Int = 200, error: URLError? = nil) {
     session.data = data
     session.response = HTTPURLResponse(url: URL(string: MockAPI().baseURL)!,

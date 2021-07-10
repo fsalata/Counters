@@ -14,6 +14,7 @@ class ExamplesViewController: UIViewController {
     private weak var coordinator: ExamplesCoordinator?
     private let viewModel: ExamplesViewModel
 
+    // MARK: - Lifecycle
     init(coordinator: ExamplesCoordinator, viewModel: ExamplesViewModel) {
         self.coordinator = coordinator
         self.viewModel = viewModel
@@ -30,12 +31,15 @@ class ExamplesViewController: UIViewController {
         setupNavigation()
         setupCollectionView()
     }
+}
 
-    private func setupNavigation() {
+// MARK: - Private methods
+private extension ExamplesViewController {
+    func setupNavigation() {
         navigationController?.navigationBar.tintColor = .orange
     }
 
-    private func setupCollectionView() {
+    func setupCollectionView() {
         collectionView.collectionViewLayout = createLayout()
         collectionView.registerCell(of: ExampleCollectionViewCell.self)
         collectionView.register(ExampleHeaderCollectionReusableView.self,

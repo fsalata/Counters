@@ -11,9 +11,9 @@ protocol CreateCounterCoordinatorDelegate: AnyObject {
     func createCounterCoordinatorDidFinish(_ coordinator: CreateCounterCoordinator)
 }
 
-final class CreateCounterCoordinator: Coordinator {
+class CreateCounterCoordinator: Coordinator {
     let navigationController: UINavigationController
-    var innerNavigationController: UINavigationController!
+    private(set) var innerNavigationController: UINavigationController!
 
     var examplesCoordinator: ExamplesCoordinator!
     var createCounterViewController: CreateCounterViewController!
