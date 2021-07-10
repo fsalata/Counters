@@ -15,7 +15,7 @@ class CountersViewController: UIViewController {
     @IBOutlet weak var totalCountLabel: UILabel!
 
     // MARK: Properties
-    private let coordinator: CountersCoordinator
+    private weak var coordinator: CountersCoordinator?
     private let viewModel: CountersViewModel
 
     private lazy var searchController: UISearchController = {
@@ -66,7 +66,7 @@ class CountersViewController: UIViewController {
         return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
     }
 
-    // MARK: - Init
+    // MARK: - Lifecycle
     init(coordinator: CountersCoordinator, viewModel: CountersViewModel) {
         self.coordinator = coordinator
         self.viewModel = viewModel
@@ -97,7 +97,18 @@ class CountersViewController: UIViewController {
         checkFirstTimeUse()
     }
 
-    private func setupNavigation() {
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+
+        tableView.setEditing(editing, animated: true)
+
+        updateButtonsState()
+    }
+}
+
+// MARK: - Private methods
+private extension CountersViewController {
+    func setupNavigation() {
         title = "Counters"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItems = [editBarButtonItem]
@@ -111,7 +122,7 @@ class CountersViewController: UIViewController {
                                     for: .normal)
     }
 
-    private func setupTableView() {
+    func setupTableView() {
         tableView.registerCell(of: CounterTableViewCell.self)
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -121,27 +132,19 @@ class CountersViewController: UIViewController {
     }
 
     // MARK: - Subscriptions
-    private func bindToViewModel() {
-        viewModel.didChangeState = {[weak self] viewState, totalCountString, error in
-            self?.update(viewState, totalCountString, error)
+    func bindToViewModel() {
+        viewModel.didChangeState = {[weak self] viewState, error in
+            self?.update(viewState, error)
         }
     }
 
-    private func checkFirstTimeUse() {
+    func checkFirstTimeUse() {
         if viewModel.checkFirstTimeUse() {
-            coordinator.presentWelcomeScreen()
+            coordinator?.presentWelcomeScreen()
         }
     }
 
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-
-        tableView.setEditing(editing, animated: true)
-
-        updateButtonsState()
-    }
-
-    @objc private func selectAllHandler() {
+    @objc func selectAllHandler() {
         for row in 0..<viewModel.counters.count {
             let indexPath = IndexPath(row: row, section: 0)
 
@@ -149,16 +152,19 @@ class CountersViewController: UIViewController {
         }
     }
 
-    private func presentCreateCounter() {
-        coordinator.presentCreateItem()
+    func presentCreateCounter() {
+        coordinator?.presentCreateItem()
     }
 
     // MARK: - Fetch data
-    @objc private func fetchCounters() {
+    @objc func fetchCounters() {
         viewModel.fetchCounters()
     }
+}
 
-    // MARK: - Actions
+// MARK: - Public methods
+extension CountersViewController {
+    // Actions
     @IBAction func createItemHandler(_ sender: Any) {
         presentCreateCounter()
     }
@@ -257,18 +263,14 @@ extension CountersViewController: FeedbackViewDelegate {
 }
 
 // MARK: - View States
-extension CountersViewController {
-    func update(_ viewState: CountersViewModel.ViewState,
-                _ totalCountString: String,
-                _ error: CountersViewModel.ViewStateError?) {
-        print("=== Current state: \(viewState) ===")
-
+private extension CountersViewController {
+    func update(_ viewState: CountersViewModel.ViewState, _ error: CountersViewModel.ViewStateError?) {
         DispatchQueue.main.async {
             self.tableView.backgroundView = nil
             self.loadingIndicator.stopAnimating()
             self.refreshControl.endRefreshing()
             self.updateButtonsState()
-            self.totalCountLabel.text = totalCountString
+            self.totalCountLabel.text = self.viewModel.totalCountersText
 
             switch viewState {
             // MARK: - Loading
@@ -327,7 +329,7 @@ extension CountersViewController {
     }
 
     // MARK: - Button states
-    private func updateButtonsState() {
+    func updateButtonsState() {
         editButtonItem.isEnabled = !isCountersEmpty || isEditing
         totalCountLabel.isHidden = isCountersEmpty
         addNewButton.isHidden = isEditing
@@ -341,7 +343,7 @@ extension CountersViewController {
     }
 
     // MARK: - Error handler
-    private func handleError(title: String?, message: String?, type: CountersViewModel.ViewErrorType) {
+    func handleError(title: String?, message: String?, type: CountersViewModel.ViewErrorType) {
         var actionButtons: [UIAlertAction] = []
 
         switch type {

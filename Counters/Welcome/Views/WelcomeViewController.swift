@@ -9,8 +9,9 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     @IBOutlet weak var contentStackView: UIStackView!
+    @IBOutlet weak var continueButton: Button!
 
-    private let coordinator: WelcomeCoordinator
+    private weak var coordinator: WelcomeCoordinator?
     private let viewModel: WelcomeViewModel
 
     init(coordinator: WelcomeCoordinator, viewModel: WelcomeViewModel) {
@@ -32,7 +33,7 @@ class WelcomeViewController: UIViewController {
     }
 
     @IBAction func continueButtonHandler(_ sender: Any) {
-        coordinator.dismiss()
+        coordinator?.dismiss()
     }
 }
 
@@ -44,7 +45,6 @@ private extension WelcomeViewController {
         }
     }
 
-    // TODO: refactor
     func configure(_ feature: WelcomeFeature) {
         let containerStackView = UIStackView()
         containerStackView.axis = .horizontal

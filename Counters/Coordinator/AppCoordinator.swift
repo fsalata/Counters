@@ -9,13 +9,14 @@ import UIKit
 
 class AppCoordinator: Coordinator {
     var navigationController: UINavigationController
+    var countersCoordinator: CountersCoordinator!
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
     func start() {
-        let countersCoordinator = CountersCoordinator(navigationController: navigationController)
+        countersCoordinator = CountersCoordinator(navigationController: navigationController)
         countersCoordinator.start()
     }
 }

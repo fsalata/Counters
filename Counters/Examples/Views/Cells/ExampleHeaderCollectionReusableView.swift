@@ -8,7 +8,7 @@
 import UIKit
 
 class ExampleHeaderCollectionReusableView: UICollectionReusableView {
-    lazy var titleLabel: UILabel = {
+    private(set) lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
         label.textColor = UIColor(hex6: 0x4A4A4A)

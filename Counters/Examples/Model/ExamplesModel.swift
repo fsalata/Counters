@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Example {
+struct Example: Equatable {
     let name: String
 }
 

@@ -11,7 +11,7 @@ class CreateCounterViewController: UIViewController {
     @IBOutlet weak var titleTextField: CustomTextField!
     @IBOutlet weak var examplesButton: UIButton!
 
-    private let coordinator: CreateCounterCoordinator
+    private weak var coordinator: CreateCounterCoordinator?
     private let viewModel: CreateCounterViewModel
 
     private lazy var cancelBarButtonItem: UIBarButtonItem = {
@@ -32,7 +32,7 @@ class CreateCounterViewController: UIViewController {
         return saveButton
     }()
 
-    // MARK: - Init
+    // MARK: - Lifecycle
     init(coordinator: CreateCounterCoordinator, viewModel: CreateCounterViewModel) {
         self.coordinator = coordinator
         self.viewModel = viewModel
@@ -50,15 +50,18 @@ class CreateCounterViewController: UIViewController {
         setupView()
         bindToViewModel()
     }
+}
 
-    private func setupNavigation() {
+// MARK: - Private methods
+private extension CreateCounterViewController {
+    func setupNavigation() {
         title = "Create a counter"
         navigationItem.backButtonTitle = "Create"
         navigationItem.leftBarButtonItems = [cancelBarButtonItem]
         navigationItem.rightBarButtonItem = saveBarButtonItem
     }
 
-    private func setupView() {
+    func setupView() {
         titleTextField.delegate = self
         titleTextField.addTarget(self, action: #selector(textFieldTextDidChange(_:)), for: .editingChanged)
 
@@ -68,19 +71,17 @@ class CreateCounterViewController: UIViewController {
         view.addGestureRecognizer(hideKeyboardTap)
     }
 
-    private func bindToViewModel() {
+    func bindToViewModel() {
         viewModel.didSaveCounter = {[weak self] in
             self?.update()
         }
     }
 
-    @objc private func dismissViewController() {
-        DispatchQueue.main.async {
-            self.navigationController?.dismiss(animated: true)
-        }
+    @objc func dismissViewController() {
+        self.coordinator?.dismiss()
     }
 
-    @objc private func saveButtonHandler() {
+    @objc func saveButtonHandler() {
         if let text = titleTextField.text,
            !text.isEmpty {
             hideKeyboard()
@@ -88,21 +89,24 @@ class CreateCounterViewController: UIViewController {
         }
     }
 
-    @objc private func hideKeyboard() {
+    @objc func hideKeyboard() {
         view.endEditing(true)
     }
 
-    private func save(title: String) {
+    func save(title: String) {
         viewModel.save(title: title)
     }
+}
 
+// MARK: Public methods
+extension CreateCounterViewController {
     @IBAction func exampleButtonHandler(_ sender: Any) {
-        coordinator.presentExamplesScreen()
+        coordinator?.presentExamplesScreen()
     }
 }
 
 // MARK: - ViewStateProtocol
-extension CreateCounterViewController {
+private extension CreateCounterViewController {
     func update() {
         DispatchQueue.main.async {
             switch self.viewModel.viewState {
@@ -113,7 +117,6 @@ extension CreateCounterViewController {
                 self.titleTextField.text = nil
                 self.titleTextField.hideLoading()
                 self.dismissViewController()
-                self.coordinator.stop()
 
             case .error:
                 self.titleTextField.hideLoading()
@@ -122,7 +125,7 @@ extension CreateCounterViewController {
         }
     }
 
-    private func handleError() {
+    func handleError() {
         self.showAlert(title: CreateCounterStrings.ErrorMessage.title,
                        message: CreateCounterStrings.ErrorMessage.message,
                        actionButtons: nil)

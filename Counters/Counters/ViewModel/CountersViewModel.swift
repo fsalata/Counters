@@ -9,21 +9,27 @@ import Foundation
 
 final class CountersViewModel: ObservableObject {
     private let service: CountersService
+    private let userDefaults: UserDefaultsProtocol
 
     private(set) var counters: [Counter] = []
+    private(set) var filteredCounters: [Counter] = []
+    private let firstTimeOpenKey = "FirstOpen"
 
     private(set) var viewState: ViewState = .noContent {
         didSet {
             switch viewState {
             case .error(let stateError):
-                didChangeState?(viewState, totalCountersText, stateError)
+                didChangeState?(viewState, stateError)
             default:
-                didChangeState?(viewState, totalCountersText, nil)
+                didChangeState?(viewState, nil)
             }
         }
     }
 
-    private var totalCountersText: String {
+    private var cache = Cache.shared
+    private var countersCacheKey = "counters"
+
+    var totalCountersText: String {
         guard counters.count > 0 else {
             return ""
         }
@@ -37,16 +43,6 @@ final class CountersViewModel: ObservableObject {
                """
     }
 
-    private(set) var filteredCounters: [Counter] = []
-
-    private let firstTimeOpenKey = "FirstOpen"
-
-    private var cache = Cache.shared
-    private var countersCacheKey = "counters"
-
-    // View bindings
-    var didChangeState: ((ViewState, String, ViewStateError?) -> Void)?
-
     var isCountersEmpty: Bool {
         return counters.count == 0
     }
@@ -55,17 +51,22 @@ final class CountersViewModel: ObservableObject {
         return filteredCounters.count == 0
     }
 
+    // View bindings
+    var didChangeState: ((ViewState, ViewStateError?) -> Void)?
+
     // Init
-    init(service: CountersService = CountersService()) {
+    init(service: CountersService = CountersService(),
+         userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
         self.service = service
+        self.userDefaults = userDefaults
     }
 }
 
 // MARK: - Public methods
 extension CountersViewModel {
     func checkFirstTimeUse() -> Bool {
-        if UserDefaults.standard.object(forKey: firstTimeOpenKey) == nil {
-            UserDefaults.standard.setValue(false, forKey: firstTimeOpenKey)
+        if getValueFor(key: firstTimeOpenKey) == nil {
+            set(value: false, for: firstTimeOpenKey)
             return true
         }
 
@@ -79,6 +80,7 @@ extension CountersViewModel {
 
     func didEndFiltering() {
         viewState = .hasContent
+        filteredCounters = []
     }
 
     func shareItems(at indexPaths: [IndexPath]) -> [String] {
@@ -200,7 +202,7 @@ private extension CountersViewModel {
     // MARK: - Received completion handler
     func errorHandler(_ error: APIError, in type: ViewErrorType) {
         if type == .fetch,
-           case .network(_) = error,
+           case .network = error,
            let cachedCounters = self.cache.get(key: self.countersCacheKey) {
             self.receiveValueHandler(cachedCounters)
             return
@@ -230,6 +232,15 @@ private extension CountersViewModel {
 
         let viewStateError = ViewStateError(title: title, message: message, type: type)
         viewState = .error(viewStateError)
+    }
+
+    // MARK: UserDefaults
+    func getValueFor(key: String) -> Bool? {
+        userDefaults.object(forKey: firstTimeOpenKey) as? Bool
+    }
+
+    func set(value: Bool, for key: String) {
+        userDefaults.setValue(false, forKey: firstTimeOpenKey)
     }
 }
 

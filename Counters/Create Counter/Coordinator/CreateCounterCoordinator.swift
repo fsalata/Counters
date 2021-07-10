@@ -7,11 +7,18 @@
 
 import UIKit
 
-final class CreateCounterCoordinator: Coordinator {
-    let navigationController: UINavigationController
-    var innerNavigationController: UINavigationController!
+protocol CreateCounterCoordinatorDelegate: AnyObject {
+    func createCounterCoordinatorDidFinish(_ coordinator: CreateCounterCoordinator)
+}
 
+class CreateCounterCoordinator: Coordinator {
+    let navigationController: UINavigationController
+    private(set) var innerNavigationController: UINavigationController!
+
+    var examplesCoordinator: ExamplesCoordinator!
     var createCounterViewController: CreateCounterViewController!
+
+    weak var delegate: CreateCounterCoordinatorDelegate?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -27,19 +34,29 @@ final class CreateCounterCoordinator: Coordinator {
         navigationController.present(innerNavigationController, animated: true)
     }
 
-    func stop() {
-        self.innerNavigationController = nil
-        self.createCounterViewController = nil
-    }
-}
-
-extension CreateCounterCoordinator {
+    // MARK: View controller methods
     func presentExamplesScreen() {
         let examplesViewModel = ExamplesViewModel()
         examplesViewModel.delegate = createCounterViewController
 
-        let examplesCoordinator = ExamplesCoordinator(navigationController: innerNavigationController,
+        examplesCoordinator = ExamplesCoordinator(navigationController: innerNavigationController,
                                                       viewModel: examplesViewModel)
         examplesCoordinator.start()
+    }
+
+    func dismiss() {
+        DispatchQueue.main.async {
+            self.navigationController.dismiss(animated: true)
+            self.stop()
+            self.delegate?.createCounterCoordinatorDidFinish(self)
+        }
+    }
+}
+
+private extension CreateCounterCoordinator {
+    func stop() {
+        innerNavigationController = nil
+        createCounterViewController = nil
+        examplesCoordinator = nil
     }
 }
