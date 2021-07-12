@@ -18,6 +18,8 @@ class CountersViewController: UIViewController {
     private weak var coordinator: CountersCoordinator?
     private let viewModel: CountersViewModel
 
+    private var countersTableViewDataSource: UITableViewDataSource?
+
     private lazy var searchController: UISearchController = {
         UISearchController(searchResultsController: nil)
     }()
@@ -124,7 +126,6 @@ private extension CountersViewController {
 
     func setupTableView() {
         tableView.registerCell(of: CounterTableViewCell.self)
-        tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         tableView.contentInset.top = 8
@@ -159,6 +160,13 @@ private extension CountersViewController {
     // MARK: - Fetch data
     @objc func fetchCounters() {
         viewModel.fetchCounters()
+    }
+
+    func setTableViewDataSource(for viewState: CountersViewModel.ViewState) {
+        countersTableViewDataSource = CountersTableViewDataSource(self, isSearching ? viewModel.filteredCounters
+                                                                                    : viewModel.counters)
+
+        tableView.dataSource = countersTableViewDataSource
     }
 }
 
@@ -197,26 +205,6 @@ extension CountersViewController {
 
         let activityViewController = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
         navigationController!.present(activityViewController, animated: true, completion: nil)
-    }
-}
-
-// MARK: - UITableViewDataSource
-extension CountersViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isSearching ? viewModel.filteredCounters.count : viewModel.counters.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueCell(of: CounterTableViewCell.self, for: indexPath) { [weak self] cell in
-            guard let self = self else { return }
-
-            let counter = self.isSearching ? self.viewModel.filteredCounters[indexPath.row]
-                                           : self.viewModel.counters[indexPath.row]
-
-            cell.configure(with: counter, atIndex: indexPath)
-
-            cell.delegate = self
-        }
     }
 }
 
@@ -271,6 +259,8 @@ private extension CountersViewController {
             self.refreshControl.endRefreshing()
             self.updateButtonsState()
             self.totalCountLabel.text = self.viewModel.totalCountersText
+
+            self.setTableViewDataSource(for: viewState)
 
             switch viewState {
             // MARK: - Loading
