@@ -234,7 +234,7 @@ extension CountersViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
 
-        viewModel.filterCounters(title: text)
+        viewModel.searchCounters(title: text)
     }
 }
 

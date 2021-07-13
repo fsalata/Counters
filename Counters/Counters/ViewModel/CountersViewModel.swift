@@ -73,7 +73,7 @@ extension CountersViewModel {
         return false
     }
 
-    func filterCounters(title: String) {
+    func searchCounters(title: String) {
         viewState = .searching
         filteredCounters = counters.filter { $0.title?.lowercased().contains(title.lowercased()) ?? false }
     }

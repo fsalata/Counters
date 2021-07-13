@@ -535,7 +535,7 @@ class CountersViewModelTests: XCTestCase {
 
         waitForExpectations(timeout: timeout, handler: nil)
 
-        sut.filterCounters(title: "tea")
+        sut.searchCounters(title: "tea")
 
         XCTAssertEqual(sut.filteredCounters, expectedFilteredCounter)
         XCTAssertEqual(sut.viewState, expectedViewState)
@@ -567,7 +567,7 @@ class CountersViewModelTests: XCTestCase {
 
         waitForExpectations(timeout: timeout, handler: nil)
 
-        sut.filterCounters(title: "whisky")
+        sut.searchCounters(title: "whisky")
 
         XCTAssertEqual(sut.filteredCounters, expectedFilteredCounter)
         XCTAssertEqual(sut.viewState, expectedViewState)
@@ -598,7 +598,7 @@ class CountersViewModelTests: XCTestCase {
 
         waitForExpectations(timeout: timeout, handler: nil)
 
-        sut.filterCounters(title: "tea")
+        sut.searchCounters(title: "tea")
 
         sut.didEndFiltering()
 
