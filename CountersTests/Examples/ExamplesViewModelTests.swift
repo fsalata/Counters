@@ -27,7 +27,7 @@ class ExamplesViewModelTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_initalItemsCount_shouldReturn3() {
+    func test_initalItemsCount_shouldBe3() {
         XCTAssertEqual(sut.examples.count, 3)
     }
 
@@ -37,7 +37,7 @@ class ExamplesViewModelTests: XCTestCase {
         XCTAssertEqual(sut.sectionKeys, expectedKeys)
     }
 
-    func test_selectExampleDelegate_ShouldReturnItem() {
+    func test_selectExampleDelegate_ShouldHaveItem() {
         let expectedItem = Example(name: "beer")
 
         sut.didSelect(item: expectedItem)

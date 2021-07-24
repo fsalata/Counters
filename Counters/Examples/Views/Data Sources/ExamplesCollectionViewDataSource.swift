@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ExamplesCollectionViewDataSource: NSObject {
+final class ExamplesCollectionViewDataSource: NSObject {
     let examples: [String: [Example]]
     let sectionKeys: [String]
 

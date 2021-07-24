@@ -32,7 +32,7 @@ class ExamplesViewControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func testOutlets() {
+    func testOutlets_notNil() {
         sut.loadViewIfNeeded()
 
         XCTAssertNotNil(sut.collectionView)
@@ -47,7 +47,7 @@ class ExamplesViewControllerTests: XCTestCase {
         XCTAssertNotNil(sut.collectionView.dataSource)
     }
 
-    func test_numberOfCollectionViewItens() {
+    func test_numberOfCollectionViewItens_shouldReturn3And4() {
         let expectedNumberofSections = 3
         let expectedRowsInSection = 4
 
@@ -59,7 +59,7 @@ class ExamplesViewControllerTests: XCTestCase {
         XCTAssertEqual(sectionRowsCount, expectedRowsInSection)
     }
 
-    func test_firstCell_shouldReturnCupsOfCoffee() {
+    func test_firstCell_shouldBeCupsOfCoffee() {
         let expectedValue = "Cups of coffee"
 
         sut.loadViewIfNeeded()
@@ -69,7 +69,7 @@ class ExamplesViewControllerTests: XCTestCase {
         XCTAssertEqual(cell?.titleLabel.text, expectedValue)
     }
 
-    func test_selectItem_shoulReturnItem() {
+    func test_selectItem_shoulHaveItem() {
         let expectedItem = Example(name: "cups of coffee")
 
         sut.loadViewIfNeeded()

@@ -500,17 +500,17 @@ class CountersViewModelTests: XCTestCase {
     }
 
     // Public methods
-    func test_checkFirstTimeUser_shouldReturnTrue() {
+    func test_checkFirstTimeUser_shouldBeTrue() {
         XCTAssertTrue(sut.checkFirstTimeUse())
     }
 
-    func test_checkFirstTimeUser_shouldReturnFalse() {
+    func test_checkFirstTimeUser_shouldBeFalse() {
         _ = sut.checkFirstTimeUse()
 
         XCTAssertFalse(sut.checkFirstTimeUse())
     }
 
-    func test_filterCounters_shouldReturn1Counter() {
+    func test_filterCounters_shouldHave1Counter() {
         let expectedFilteredCounter = [Counter(id: "kqqux3m1", title: "Tea")]
         let expectedViewState = CountersViewModel.ViewState.searching
 
@@ -542,7 +542,7 @@ class CountersViewModelTests: XCTestCase {
         XCTAssertEqual(receivedViewState, expectedViewState)
     }
 
-    func test_filterCounters_shouldReturn0Counter() {
+    func test_filterCounters_shouldHave0Counter() {
         let expectedFilteredCounter: [Counter] = []
         let expectedViewState = CountersViewModel.ViewState.searching
 
@@ -574,7 +574,7 @@ class CountersViewModelTests: XCTestCase {
         XCTAssertEqual(receivedViewState, expectedViewState)
     }
 
-    func test_didEndFiltering_shouldReturnHasContent() {
+    func test_didEndFiltering_shouldBeHasContent() {
         let expectedViewState = CountersViewModel.ViewState.hasContent
 
         var receivedViewState: [CountersViewModel.ViewState] = []
@@ -607,7 +607,7 @@ class CountersViewModelTests: XCTestCase {
         XCTAssertTrue(sut.filteredCounters.isEmpty)
     }
 
-    func test_shareItems_shoudReturnItemsToShare() {
+    func test_shareItems_shoudHaveItemsToShare() {
         let indexPaths = [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0)]
         let expectedSharedItems = ["0 x Coffee", "0 x Tea"]
 

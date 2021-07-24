@@ -76,6 +76,7 @@
 		00A103E72665573F00E661CD /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103E42665573F00E661CD /* UITableView+Extensions.swift */; };
 		00A103ED26655A0400E661CD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00A103EC26655A0400E661CD /* Colors.xcassets */; };
 		00B3D00F2693409B00A83BEC /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D00E2693409B00A83BEC /* Cache.swift */; };
+		00C421C3269DC678008565F3 /* CountersViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C421C2269DC678008565F3 /* CountersViewControllerTests.swift */; };
 		00CF700C269CB7D100F5AB5E /* ExamplesCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF700B269CB7D100F5AB5E /* ExamplesCollectionViewDataSource.swift */; };
 		00CF7012269CBCB900F5AB5E /* CountersTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF7011269CBCB900F5AB5E /* CountersTableViewDataSource.swift */; };
 		00ECFF872693878B005A1F24 /* ExamplesViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ECFF862693878B005A1F24 /* ExamplesViewControllerTests.swift */; };
@@ -169,6 +170,7 @@
 		00A103E42665573F00E661CD /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		00A103EC26655A0400E661CD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		00B3D00E2693409B00A83BEC /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		00C421C2269DC678008565F3 /* CountersViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersViewControllerTests.swift; sourceTree = "<group>"; };
 		00CF700B269CB7D100F5AB5E /* ExamplesCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		00CF7011269CBCB900F5AB5E /* CountersTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersTableViewDataSource.swift; sourceTree = "<group>"; };
 		00ECFF862693878B005A1F24 /* ExamplesViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesViewControllerTests.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				006F64FB2692563A00722617 /* CountersViewModelTests.swift */,
+				00C421C2269DC678008565F3 /* CountersViewControllerTests.swift */,
 			);
 			path = Counters;
 			sourceTree = "<group>";
@@ -872,6 +875,7 @@
 				00770D31269367E00078C4B2 /* CounterMocks.swift in Sources */,
 				00F84DB82692397000B266C5 /* APIClientTests.swift in Sources */,
 				0033FD422692417000F7C5CE /* CountersServiceTests.swift in Sources */,
+				00C421C3269DC678008565F3 /* CountersViewControllerTests.swift in Sources */,
 				00F84DB92692397000B266C5 /* URLSessionSpy.swift in Sources */,
 				00ECFF872693878B005A1F24 /* ExamplesViewControllerTests.swift in Sources */,
 				006F64F426924B7000722617 /* WelcomeViewModelTests.swift in Sources */,

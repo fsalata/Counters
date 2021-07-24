@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CountersCoordinator: Coordinator {
+class CountersCoordinator: Coordinator {
     var navigationController: UINavigationController
 
     var createCounterCoordinator: CreateCounterCoordinator!

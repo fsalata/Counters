@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CountersTableViewDataSource: NSObject {
+final class CountersTableViewDataSource: NSObject {
     weak var viewController: CountersViewController?
     let counters: [Counter]
 

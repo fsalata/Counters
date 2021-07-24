@@ -26,26 +26,26 @@ class WelcomeViewControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_outlets() {
+    func test_outlets_notNil() {
         sut.loadViewIfNeeded()
 
         XCTAssertNotNil(sut.contentStackView)
         XCTAssertNotNil(sut.continueButton)
     }
 
-    func test_stackViewFeaturesCount_shoudReturn3() {
+    func test_stackViewFeaturesCount_shoudHave3() {
         sut.loadViewIfNeeded()
 
         XCTAssertEqual(sut.contentStackView.arrangedSubviews.count, 3)
     }
 
-    func test_navBarIsHidden_shouldReturnTrue() {
+    func test_navBarIsHidden_shouldBeTrue() {
         coordinator.start()
 
         XCTAssertTrue(coordinator.navigationController.navigationBar.isHidden)
     }
 
-    func test_tapDismissButton_ShouldReturnTrue() {
+    func test_tapDismissButton_ShouldBeTrue() {
         sut.loadViewIfNeeded()
 
         tap(sut.continueButton)

@@ -23,7 +23,7 @@ class WelcomeViewModelTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_featuresCount_shouldReturn3() {
+    func test_featuresCount_shouldBe3() {
         XCTAssertEqual(sut.features.count, 3)
     }
 }

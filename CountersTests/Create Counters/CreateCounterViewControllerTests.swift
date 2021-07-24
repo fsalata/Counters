@@ -44,7 +44,7 @@ class CreateCounterViewControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_outlets() {
+    func test_outlets_notNil() {
         sut.loadViewIfNeeded()
 
         XCTAssertNotNil(sut.titleTextField)
@@ -66,7 +66,7 @@ class CreateCounterViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.examplesButton.titleLabel?.text, CreateCounterStrings.examplesText)
     }
 
-    func test_typeTextEnableSave_shouldReturnTrue() {
+    func test_typeTextEnableSave_shouldBeTrue() {
         sut.loadViewIfNeeded()
 
         sut.titleTextField.text = "beer"

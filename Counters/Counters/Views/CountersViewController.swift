@@ -170,7 +170,7 @@ private extension CountersViewController {
     }
 }
 
-// MARK: - Public methods
+// MARK: - Actions
 extension CountersViewController {
     // Actions
     @IBAction func createItemHandler(_ sender: Any) {

@@ -36,11 +36,11 @@ class CreateCounterViewModelTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_initialState_shouldReturnLoading() {
+    func test_initialState_shouldBeLoading() {
         XCTAssertEqual(sut.viewState, .loading)
     }
 
-    func test_saveCounter_shouldReturnSuccess() {
+    func test_saveCounter_shouldSucceed() {
         let title = "Tea"
         givenSession(session: session, data: CounterMocks.responseBody)
 
@@ -61,7 +61,7 @@ class CreateCounterViewModelTests: XCTestCase {
         XCTAssertTrue(didSaveCounter)
     }
 
-    func test_saveCounter_shouldReturnError() {
+    func test_saveCounter_shouldError() {
         let title = "Tea"
         givenSession(session: session, data: CounterMocks.responseEmptyBody, error: URLError(.badServerResponse))
 
