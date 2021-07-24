@@ -1,0 +1,8 @@
+line_length: 140
+type_body_length: 400
+
+disabled_rules:
+- identifier_name 
+- unused_closure_parameter
+- force_cast
+- file_length
