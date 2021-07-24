@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class CreateCounterViewModel {
-    private let service: CountersService
+    let storageProvider: StorageProvider
 
     private(set) var viewState: ViewState = .loading {
         didSet {
@@ -20,23 +20,15 @@ final class CreateCounterViewModel {
     var didSaveCounter: (() -> Void)?
 
     // Init
-    init(service: CountersService = CountersService()) {
-        self.service = service
+    init(storageProvider: StorageProvider = StorageProvider()) {
+        self.storageProvider = storageProvider
     }
 
     // MARK: - Fetch Counters
     func save(title: String) {
         viewState = .loading
-
-        service.save(title: title) {[weak self] result, _ in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                self.viewState = .loaded
-            case .failure:
-                self.viewState = .error
-            }
-        }
+        storageProvider.saveCounter(named: title)
+        viewState = .loaded
     }
 }
 

@@ -8,7 +8,7 @@
 import Foundation
 
 final class CountersViewModel: ObservableObject {
-    private let service: CountersService
+    private let storageProvider: StorageProvider
     private let userDefaults: UserDefaultsProtocol
 
     private(set) var counters: [Counter] = []
@@ -25,9 +25,6 @@ final class CountersViewModel: ObservableObject {
             }
         }
     }
-
-    private var cache = Cache.shared
-    private var countersCacheKey = "counters"
 
     var totalCountersText: String {
         guard counters.count > 0 else {
@@ -55,9 +52,9 @@ final class CountersViewModel: ObservableObject {
     var didChangeState: ((ViewState, ViewStateError?) -> Void)?
 
     // Init
-    init(service: CountersService = CountersService(),
+    init(storageProvider: StorageProvider = StorageProvider(),
          userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
-        self.service = service
+        self.storageProvider = storageProvider
         self.userDefaults = userDefaults
     }
 }
@@ -93,91 +90,40 @@ extension CountersViewModel {
     // MARK: - Fetch counters
     func fetchCounters() {
         viewState = .loading
-        service.fetch {[weak self] result, _ in
-            guard let self = self else { return }
 
-            switch result {
-            case .success(let counters):
-                self.receiveValueHandler(counters)
-            case .failure(let error):
-                self.errorHandler(error, in: .fetch)
-            }
-        }
+        let counters = storageProvider.getCounters()
+
+        self.receiveValueHandler(counters)
     }
 
     // MARK: - Increment counter
     func incrementCounter(_ counter: Counter) {
-        guard let id = counter.id else { return }
-
-        service.increment(id: id) {[weak self] result, _ in
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let counters):
-                self.receiveValueHandler(counters)
-            case .failure(let error):
-                self.errorHandler(error, in: .increment(counter))
-            }
-        }
+        counter.count += 1
+        storageProvider.updateCounter(counter)
+        fetchCounters()
     }
 
     // MARK: - Decrement counter
     func decrementCounter(_ counter: Counter) {
-        guard let id = counter.id,
-              counter.count > 0 else { return }
+        guard counter.count > 0 else { return }
 
-        service.decrement(id: id) {[weak self] result, _ in
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let counters):
-                self.receiveValueHandler(counters)
-            case .failure(let error):
-                self.errorHandler(error, in: .decrement(counter))
-            }
-        }
+        counter.count -= 1
+        storageProvider.updateCounter(counter)
+        fetchCounters()
     }
 
     // MARK: - Delete counter(s)
     func deleteCounters(at indexPaths: [IndexPath], completion: @escaping () -> Void) {
         viewState = .loading
 
-        let selectedCountersIds = indexPaths.compactMap {  indexPath in
-            return counters[indexPath.row].id
+        let selectedCounters = indexPaths.compactMap {  indexPath in
+            return counters[indexPath.row]
         }
 
-        let dispatchGroup = DispatchGroup()
+        storageProvider.deleteCounter(selectedCounters)
+        fetchCounters()
 
-        var remainingCounters: [Counter] = []
-        var failedToDelete: (error: APIError, counter: Counter)?
-
-        for id in selectedCountersIds {
-            dispatchGroup.enter()
-
-            service.delete(id: id) { result, _ in
-                switch result {
-                case .success(let counters):
-                    remainingCounters = counters
-                case .failure(let error):
-                    if let counter = self.counters.first(where: { $0.id == id }) {
-                        failedToDelete = (error: error, counter: counter)
-                    }
-                }
-
-                dispatchGroup.leave()
-            }
-        }
-
-        dispatchGroup.notify(queue: .main) {
-            if let failedToDelete = failedToDelete {
-                let (error, counter) = failedToDelete
-                self.errorHandler(error, in: .delete(counter))
-            } else {
-                self.receiveValueHandler(remainingCounters)
-            }
-
-            completion()
-        }
+        completion()
     }
 }
 
@@ -188,7 +134,6 @@ private extension CountersViewModel {
         self.counters = counters
         updateFilteredCounters()
         viewState = counters.isEmpty ? .noContent : .hasContent
-        cache.set(key: countersCacheKey, object: counters)
     }
 
     func updateFilteredCounters() {
@@ -197,41 +142,6 @@ private extension CountersViewModel {
         filteredCounters = filteredCounters.map { filteredCounter in
             return counters.first { $0.id == filteredCounter.id } ?? filteredCounter
         }
-    }
-
-    // MARK: - Received completion handler
-    func errorHandler(_ error: APIError, in type: ViewErrorType) {
-        if type == .fetch,
-           case .network = error,
-           let cachedCounters = self.cache.get(key: self.countersCacheKey) {
-            self.receiveValueHandler(cachedCounters)
-            return
-        }
-
-        var title: String?
-        var message: String? = "The Internet connection appears to be offline."
-
-        switch type {
-        case .fetch:
-            title = "Couldn’t update counters"
-            counters = []
-
-        case .increment(let counter):
-            title = "Couldn’t update the \"\(counter.title ?? "")\" counter to \(counter.count + 1)"
-
-        case .decrement(let counter):
-            title = "Couldn’t update the \"\(counter.title ?? "")\" counter to \(counter.count - 1)"
-
-        case .delete(let counter):
-            title = "Couldn’t delete the counter \"\(counter.title ?? "")\""
-
-        case .none:
-            title = nil
-            message = nil
-        }
-
-        let viewStateError = ViewStateError(title: title, message: message, type: type)
-        viewState = .error(viewStateError)
     }
 
     // MARK: UserDefaults

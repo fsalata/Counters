@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct Counter: Decodable, Equatable {
-    let id: String?
-    let title: String?
-    var count: Int = 0
-}
-
 struct CounterPayload: Codable, Equatable {
     let id: String?
     let title: String?
