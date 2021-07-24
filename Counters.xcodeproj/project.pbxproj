@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00039F6C268210520061B2A2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00039F6B268210520061B2A2 /* String+Extensions.swift */; };
+		000BB85126B1CA79001B2C7E /* URLResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000BB85026B1CA79001B2C7E /* URLResponse+Extensions.swift */; };
 		001978632695D13B0092FFF1 /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001978622695D13B0092FFF1 /* UserDefaultsProtocol.swift */; };
 		001978692695D1D80092FFF1 /* UserDefaultsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001978682695D1D80092FFF1 /* UserDefaultsMock.swift */; };
 		002ABA3126666F5500F5B3C9 /* CreateCounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002ABA2626666F5500F5B3C9 /* CreateCounterViewModel.swift */; };
@@ -98,6 +99,7 @@
 
 /* Begin PBXFileReference section */
 		00039F6B268210520061B2A2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		000BB85026B1CA79001B2C7E /* URLResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLResponse+Extensions.swift"; sourceTree = "<group>"; };
 		001978622695D13B0092FFF1 /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
 		001978682695D1D80092FFF1 /* UserDefaultsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMock.swift; sourceTree = "<group>"; };
 		002ABA2626666F5500F5B3C9 /* CreateCounterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCounterViewModel.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 			children = (
 				00A1035C26651BF200E661CD /* URL+Extensions.swift */,
 				00A1035826651BF200E661CD /* URLRequest+Extensions.swift */,
+				000BB85026B1CA79001B2C7E /* URLResponse+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -830,6 +833,7 @@
 				00A1036226651BF200E661CD /* APIClient.swift in Sources */,
 				007C166C2681046800EB74C5 /* ExampleCollectionViewCell.swift in Sources */,
 				00A103922665204200E661CD /* CustomTextField.swift in Sources */,
+				000BB85126B1CA79001B2C7E /* URLResponse+Extensions.swift in Sources */,
 				00CF700C269CB7D100F5AB5E /* ExamplesCollectionViewDataSource.swift in Sources */,
 				00A103AA266522C800E661CD /* UIImage+Badge.swift in Sources */,
 				002ABA3326666F5500F5B3C9 /* CreateCounterStrings.swift in Sources */,
