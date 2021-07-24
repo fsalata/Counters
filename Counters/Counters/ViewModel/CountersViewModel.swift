@@ -7,13 +7,16 @@
 
 import Foundation
 
-final class CountersViewModel: ObservableObject {
+final class CountersViewModel {
     private let service: CountersService
     private let userDefaults: UserDefaultsProtocol
 
     private(set) var counters: [Counter] = []
     private(set) var filteredCounters: [Counter] = []
     private let firstTimeOpenKey = "FirstOpen"
+
+    private var cache = Cache.shared
+    private var countersCacheKey = "counters"
 
     private(set) var viewState: ViewState = .noContent {
         didSet {
@@ -26,9 +29,21 @@ final class CountersViewModel: ObservableObject {
         }
     }
 
-    private var cache = Cache.shared
-    private var countersCacheKey = "counters"
+    // View bindings
+    var didChangeState: ((ViewState, ViewStateError?) -> Void)? = { (_, _) in
+        fatalError("Not implemented")
+    }
 
+    // Init
+    init(service: CountersService = CountersService(),
+         userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
+        self.service = service
+        self.userDefaults = userDefaults
+    }
+}
+
+// MARK: - Computed properties
+extension CountersViewModel {
     var totalCountersText: String {
         guard counters.count > 0 else {
             return ""
@@ -49,16 +64,6 @@ final class CountersViewModel: ObservableObject {
 
     var isFilteredCountersEmpty: Bool {
         return filteredCounters.count == 0
-    }
-
-    // View bindings
-    var didChangeState: ((ViewState, ViewStateError?) -> Void)?
-
-    // Init
-    init(service: CountersService = CountersService(),
-         userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
-        self.service = service
-        self.userDefaults = userDefaults
     }
 }
 
