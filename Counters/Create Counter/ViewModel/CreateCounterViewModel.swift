@@ -28,12 +28,11 @@ final class CreateCounterViewModel {
     func save(title: String) {
         viewState = .loading
 
-        service.save(title: title) {[weak self] result, _ in
-            guard let self = self else { return }
-            switch result {
-            case .success:
+        Task(priority: .medium) {
+            do {
+                try await service.save(title: title)
                 self.viewState = .loaded
-            case .failure:
+            } catch {
                 self.viewState = .error
             }
         }

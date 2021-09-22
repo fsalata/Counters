@@ -98,14 +98,14 @@ extension CountersViewModel {
     // MARK: - Fetch counters
     func fetchCounters() {
         viewState = .loading
-        service.fetch {[weak self] result, _ in
-            guard let self = self else { return }
 
-            switch result {
-            case .success(let counters):
+        Task(priority: .medium) {
+            do {
+                let (counters, _) = try await service.fetch()
                 self.receiveValueHandler(counters)
-            case .failure(let error):
-                self.errorHandler(error, in: .fetch)
+            } catch {
+                let apiError = APIError(error)
+                self.errorHandler(apiError, in: .fetch)
             }
         }
     }
@@ -114,14 +114,13 @@ extension CountersViewModel {
     func incrementCounter(_ counter: Counter) {
         guard let id = counter.id else { return }
 
-        service.increment(id: id) {[weak self] result, _ in
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let counters):
+        Task(priority: .medium) {
+            do {
+                let (counters, _) = try await service.increment(id: id)
                 self.receiveValueHandler(counters)
-            case .failure(let error):
-                self.errorHandler(error, in: .increment(counter))
+            } catch {
+                let apiError = APIError(error)
+                self.errorHandler(apiError, in: .fetch)
             }
         }
     }
@@ -131,57 +130,44 @@ extension CountersViewModel {
         guard let id = counter.id,
               counter.count > 0 else { return }
 
-        service.decrement(id: id) {[weak self] result, _ in
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let counters):
+        Task(priority: .medium) {
+            do {
+                let (counters, _) = try await service.decrement(id: id)
                 self.receiveValueHandler(counters)
-            case .failure(let error):
-                self.errorHandler(error, in: .decrement(counter))
+            } catch {
+                let apiError = APIError(error)
+                self.errorHandler(apiError, in: .fetch)
             }
         }
     }
 
     // MARK: - Delete counter(s)
-    func deleteCounters(at indexPaths: [IndexPath], completion: @escaping () -> Void) {
+    func deleteCounters(at indexPaths: [IndexPath]) async {
         viewState = .loading
 
         let selectedCountersIds = indexPaths.compactMap {  indexPath in
             return counters[indexPath.row].id
         }
 
-        let dispatchGroup = DispatchGroup()
-
         var remainingCounters: [Counter] = []
         var failedToDelete: (error: APIError, counter: Counter)?
 
         for id in selectedCountersIds {
-            dispatchGroup.enter()
 
-            service.delete(id: id) { result, _ in
-                switch result {
-                case .success(let counters):
-                    remainingCounters = counters
-                case .failure(let error):
-                    if let counter = self.counters.first(where: { $0.id == id }) {
-                        failedToDelete = (error: error, counter: counter)
-                    }
+            do {
+                (remainingCounters, _) = try await service.delete(id: id)
+            } catch {
+                if let counter = self.counters.first(where: { $0.id == id }) {
+                    failedToDelete = (error: APIError(error), counter: counter)
                 }
-
-                dispatchGroup.leave()
             }
         }
 
-        dispatchGroup.notify(queue: .main) {
-            if let failedToDelete = failedToDelete {
-                let (error, counter) = failedToDelete
-                self.errorHandler(error, in: .delete(counter))
-            } else {
-                self.receiveValueHandler(remainingCounters)
-            }
-
-            completion()
+        if let failedToDelete = failedToDelete {
+            let (error, counter) = failedToDelete
+            self.errorHandler(error, in: .delete(counter))
+        } else {
+            self.receiveValueHandler(remainingCounters)
         }
     }
 }
