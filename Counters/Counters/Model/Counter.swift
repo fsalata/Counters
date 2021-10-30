@@ -14,6 +14,6 @@ struct Counter: Decodable, Equatable {
 }
 
 struct CounterPayload: Codable, Equatable {
-    let id: String?
-    let title: String?
+    var id: String?
+    var title: String?
 }

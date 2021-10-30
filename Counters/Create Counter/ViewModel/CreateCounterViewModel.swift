@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 final class CreateCounterViewModel {
     private let service: CountersService
