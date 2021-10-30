@@ -42,7 +42,7 @@ class APIClient {
                 }
 
                 if let response = response as? HTTPURLResponse,
-                   !(200..<300 ~= response.statusCode) {
+                   response.validationStatus != .success {
                     completion(.failure(APIError(response)), response)
                     return
                 }
