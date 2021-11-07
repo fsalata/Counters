@@ -9,24 +9,29 @@ import Foundation
 import UIKit
 
 final class DependencyFactory {
-    lazy var api = CountersApi()
-    lazy var session = URLSession.shared
-    lazy var apiClient = APIClient(session: session, api: api)
-    lazy var userDefaults = UserDefaults.standard
+    lazy var navigationController = UINavigationController()
+    private lazy var api = CountersApi()
+    private lazy var session = URLSession.shared
+    private lazy var client = APIClient(session: session, api: api)
+    private lazy var service = CountersService(client: client)
+    private lazy var userDefaults = UserDefaults.standard
+}
 
-    func makeCountersService() -> CountersService {
-        return CountersService(client: apiClient)
+// MARK: App Coordinator
+extension DependencyFactory: AppCoordinatorFactory {
+    func makeAppCoordinator() -> AppCoordinator {
+        return AppCoordinator(navigationController: navigationController, factory: self)
     }
 }
 
 // MARK: Counters
 extension DependencyFactory: CountersFactory {
-    func makeCountersCoordinator(navigationController: UINavigationController) -> CountersCoordinator {
+    func makeCountersCoordinator() -> CountersCoordinator {
         return CountersCoordinator(navigationController: navigationController, factory: self)
     }
 
     func makeCountersViewModel() -> CountersViewModel {
-        return CountersViewModel(service: makeCountersService(), userDefaults: userDefaults)
+        return CountersViewModel(service: service, userDefaults: userDefaults)
     }
 
     func makeCountersViewController(coordinator: CountersCoordinator) -> CountersViewController {
@@ -36,7 +41,7 @@ extension DependencyFactory: CountersFactory {
 
 // MARK: Welcome
 extension DependencyFactory: WelcomeFactory {
-    func makeWelcomeCoordinator(navigationController: UINavigationController) -> WelcomeCoordinator {
+    func makeWelcomeCoordinator() -> WelcomeCoordinator {
         return WelcomeCoordinator(navigationController: navigationController, factory: self)
     }
 
@@ -52,12 +57,12 @@ extension DependencyFactory: WelcomeFactory {
 
 // MARK: Create Counter
 extension DependencyFactory: CreateCounterFactory {
-    func makeCreateCountersCoordinator(navigationController: UINavigationController) -> CreateCounterCoordinator {
+    func makeCreateCountersCoordinator() -> CreateCounterCoordinator {
         return CreateCounterCoordinator(navigationController: navigationController, factory: self)
     }
 
     func makeCreateCounterViewModel() -> CreateCounterViewModel {
-        return CreateCounterViewModel(service: makeCountersService())
+        return CreateCounterViewModel(service: service)
     }
 
     func makeCreateCounterViewController(coordinator: CreateCounterCoordinator) -> CreateCounterViewController {
@@ -67,7 +72,7 @@ extension DependencyFactory: CreateCounterFactory {
 
 // MARK: Examples
 extension DependencyFactory: ExamplesFactory {
-    func makeExamplesCoordinator(navigationController: UINavigationController, viewModel: ExamplesViewModel) -> ExamplesCoordinator {
+    func makeExamplesCoordinator(viewModel: ExamplesViewModel) -> ExamplesCoordinator {
         return ExamplesCoordinator(navigationController: navigationController,
                                    viewModel: viewModel,
                                    factory: self)

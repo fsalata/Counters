@@ -9,10 +9,9 @@ import XCTest
 @testable import Counters
 
 class CountersViewControllerTests: XCTestCase {
-
     var sut: CountersViewController!
+    var factory: MockDependencyFactory!
     var coordinator: CountersCoordinatorMock!
-    var session: URLSessionSpy!
 
     var createCounterCoordinatorDidFinish = false
 
@@ -21,23 +20,20 @@ class CountersViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
+        factory = MockDependencyFactory()
+
         let navigationcontroller = UINavigationController()
-        coordinator = CountersCoordinatorMock(navigationController: navigationcontroller)
+        coordinator = CountersCoordinatorMock(navigationController: navigationcontroller, factory: factory)
         coordinator.start()
 
-        session = URLSessionSpy()
-        let client = APIClient(session: session, api: mockAPI)
-        let service = CountersService(client: client)
-        let viewModel = CountersViewModel(service: service)
-
-        sut = CountersViewController(coordinator: coordinator, viewModel: viewModel)
+        sut = factory.makeCountersViewController(coordinator: coordinator)
         navigationcontroller.pushViewController(sut, animated: false)
     }
 
     override func tearDown() {
         sut = nil
+        factory = nil
         coordinator = nil
-        session = nil
         createCounterCoordinatorDidFinish = false
 
         super.tearDown()
@@ -54,6 +50,7 @@ class CountersViewControllerTests: XCTestCase {
     }
 }
 
+// MARK: - Mock
 class CountersCoordinatorMock: CountersCoordinator {
     var didPresentWelcomeScreen = false
     var didPresentCreateCounters = false

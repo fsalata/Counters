@@ -10,17 +10,21 @@ import XCTest
 
 class WelcomeViewControllerTests: XCTestCase {
     var sut: WelcomeViewController!
+    var factory: MockDependencyFactory!
     var coordinator: WelcomeCoordinatorMock!
 
     override func setUp() {
         super.setUp()
 
-        coordinator = WelcomeCoordinatorMock(navigationController: UINavigationController())
-        sut = WelcomeViewController(coordinator: coordinator, viewModel: WelcomeViewModel())
+        factory = MockDependencyFactory()
+
+        coordinator = WelcomeCoordinatorMock(navigationController: UINavigationController(), factory: factory)
+        sut = factory.makeWelcomeViewController(coordinator: coordinator)
     }
 
     override func tearDown() {
         sut = nil
+        factory = nil
         coordinator = nil
 
         super.tearDown()
@@ -55,6 +59,7 @@ class WelcomeViewControllerTests: XCTestCase {
     }
 }
 
+// MARK: - Mock
 class WelcomeCoordinatorMock: WelcomeCoordinator {
     var didTapDismiss = false
 

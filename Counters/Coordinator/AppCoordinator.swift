@@ -9,15 +9,17 @@ import UIKit
 
 class AppCoordinator: Coordinator {
     var navigationController: UINavigationController
+    let factory: CountersFactory
+
     var countersCoordinator: CountersCoordinator!
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, factory: CountersFactory) {
         self.navigationController = navigationController
+        self.factory = factory
     }
 
     func start() {
-        let factory = DependencyFactory()
-        countersCoordinator = factory.makeCountersCoordinator(navigationController: navigationController)
+        countersCoordinator = factory.makeCountersCoordinator()
         countersCoordinator.start()
     }
 }

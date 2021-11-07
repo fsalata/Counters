@@ -10,23 +10,27 @@ import XCTest
 
 class ExamplesViewControllerTests: XCTestCase {
     var sut: ExamplesViewController!
+    var factory: MockDependencyFactory!
 
     var selectedItem: Example?
 
     override func setUp() {
         super.setUp()
 
-        let navigationcontroller = UINavigationController()
-        let viewModel = ExamplesViewModel()
+        factory = MockDependencyFactory()
+
+        let viewModel = factory.makeExamplesViewModel()
         viewModel.delegate = self
 
-        sut = ExamplesViewController(coordinator: ExamplesCoordinator(navigationController: navigationcontroller),
-                                     viewModel: viewModel)
-        navigationcontroller.pushViewController(sut, animated: false)
+        let coordinator = factory.makeExamplesCoordinator(viewModel: viewModel)
+
+        sut = factory.makeExamplesViewController(coordinator: coordinator, viewModel: viewModel)
+        factory.navigationController.pushViewController(sut, animated: false)
     }
 
     override func tearDown() {
         sut = nil
+        factory = nil
         selectedItem = nil
 
         super.tearDown()

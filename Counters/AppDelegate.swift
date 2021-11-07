@@ -15,12 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        let navigationController = UINavigationController()
-
-        appCoordinator = AppCoordinator(navigationController: navigationController)
+        let factory = DependencyFactory()
+        appCoordinator = factory.makeAppCoordinator()
         appCoordinator.start()
 
-        window?.rootViewController = navigationController
+        window?.rootViewController = factory.navigationController
         window?.makeKeyAndVisible()
 
         return true

@@ -11,8 +11,8 @@ import XCTest
 class CreateCounterViewControllerTests: XCTestCase {
 
     var sut: CreateCounterViewController!
+    var factory: MockDependencyFactory!
     var coordinator: CreateCounterCoordinatorMock!
-    var session: URLSessionSpy!
 
     var createCounterCoordinatorDidFinish = false
 
@@ -21,24 +21,21 @@ class CreateCounterViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
+        factory = MockDependencyFactory()
+
         let navigationcontroller = UINavigationController()
-        coordinator = CreateCounterCoordinatorMock(navigationController: navigationcontroller)
+        coordinator = CreateCounterCoordinatorMock(navigationController: navigationcontroller, factory: factory)
         coordinator.start()
         coordinator.delegate = self
 
-        session = URLSessionSpy()
-        let client = APIClient(session: session, api: mockAPI)
-        let service = CountersService(client: client)
-        let viewModel = CreateCounterViewModel(service: service)
-
-        sut = CreateCounterViewController(coordinator: coordinator, viewModel: viewModel)
+        sut = factory.makeCreateCounterViewController(coordinator: coordinator)
         navigationcontroller.pushViewController(sut, animated: false)
     }
 
     override func tearDown() {
         sut = nil
+        factory = nil
         coordinator = nil
-        session = nil
         createCounterCoordinatorDidFinish = false
 
         super.tearDown()
@@ -91,7 +88,7 @@ class CreateCounterViewControllerTests: XCTestCase {
         sut.titleTextField.text = "beer"
         sut.titleTextField.sendActions(for: .editingChanged)
 
-        givenSession(session: session, data: CounterMocks.responseBody)
+        givenSession(session: factory.session, data: CounterMocks.responseBody)
 
         if let saveButton = sut.navigationItem.rightBarButtonItem {
             _ = saveButton.target?.perform(saveButton.action, with: nil)
@@ -106,7 +103,7 @@ class CreateCounterViewControllerTests: XCTestCase {
         sut.titleTextField.text = "beer"
         sut.titleTextField.sendActions(for: .editingChanged)
 
-        givenSession(session: session, data: CounterMocks.responseBody, statusCode: 500)
+        givenSession(session: factory.session, data: CounterMocks.responseBody, statusCode: 500)
 
         if let saveButton = sut.navigationItem.rightBarButtonItem {
             _ = saveButton.target?.perform(saveButton.action, with: nil)
@@ -151,6 +148,7 @@ extension CreateCounterViewControllerTests: CreateCounterCoordinatorDelegate {
     }
 }
 
+// MARK: - Mock
 class CreateCounterCoordinatorMock: CreateCounterCoordinator {
     var didPresentExampleScreen = false
     var didDismiss = false

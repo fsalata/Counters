@@ -28,13 +28,13 @@ class CountersCoordinator: Coordinator {
 
     // MARK: - View controller methods
     func presentWelcomeScreen() {
-        welcomeCoordinator = factory.makeWelcomeCoordinator(navigationController: navigationController)
+        welcomeCoordinator = factory.makeWelcomeCoordinator()
         welcomeCoordinator.start()
         welcomeCoordinator.delegate = self
     }
 
     func presentCreateItem() {
-        createCounterCoordinator = factory.makeCreateCountersCoordinator(navigationController: navigationController)
+        createCounterCoordinator = factory.makeCreateCountersCoordinator()
         createCounterCoordinator.start()
         createCounterCoordinator.delegate = self
     }
