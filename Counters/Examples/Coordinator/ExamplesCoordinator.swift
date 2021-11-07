@@ -9,16 +9,18 @@ import UIKit
 
 class ExamplesCoordinator: Coordinator {
     var navigationController: UINavigationController
+    let factory: ExamplesFactory
 
     var viewModel: ExamplesViewModel
 
-    init(navigationController: UINavigationController, viewModel: ExamplesViewModel = ExamplesViewModel()) {
+    init(navigationController: UINavigationController, viewModel: ExamplesViewModel, factory: ExamplesFactory) {
         self.navigationController = navigationController
         self.viewModel = viewModel
+        self.factory = factory
     }
 
     func start() {
-        let examplesViewControler = ExamplesViewController(coordinator: self, viewModel: viewModel)
+        let examplesViewControler = factory.makeExamplesViewController(coordinator: self, viewModel: viewModel)
         navigationController.pushViewController(examplesViewControler, animated: true)
     }
 }

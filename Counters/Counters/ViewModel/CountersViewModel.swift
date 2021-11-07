@@ -35,8 +35,8 @@ final class CountersViewModel {
     }
 
     // Init
-    init(service: CountersService = CountersService(),
-         userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
+    init(service: CountersService,
+         userDefaults: UserDefaultsProtocol) {
         self.service = service
         self.userDefaults = userDefaults
     }

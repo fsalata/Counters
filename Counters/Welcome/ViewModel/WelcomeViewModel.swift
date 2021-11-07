@@ -10,7 +10,7 @@ import Foundation
 final class WelcomeViewModel {
     let features: [WelcomeFeature]
 
-    init(features: [WelcomeFeature] = WelcomeFeature.getFeatures()) {
+    init(features: [WelcomeFeature]) {
         self.features = features
     }
 }

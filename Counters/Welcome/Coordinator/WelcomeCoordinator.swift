@@ -13,16 +13,17 @@ protocol WelcomeCoordinatorDelegate: AnyObject {
 
 class WelcomeCoordinator: Coordinator {
     var navigationController: UINavigationController
+    var factory: WelcomeFactory
 
     weak var delegate: WelcomeCoordinatorDelegate?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, factory: WelcomeFactory) {
         self.navigationController = navigationController
+        self.factory = factory
     }
 
     func start() {
-        let viewModel = WelcomeViewModel()
-        let welcomeViewController = WelcomeViewController(coordinator: self, viewModel: viewModel)
+        let welcomeViewController = factory.makeWelcomeViewController(coordinator: self)
         welcomeViewController.modalPresentationStyle = .fullScreen
         navigationController.navigationBar.isHidden = true
         navigationController.present(welcomeViewController, animated: true)

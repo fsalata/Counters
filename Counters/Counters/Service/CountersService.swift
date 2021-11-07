@@ -10,7 +10,7 @@ import Foundation
 final class CountersService {
     private let client: APIClient
 
-    init(client: APIClient = APIClient(api: CountersApi())) {
+    init(client: APIClient) {
         self.client = client
     }
 

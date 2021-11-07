@@ -15,18 +15,21 @@ class CreateCounterCoordinator: Coordinator {
     let navigationController: UINavigationController
     private(set) var innerNavigationController: UINavigationController!
 
+    typealias Factory = CreateCounterFactory & ExamplesFactory
+    let factory: Factory
+
     var examplesCoordinator: ExamplesCoordinator!
     var createCounterViewController: CreateCounterViewController!
 
     weak var delegate: CreateCounterCoordinatorDelegate?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, factory: Factory) {
         self.navigationController = navigationController
+        self.factory = factory
     }
 
     func start() {
-        let viewModel = CreateCounterViewModel()
-        createCounterViewController = CreateCounterViewController(coordinator: self, viewModel: viewModel)
+        createCounterViewController = factory.makeCreateCounterViewController(coordinator: self)
 
         innerNavigationController = UINavigationController(rootViewController: createCounterViewController)
         innerNavigationController.modalPresentationStyle = .fullScreen
@@ -36,11 +39,11 @@ class CreateCounterCoordinator: Coordinator {
 
     // MARK: View controller methods
     func presentExamplesScreen() {
-        let examplesViewModel = ExamplesViewModel()
+        let examplesViewModel = factory.makeExamplesViewModel()
         examplesViewModel.delegate = createCounterViewController
 
-        examplesCoordinator = ExamplesCoordinator(navigationController: innerNavigationController,
-                                                      viewModel: examplesViewModel)
+        examplesCoordinator = factory.makeExamplesCoordinator(navigationController: innerNavigationController,
+                                                              viewModel: examplesViewModel)
         examplesCoordinator.start()
     }
 

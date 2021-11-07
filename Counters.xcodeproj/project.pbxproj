@@ -22,6 +22,8 @@
 		006F64F626924CCA00722617 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006F64F526924CCA00722617 /* Helpers.swift */; };
 		006F64F826924EC400722617 /* WelcomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006F64F726924EC400722617 /* WelcomeViewControllerTests.swift */; };
 		006F64FC2692563A00722617 /* CountersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006F64FB2692563A00722617 /* CountersViewModelTests.swift */; };
+		0075A34527383939009B887E /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075A34427383939009B887E /* Factory.swift */; };
+		0075A34727383C46009B887E /* DependencyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075A34627383C46009B887E /* DependencyFactory.swift */; };
 		00770D27269348640078C4B2 /* CreateCounterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00770D26269348640078C4B2 /* CreateCounterViewModelTests.swift */; };
 		00770D31269367E00078C4B2 /* CounterMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00770D30269367E00078C4B2 /* CounterMocks.swift */; };
 		00770D36269371650078C4B2 /* ExamplesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00770D35269371650078C4B2 /* ExamplesViewModelTests.swift */; };
@@ -113,6 +115,8 @@
 		006F64F526924CCA00722617 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		006F64F726924EC400722617 /* WelcomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewControllerTests.swift; sourceTree = "<group>"; };
 		006F64FB2692563A00722617 /* CountersViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersViewModelTests.swift; sourceTree = "<group>"; };
+		0075A34427383939009B887E /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		0075A34627383C46009B887E /* DependencyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyFactory.swift; sourceTree = "<group>"; };
 		00770D26269348640078C4B2 /* CreateCounterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCounterViewModelTests.swift; sourceTree = "<group>"; };
 		00770D30269367E00078C4B2 /* CounterMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterMocks.swift; sourceTree = "<group>"; };
 		00770D35269371650078C4B2 /* ExamplesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesViewModelTests.swift; sourceTree = "<group>"; };
@@ -303,6 +307,15 @@
 			path = "Create Counters";
 			sourceTree = "<group>";
 		};
+		0075A3432738391D009B887E /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				0075A34427383939009B887E /* Factory.swift */,
+				0075A34627383C46009B887E /* DependencyFactory.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
 		00770D2C26934DCD0078C4B2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,6 +422,7 @@
 				00A102F72665113400E661CD /* AppDelegate.swift */,
 				00A1035426651BF200E661CD /* Network */,
 				00A1034B2665196400E661CD /* Coordinator */,
+				0075A3432738391D009B887E /* Factories */,
 				00A1037D26651EDC00E661CD /* Welcome */,
 				00A103BE266556CE00E661CD /* Counters */,
 				002ABA2426666F5500F5B3C9 /* Create Counter */,
@@ -839,6 +853,7 @@
 				002ABA3326666F5500F5B3C9 /* CreateCounterStrings.swift in Sources */,
 				00A103E52665573F00E661CD /* UIViewController+Extensions.swift in Sources */,
 				00A102F82665113400E661CD /* AppDelegate.swift in Sources */,
+				0075A34527383939009B887E /* Factory.swift in Sources */,
 				00A1036426651BF200E661CD /* URLRequest+Extensions.swift in Sources */,
 				002ABA3226666F5500F5B3C9 /* CreateCounterCoordinator.swift in Sources */,
 				00A1034F2665196400E661CD /* Coordinator.swift in Sources */,
@@ -850,6 +865,7 @@
 				00A103AF266526A600E661CD /* WelcomeFeature.swift in Sources */,
 				00A103D8266556CE00E661CD /* CounterTableViewCell.swift in Sources */,
 				00A103D5266556CE00E661CD /* CountersService.swift in Sources */,
+				0075A34727383C46009B887E /* DependencyFactory.swift in Sources */,
 				00039F6C268210520061B2A2 /* String+Extensions.swift in Sources */,
 				00A1033E2665189A00E661CD /* Button.swift in Sources */,
 				00A103D6266556CE00E661CD /* CounterServiceTarget.swift in Sources */,

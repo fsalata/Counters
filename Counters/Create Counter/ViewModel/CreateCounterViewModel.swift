@@ -19,7 +19,7 @@ final class CreateCounterViewModel {
     var didSaveCounter: (() -> Void)?
 
     // Init
-    init(service: CountersService = CountersService()) {
+    init(service: CountersService) {
         self.service = service
     }
 

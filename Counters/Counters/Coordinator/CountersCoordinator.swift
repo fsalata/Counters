@@ -10,28 +10,31 @@ import UIKit
 class CountersCoordinator: Coordinator {
     var navigationController: UINavigationController
 
+    typealias Factory = CountersFactory & WelcomeFactory & CreateCounterFactory
+    var factory: Factory
+
     var createCounterCoordinator: CreateCounterCoordinator!
     var welcomeCoordinator: WelcomeCoordinator!
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, factory: Factory) {
         self.navigationController = navigationController
+        self.factory = factory
     }
 
     func start() {
-        let viewModel = CountersViewModel()
-        let countersViewController = CountersViewController(coordinator: self, viewModel: viewModel)
+        let countersViewController = factory.makeCountersViewController(coordinator: self)
         navigationController.pushViewController(countersViewController, animated: true)
     }
 
     // MARK: - View controller methods
     func presentWelcomeScreen() {
-        welcomeCoordinator = WelcomeCoordinator(navigationController: navigationController)
+        welcomeCoordinator = factory.makeWelcomeCoordinator(navigationController: navigationController)
         welcomeCoordinator.start()
         welcomeCoordinator.delegate = self
     }
 
     func presentCreateItem() {
-        createCounterCoordinator = CreateCounterCoordinator(navigationController: navigationController)
+        createCounterCoordinator = factory.makeCreateCountersCoordinator(navigationController: navigationController)
         createCounterCoordinator.start()
         createCounterCoordinator.delegate = self
     }

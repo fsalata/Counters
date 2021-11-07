@@ -16,7 +16,8 @@ class AppCoordinator: Coordinator {
     }
 
     func start() {
-        countersCoordinator = CountersCoordinator(navigationController: navigationController)
+        let factory = DependencyFactory()
+        countersCoordinator = factory.makeCountersCoordinator(navigationController: navigationController)
         countersCoordinator.start()
     }
 }
