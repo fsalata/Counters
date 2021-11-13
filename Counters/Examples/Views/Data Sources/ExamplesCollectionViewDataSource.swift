@@ -8,8 +8,8 @@
 import UIKit
 
 final class ExamplesCollectionViewDataSource: NSObject {
-    let examples: [String: [Example]]
-    let sectionKeys: [String]
+    private let examples: [String: [Example]]
+    private let sectionKeys: [String]
 
     init(_ examples: [String: [Example]]) {
         self.examples = examples

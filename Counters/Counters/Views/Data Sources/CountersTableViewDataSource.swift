@@ -8,8 +8,8 @@
 import UIKit
 
 final class CountersTableViewDataSource: NSObject {
-    weak var viewController: CountersViewController?
-    let counters: [Counter]
+    private weak var viewController: CountersViewController?
+    private let counters: [Counter]
 
     init(_ viewController: CountersViewController, _ counters: [Counter]) {
         self.counters = counters

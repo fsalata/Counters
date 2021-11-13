@@ -16,8 +16,8 @@ final class DependencyFactory {
     private lazy var userDefaults = UserDefaults.standard
     private lazy var cache = Cache.shared
     private lazy var repository = CountersRepository(client: client,
-                                                  userDefaults: userDefaults,
-                                                  cache: cache)
+                                                     userDefaults: userDefaults,
+                                                     cache: cache)
 }
 
 // MARK: App Coordinator

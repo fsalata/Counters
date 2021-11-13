@@ -8,7 +8,7 @@
 import UIKit
 
 class AppCoordinator: Coordinator {
-    var navigationController: UINavigationController
+    let navigationController: UINavigationController
     let factory: CountersFactory
 
     var countersCoordinator: CountersCoordinator!

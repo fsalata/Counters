@@ -8,7 +8,7 @@
 import UIKit
 
 class ExamplesCoordinator: Coordinator {
-    var navigationController: UINavigationController
+    let navigationController: UINavigationController
     let factory: ExamplesFactory
 
     var viewModel: ExamplesViewModel

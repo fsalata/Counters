@@ -8,13 +8,13 @@
 import UIKit
 
 class CountersCoordinator: Coordinator {
-    var navigationController: UINavigationController
+    let navigationController: UINavigationController
 
     typealias Factory = CountersFactory & WelcomeFactory & CreateCounterFactory
-    var factory: Factory
+    private let factory: Factory
 
-    var createCounterCoordinator: CreateCounterCoordinator!
-    var welcomeCoordinator: WelcomeCoordinator!
+    private var createCounterCoordinator: CreateCounterCoordinator!
+    private var welcomeCoordinator: WelcomeCoordinator!
 
     init(navigationController: UINavigationController, factory: Factory) {
         self.navigationController = navigationController

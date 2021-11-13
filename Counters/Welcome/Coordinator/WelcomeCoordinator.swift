@@ -12,8 +12,8 @@ protocol WelcomeCoordinatorDelegate: AnyObject {
 }
 
 class WelcomeCoordinator: Coordinator {
-    var navigationController: UINavigationController
-    var factory: WelcomeFactory
+    let navigationController: UINavigationController
+    private let factory: WelcomeFactory
 
     weak var delegate: WelcomeCoordinatorDelegate?
 
