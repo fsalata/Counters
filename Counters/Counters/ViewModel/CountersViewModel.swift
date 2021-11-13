@@ -8,15 +8,10 @@
 import Foundation
 
 final class CountersViewModel {
-    private let service: CountersService
-    private let userDefaults: UserDefaultsProtocol
+    private let repository: CountersRepository
 
     private(set) var counters: [Counter] = []
     private(set) var filteredCounters: [Counter] = []
-    private let firstTimeOpenKey = "FirstOpen"
-
-    private var cache = Cache.shared
-    private var countersCacheKey = "counters"
 
     private(set) var viewState: ViewState = .noContent {
         didSet {
@@ -35,10 +30,8 @@ final class CountersViewModel {
     }
 
     // Init
-    init(service: CountersService,
-         userDefaults: UserDefaultsProtocol) {
-        self.service = service
-        self.userDefaults = userDefaults
+    init(repository: CountersRepository) {
+        self.repository = repository
     }
 }
 
@@ -70,8 +63,8 @@ extension CountersViewModel {
 // MARK: - Public methods
 extension CountersViewModel {
     func checkFirstTimeUse() -> Bool {
-        if getValueFor(key: firstTimeOpenKey) == nil {
-            set(value: false, for: firstTimeOpenKey)
+        if !repository.checkWelcomeWasShown() {
+            repository.setWelcomeWasShown()
             return true
         }
 
@@ -98,7 +91,7 @@ extension CountersViewModel {
     // MARK: - Fetch counters
     func fetchCounters() {
         viewState = .loading
-        service.fetch {[weak self] result, _ in
+        repository.fetch {[weak self] result, _ in
             guard let self = self else { return }
 
             switch result {
@@ -114,7 +107,7 @@ extension CountersViewModel {
     func incrementCounter(_ counter: Counter) {
         guard let id = counter.id else { return }
 
-        service.increment(id: id) {[weak self] result, _ in
+        repository.increment(id: id) {[weak self] result, _ in
             guard let self = self else { return }
 
             switch result {
@@ -131,7 +124,7 @@ extension CountersViewModel {
         guard let id = counter.id,
               counter.count > 0 else { return }
 
-        service.decrement(id: id) {[weak self] result, _ in
+        repository.decrement(id: id) {[weak self] result, _ in
             guard let self = self else { return }
 
             switch result {
@@ -159,7 +152,7 @@ extension CountersViewModel {
         for id in selectedCountersIds {
             dispatchGroup.enter()
 
-            service.delete(id: id) { result, _ in
+            repository.delete(id: id) { result, _ in
                 switch result {
                 case .success(let counters):
                     remainingCounters = counters
@@ -193,7 +186,7 @@ private extension CountersViewModel {
         self.counters = counters
         updateFilteredCounters()
         viewState = counters.isEmpty ? .noContent : .hasContent
-        cache.set(key: countersCacheKey, object: counters)
+        repository.setCacheFor(counters: counters)
     }
 
     func updateFilteredCounters() {
@@ -208,7 +201,7 @@ private extension CountersViewModel {
     func errorHandler(_ error: APIError, in type: ViewErrorType) {
         if type == .fetch,
            case .network = error,
-           let cachedCounters = self.cache.get(key: self.countersCacheKey) {
+           let cachedCounters = self.repository.getCachedCounters() {
             self.receiveValueHandler(cachedCounters)
             return
         }
@@ -237,15 +230,6 @@ private extension CountersViewModel {
 
         let viewStateError = ViewStateError(title: title, message: message, type: type)
         viewState = .error(viewStateError)
-    }
-
-    // MARK: UserDefaults
-    func getValueFor(key: String) -> Bool? {
-        userDefaults.object(forKey: firstTimeOpenKey) as? Bool
-    }
-
-    func set(value: Bool, for key: String) {
-        userDefaults.setValue(false, forKey: firstTimeOpenKey)
     }
 }
 

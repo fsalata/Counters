@@ -10,27 +10,21 @@ import XCTest
 
 class CountersViewModelTests: XCTestCase {
     var sut: CountersViewModel!
+    var factory: MockDependencyFactory!
     var session: URLSessionSpy!
-    var service: CountersService!
-    var userDefaults: UserDefaultsProtocol!
-
-    let mockAPI = MockAPI()
 
     override func setUp() {
         super.setUp()
 
-        session = URLSessionSpy()
-        let client = APIClient(session: session, api: mockAPI)
-        service = CountersService(client: client)
-        userDefaults = UserDefaultsMock()
-        sut = CountersViewModel(service: service, userDefaults: userDefaults)
+        factory = MockDependencyFactory()
+        sut = factory.makeCountersViewModel()
+        session = factory.session
     }
 
     override func tearDown() {
         sut = nil
+        factory = nil
         session = nil
-        service = nil
-        userDefaults = nil
 
         super.tearDown()
     }

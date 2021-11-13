@@ -35,7 +35,9 @@ protocol CreateCounterFactory {
 
 // Examples
 protocol ExamplesFactory {
-    func makeExamplesCoordinator(viewModel: ExamplesViewModel) -> ExamplesCoordinator
+    func makeExamplesCoordinator(navigationController: UINavigationController,
+                                 viewModel: ExamplesViewModel) -> ExamplesCoordinator
     func makeExamplesViewModel() -> ExamplesViewModel
-    func makeExamplesViewController(coordinator: ExamplesCoordinator, viewModel: ExamplesViewModel) -> ExamplesViewController
+    func makeExamplesViewController(coordinator: ExamplesCoordinator,
+                                    viewModel: ExamplesViewModel) -> ExamplesViewController
 }

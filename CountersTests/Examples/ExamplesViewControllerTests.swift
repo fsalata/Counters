@@ -22,7 +22,8 @@ class ExamplesViewControllerTests: XCTestCase {
         let viewModel = factory.makeExamplesViewModel()
         viewModel.delegate = self
 
-        let coordinator = factory.makeExamplesCoordinator(viewModel: viewModel)
+        let coordinator = factory.makeExamplesCoordinator(navigationController: UINavigationController(),
+                                                          viewModel: viewModel)
 
         sut = factory.makeExamplesViewController(coordinator: coordinator, viewModel: viewModel)
         factory.navigationController.pushViewController(sut, animated: false)

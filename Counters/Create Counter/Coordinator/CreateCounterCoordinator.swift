@@ -42,7 +42,8 @@ class CreateCounterCoordinator: Coordinator {
         let examplesViewModel = factory.makeExamplesViewModel()
         examplesViewModel.delegate = createCounterViewController
 
-        examplesCoordinator = factory.makeExamplesCoordinator(viewModel: examplesViewModel)
+        examplesCoordinator = factory.makeExamplesCoordinator(navigationController: innerNavigationController,
+                                                              viewModel: examplesViewModel)
         examplesCoordinator.start()
     }
 

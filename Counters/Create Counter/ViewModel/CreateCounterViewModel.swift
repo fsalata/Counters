@@ -8,7 +8,7 @@
 import Foundation
 
 final class CreateCounterViewModel {
-    private let service: CountersService
+    private let repository: CountersRepository
 
     private(set) var viewState: ViewState = .loading {
         didSet {
@@ -19,15 +19,15 @@ final class CreateCounterViewModel {
     var didSaveCounter: (() -> Void)?
 
     // Init
-    init(service: CountersService) {
-        self.service = service
+    init(repository: CountersRepository) {
+        self.repository = repository
     }
 
     // MARK: - Fetch Counters
     func save(title: String) {
         viewState = .loading
 
-        service.save(title: title) {[weak self] result, _ in
+        repository.save(title: title) {[weak self] result, _ in
             guard let self = self else { return }
             switch result {
             case .success:

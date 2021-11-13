@@ -14,8 +14,17 @@ final class MockDependencyFactory {
     lazy var api = CountersApi()
     lazy var session = URLSessionSpy()
     lazy var client = APIClient(session: session, api: MockAPI())
-    lazy var service = CountersService(client: client)
-    lazy var userDefaults = UserDefaults.standard
+    private lazy var userDefaults = UserDefaultsMock()
+    private lazy var cache = Cache.shared
+    private lazy var repository = CountersRepository(client: client,
+                                                     userDefaults: userDefaults,
+                                                     cache: cache)
+
+    func makeCountersRepository() -> CountersRepository {
+        CountersRepository(client: client,
+                           userDefaults: userDefaults,
+                           cache: cache)
+    }
 }
 
 // MARK: Counters
@@ -25,7 +34,7 @@ extension MockDependencyFactory: CountersFactory {
     }
 
     func makeCountersViewModel() -> CountersViewModel {
-        return CountersViewModel(service: service, userDefaults: userDefaults)
+        return CountersViewModel(repository: repository)
     }
 
     func makeCountersViewController(coordinator: CountersCoordinator) -> CountersViewController {
@@ -56,7 +65,7 @@ extension MockDependencyFactory: CreateCounterFactory {
     }
 
     func makeCreateCounterViewModel() -> CreateCounterViewModel {
-        return CreateCounterViewModel(service: service)
+        return CreateCounterViewModel(repository: repository)
     }
 
     func makeCreateCounterViewController(coordinator: CreateCounterCoordinator) -> CreateCounterViewController {
@@ -66,7 +75,8 @@ extension MockDependencyFactory: CreateCounterFactory {
 
 // MARK: Examples
 extension MockDependencyFactory: ExamplesFactory {
-    func makeExamplesCoordinator(viewModel: ExamplesViewModel) -> ExamplesCoordinator {
+    func makeExamplesCoordinator(navigationController: UINavigationController,
+                                 viewModel: ExamplesViewModel) -> ExamplesCoordinator {
         return ExamplesCoordinator(navigationController: navigationController,
                                    viewModel: viewModel,
                                    factory: self)
@@ -76,7 +86,8 @@ extension MockDependencyFactory: ExamplesFactory {
         return ExamplesViewModel()
     }
 
-    func makeExamplesViewController(coordinator: ExamplesCoordinator, viewModel: ExamplesViewModel) -> ExamplesViewController {
+    func makeExamplesViewController(coordinator: ExamplesCoordinator,
+                                    viewModel: ExamplesViewModel) -> ExamplesViewController {
         return ExamplesViewController(coordinator: coordinator, viewModel: viewModel)
     }
 }

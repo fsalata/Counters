@@ -10,27 +10,20 @@ import XCTest
 
 class CreateCounterViewModelTests: XCTestCase {
     var sut: CreateCounterViewModel!
-
-    var session: URLSessionSpy!
-    var service: CountersService!
-
-    let mockAPI = MockAPI()
+    var factory: MockDependencyFactory!
 
     var didSaveCounter = false
 
     override func setUp() {
         super.setUp()
 
-        session = URLSessionSpy()
-        let client = APIClient(session: session, api: mockAPI)
-        service = CountersService(client: client)
-        sut = CreateCounterViewModel(service: service)
+        factory = MockDependencyFactory()
+        sut = factory.makeCreateCounterViewModel()
     }
 
     override func tearDown() {
         sut = nil
-        session = nil
-        service = nil
+        factory = nil
         didSaveCounter = false
 
         super.tearDown()
@@ -42,7 +35,7 @@ class CreateCounterViewModelTests: XCTestCase {
 
     func test_saveCounter_shouldSucceed() {
         let title = "Tea"
-        givenSession(session: session, data: CounterMocks.responseBody)
+        givenSession(session: factory.session, data: CounterMocks.responseBody)
 
         let expectation = self.expectation(description: "save counters")
 
@@ -63,7 +56,7 @@ class CreateCounterViewModelTests: XCTestCase {
 
     func test_saveCounter_shouldError() {
         let title = "Tea"
-        givenSession(session: session, data: CounterMocks.responseEmptyBody, error: URLError(.badServerResponse))
+        givenSession(session: factory.session, data: CounterMocks.responseEmptyBody, error: URLError(.badServerResponse))
 
         let expectation = self.expectation(description: "save counters")
 

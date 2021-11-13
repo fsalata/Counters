@@ -13,8 +13,11 @@ final class DependencyFactory {
     private lazy var api = CountersApi()
     private lazy var session = URLSession.shared
     private lazy var client = APIClient(session: session, api: api)
-    private lazy var service = CountersService(client: client)
     private lazy var userDefaults = UserDefaults.standard
+    private lazy var cache = Cache.shared
+    private lazy var repository = CountersRepository(client: client,
+                                                  userDefaults: userDefaults,
+                                                  cache: cache)
 }
 
 // MARK: App Coordinator
@@ -31,7 +34,7 @@ extension DependencyFactory: CountersFactory {
     }
 
     func makeCountersViewModel() -> CountersViewModel {
-        return CountersViewModel(service: service, userDefaults: userDefaults)
+        return CountersViewModel(repository: repository)
     }
 
     func makeCountersViewController(coordinator: CountersCoordinator) -> CountersViewController {
@@ -62,7 +65,7 @@ extension DependencyFactory: CreateCounterFactory {
     }
 
     func makeCreateCounterViewModel() -> CreateCounterViewModel {
-        return CreateCounterViewModel(service: service)
+        return CreateCounterViewModel(repository: repository)
     }
 
     func makeCreateCounterViewController(coordinator: CreateCounterCoordinator) -> CreateCounterViewController {
@@ -72,7 +75,8 @@ extension DependencyFactory: CreateCounterFactory {
 
 // MARK: Examples
 extension DependencyFactory: ExamplesFactory {
-    func makeExamplesCoordinator(viewModel: ExamplesViewModel) -> ExamplesCoordinator {
+    func makeExamplesCoordinator(navigationController: UINavigationController,
+                                 viewModel: ExamplesViewModel) -> ExamplesCoordinator {
         return ExamplesCoordinator(navigationController: navigationController,
                                    viewModel: viewModel,
                                    factory: self)

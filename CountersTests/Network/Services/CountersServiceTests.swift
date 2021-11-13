@@ -9,21 +9,21 @@ import XCTest
 @testable import Counters
 
 class CountersServiceTests: XCTestCase {
-    private var sut: CountersService!
+    private var sut: CountersRepository!
+    private var factory: MockDependencyFactory!
     private var session: URLSessionSpy!
-
-    let mockAPI = MockAPI()
 
     override func setUp() {
         super.setUp()
 
-        session = URLSessionSpy()
-        let client = APIClient(session: session, api: mockAPI)
-        sut = CountersService(client: client)
+        factory = MockDependencyFactory()
+        sut = factory.makeCountersRepository()
+        session = factory.session
     }
 
     override func tearDown() {
         sut = nil
+        factory = nil
         session = nil
 
         super.tearDown()

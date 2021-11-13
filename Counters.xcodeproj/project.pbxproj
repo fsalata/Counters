@@ -69,7 +69,7 @@
 		00A103D2266556CE00E661CD /* CounterStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C4266556CE00E661CD /* CounterStrings.swift */; };
 		00A103D3266556CE00E661CD /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C5266556CE00E661CD /* Counter.swift */; };
 		00A103D4266556CE00E661CD /* CounterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C6266556CE00E661CD /* CounterActions.swift */; };
-		00A103D5266556CE00E661CD /* CountersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C8266556CE00E661CD /* CountersService.swift */; };
+		00A103D5266556CE00E661CD /* CountersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C8266556CE00E661CD /* CountersRepository.swift */; };
 		00A103D6266556CE00E661CD /* CounterServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103C9266556CE00E661CD /* CounterServiceTarget.swift */; };
 		00A103D7266556CE00E661CD /* CounterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A103CC266556CE00E661CD /* CounterTableViewCell.xib */; };
 		00A103D8266556CE00E661CD /* CounterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103CD266556CE00E661CD /* CounterTableViewCell.swift */; };
@@ -167,7 +167,7 @@
 		00A103C4266556CE00E661CD /* CounterStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterStrings.swift; sourceTree = "<group>"; };
 		00A103C5266556CE00E661CD /* Counter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		00A103C6266556CE00E661CD /* CounterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterActions.swift; sourceTree = "<group>"; };
-		00A103C8266556CE00E661CD /* CountersService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountersService.swift; sourceTree = "<group>"; };
+		00A103C8266556CE00E661CD /* CountersRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountersRepository.swift; sourceTree = "<group>"; };
 		00A103C9266556CE00E661CD /* CounterServiceTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterServiceTarget.swift; sourceTree = "<group>"; };
 		00A103CC266556CE00E661CD /* CounterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CounterTableViewCell.xib; sourceTree = "<group>"; };
 		00A103CD266556CE00E661CD /* CounterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterTableViewCell.swift; sourceTree = "<group>"; };
@@ -264,6 +264,15 @@
 				0033FD412692417000F7C5CE /* CountersServiceTests.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		00375E1E273C34FA00E94209 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				00A103C8266556CE00E661CD /* CountersRepository.swift */,
+				00A103C9266556CE00E661CD /* CounterServiceTarget.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		006D127D269CD83C004B587A /* Data Sources */ = {
@@ -432,6 +441,7 @@
 				00A102F72665113400E661CD /* AppDelegate.swift */,
 				00A1035426651BF200E661CD /* Network */,
 				00A1034B2665196400E661CD /* Coordinator */,
+				00375E1E273C34FA00E94209 /* Repository */,
 				0075A3432738391D009B887E /* Factory */,
 				00A1037D26651EDC00E661CD /* Welcome */,
 				00A103BE266556CE00E661CD /* Counters */,
@@ -597,7 +607,6 @@
 		00A103BE266556CE00E661CD /* Counters */ = {
 			isa = PBXGroup;
 			children = (
-				00A103C7266556CE00E661CD /* Service */,
 				00A103C3266556CE00E661CD /* Model */,
 				00A103C1266556CE00E661CD /* Coordinator */,
 				00A103BF266556CE00E661CD /* ViewModel */,
@@ -630,15 +639,6 @@
 				00A103C6266556CE00E661CD /* CounterActions.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		00A103C7266556CE00E661CD /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				00A103C8266556CE00E661CD /* CountersService.swift */,
-				00A103C9266556CE00E661CD /* CounterServiceTarget.swift */,
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		00A103CA266556CE00E661CD /* Views */ = {
@@ -875,7 +875,7 @@
 				007C16672680D4EC00EB74C5 /* ExamplesViewModel.swift in Sources */,
 				00A103AF266526A600E661CD /* WelcomeFeature.swift in Sources */,
 				00A103D8266556CE00E661CD /* CounterTableViewCell.swift in Sources */,
-				00A103D5266556CE00E661CD /* CountersService.swift in Sources */,
+				00A103D5266556CE00E661CD /* CountersRepository.swift in Sources */,
 				0075A34727383C46009B887E /* DependencyFactory.swift in Sources */,
 				00039F6C268210520061B2A2 /* String+Extensions.swift in Sources */,
 				00A1033E2665189A00E661CD /* Button.swift in Sources */,
