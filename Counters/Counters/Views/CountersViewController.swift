@@ -193,7 +193,7 @@ extension CountersViewController {
 
         }
 
-        showAlert(title: nil, message: nil, actionButtons: [deleteAction], style: .actionSheet)
+        handle(error: .init(title: nil, message: nil, actionButtons: [deleteAction], style: .actionSheet))
     }
 
     @IBAction func shareItemHandler(_ sender: Any) {
@@ -359,6 +359,6 @@ private extension CountersViewController {
             break
         }
 
-        showAlert(title: title, message: message, actionButtons: actionButtons)
+        handle(error: .init(title: title, message: message, actionButtons: actionButtons))
     }
 }

@@ -120,15 +120,11 @@ private extension CreateCounterViewController {
 
             case .error:
                 self.titleTextField.hideLoading()
-                self.handleError()
+                self.handle(error: .init(title: CreateCounterStrings.ErrorMessage.title,
+                                    message: CreateCounterStrings.ErrorMessage.message,
+                                    actionButtons: nil))
             }
         }
-    }
-
-    func handleError() {
-        self.showAlert(title: CreateCounterStrings.ErrorMessage.title,
-                       message: CreateCounterStrings.ErrorMessage.message,
-                       actionButtons: nil)
     }
 }
 
