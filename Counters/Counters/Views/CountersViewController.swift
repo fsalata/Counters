@@ -130,6 +130,7 @@ private extension CountersViewController {
         tableView.tableFooterView = UIView()
         tableView.contentInset.top = 8
         tableView.refreshControl = refreshControl
+        tableView.delegate = self
     }
 
     // MARK: - Subscriptions
@@ -205,6 +206,36 @@ extension CountersViewController {
 
         let activityViewController = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
         navigationController!.present(activityViewController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension CountersViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        guard !isEditing else {
+            return indexPath
+        }
+
+        guard let cell = tableView.cellForRow(at: indexPath) as? CounterTableViewCell else {
+            return nil
+        }
+
+        if cell.isSelected {
+            tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        }
+
+        for row in 0..<tableView.numberOfRows(inSection: 0) {
+            guard let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? CounterTableViewCell else {
+                return nil
+            }
+
+            cell.toggleNotes()
+        }
+
+        return nil
     }
 }
 

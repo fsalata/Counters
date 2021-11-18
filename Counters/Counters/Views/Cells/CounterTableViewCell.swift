@@ -18,6 +18,14 @@ class CounterTableViewCell: UITableViewCell {
     @IBOutlet weak var segmentControl: UISegmentedControl!
 
     private var indexPath: IndexPath!
+    private var showingNotes = false
+
+    private var notesView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
 
     weak var delegate: CounterTableViewCellDelegate?
 
@@ -25,6 +33,7 @@ class CounterTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         setupView()
+        setupNotesView()
     }
 
     private func setupView() {
@@ -39,11 +48,56 @@ class CounterTableViewCell: UITableViewCell {
         self.selectionStyle = .default
     }
 
+    private func setupNotesView() {
+        self.notesView.frame = self.containerView.frame
+        self.notesView.layer.cornerRadius = 8
+        self.notesView.clipsToBounds = true
+
+        let notesTextView = UITextView()
+        notesTextView.translatesAutoresizingMaskIntoConstraints = false
+        notesTextView.text = "Add notes"
+        notesTextView.textColor = .gray
+
+        notesView.addSubview(notesTextView)
+
+        NSLayoutConstraint.activate([
+            notesTextView.leftAnchor.constraint(equalTo: notesView.leftAnchor, constant: 8),
+            notesTextView.topAnchor.constraint(equalTo: notesView.topAnchor, constant: 8),
+            notesTextView.rightAnchor.constraint(equalTo: notesView.rightAnchor, constant: -16),
+            notesTextView.bottomAnchor.constraint(equalTo: notesView.bottomAnchor, constant: -8)
+        ])
+    }
+
     func configure(with model: Counter, atIndex indexPath: IndexPath) {
         countLabel.text = "\(model.count)"
         titleLabel.text = model.title
 
         self.indexPath = indexPath
+    }
+
+    func toggleNotes() {
+        if isSelected {
+            UIView.transition(with: self.containerView, duration: 0.5, options: [.transitionFlipFromLeft]) {
+                self.containerView.addSubview(self.notesView)
+
+                NSLayoutConstraint.activate([
+                    self.notesView.leftAnchor.constraint(equalTo: self.containerView.leftAnchor),
+                    self.notesView.topAnchor.constraint(equalTo: self.containerView.topAnchor),
+                    self.notesView.rightAnchor.constraint(equalTo: self.containerView.rightAnchor),
+                    self.notesView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor)
+                ])
+            }
+
+            showingNotes = true
+        } else {
+            if showingNotes {
+                UIView.transition(with: self.containerView, duration: 0.5, options: [.transitionFlipFromLeft]) {
+                    self.notesView.removeFromSuperview()
+                }
+
+                showingNotes = false
+            }
+        }
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
