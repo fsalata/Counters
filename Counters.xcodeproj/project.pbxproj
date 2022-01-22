@@ -83,7 +83,6 @@
 		00B3D00F2693409B00A83BEC /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D00E2693409B00A83BEC /* Cache.swift */; };
 		00C421C3269DC678008565F3 /* CountersViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C421C2269DC678008565F3 /* CountersViewControllerTests.swift */; };
 		00CF700C269CB7D100F5AB5E /* ExamplesCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF700B269CB7D100F5AB5E /* ExamplesCollectionViewDataSource.swift */; };
-		00CF7012269CBCB900F5AB5E /* CountersTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF7011269CBCB900F5AB5E /* CountersTableViewDataSource.swift */; };
 		00ECFF872693878B005A1F24 /* ExamplesViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ECFF862693878B005A1F24 /* ExamplesViewControllerTests.swift */; };
 		00F84DB62692397000B266C5 /* MockClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F84DB12692397000B266C5 /* MockClientData.swift */; };
 		00F84DB72692397000B266C5 /* MockServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F84DB22692397000B266C5 /* MockServiceTarget.swift */; };
@@ -182,7 +181,6 @@
 		00B3D00E2693409B00A83BEC /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		00C421C2269DC678008565F3 /* CountersViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersViewControllerTests.swift; sourceTree = "<group>"; };
 		00CF700B269CB7D100F5AB5E /* ExamplesCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesCollectionViewDataSource.swift; sourceTree = "<group>"; };
-		00CF7011269CBCB900F5AB5E /* CountersTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersTableViewDataSource.swift; sourceTree = "<group>"; };
 		00ECFF862693878B005A1F24 /* ExamplesViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesViewControllerTests.swift; sourceTree = "<group>"; };
 		00F84DB12692397000B266C5 /* MockClientData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockClientData.swift; sourceTree = "<group>"; };
 		00F84DB22692397000B266C5 /* MockServiceTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockServiceTarget.swift; sourceTree = "<group>"; };
@@ -275,14 +273,6 @@
 				00A103C9266556CE00E661CD /* CounterServiceTarget.swift */,
 			);
 			path = Repository;
-			sourceTree = "<group>";
-		};
-		006D127D269CD83C004B587A /* Data Sources */ = {
-			isa = PBXGroup;
-			children = (
-				00CF7011269CBCB900F5AB5E /* CountersTableViewDataSource.swift */,
-			);
-			path = "Data Sources";
 			sourceTree = "<group>";
 		};
 		006D127E269CD854004B587A /* Data Sources */ = {
@@ -648,7 +638,6 @@
 			isa = PBXGroup;
 			children = (
 				00A103CB266556CE00E661CD /* Cells */,
-				006D127D269CD83C004B587A /* Data Sources */,
 				00A103CE266556CE00E661CD /* CountersViewController.swift */,
 				00A103CF266556CE00E661CD /* CountersViewController.xib */,
 			);
@@ -842,7 +831,6 @@
 				00B3D00F2693409B00A83BEC /* Cache.swift in Sources */,
 				00A103D4266556CE00E661CD /* CounterActions.swift in Sources */,
 				007C16692680F9B100EB74C5 /* ExamplesModel.swift in Sources */,
-				00CF7012269CBCB900F5AB5E /* CountersTableViewDataSource.swift in Sources */,
 				00A103952665204200E661CD /* FeedbackMessage.swift in Sources */,
 				00A103D0266556CE00E661CD /* CountersViewModel.swift in Sources */,
 				002ABA3126666F5500F5B3C9 /* CreateCounterViewModel.swift in Sources */,

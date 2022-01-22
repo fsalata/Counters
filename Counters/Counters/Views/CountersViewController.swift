@@ -18,7 +18,7 @@ class CountersViewController: UIViewController {
     private weak var coordinator: CountersCoordinator?
     private let viewModel: CountersViewModel
 
-    private var countersTableViewDataSource: UITableViewDataSource?
+    private lazy var dataSource = makeDataSource()
 
     private lazy var searchController: UISearchController = {
         UISearchController(searchResultsController: nil)
@@ -161,13 +161,6 @@ private extension CountersViewController {
     @objc func fetchCounters() {
         viewModel.fetchCounters()
     }
-
-    func setTableViewDataSource(for viewState: CountersViewModel.ViewState) {
-        countersTableViewDataSource = CountersTableViewDataSource(self, isSearching ? viewModel.filteredCounters
-                                                                                    : viewModel.counters)
-
-        tableView.dataSource = countersTableViewDataSource
-    }
 }
 
 // MARK: - Actions
@@ -205,6 +198,31 @@ extension CountersViewController {
 
         let activityViewController = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
         navigationController!.present(activityViewController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Diffable Datasource
+private extension CountersViewController {
+    func makeDataSource() -> UITableViewDiffableDataSource<Int, Counter> {
+        let dataSource = UITableViewDiffableDataSource<Int, Counter>(tableView: tableView) { tableView, indexPath, counter in
+            return tableView.dequeueCell(of: CounterTableViewCell.self, for: indexPath) { [weak self] cell in
+                guard let self = self else { return }
+                cell.configure(with: counter, atIndex: indexPath)
+
+                cell.delegate = self
+            }
+        }
+        
+        return dataSource
+    }
+    
+    func applySnapshot(for viewState: CountersViewModel.ViewState, animated: Bool = false) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Counter>()
+        
+        snapshot.appendSections([0])
+        snapshot.appendItems(viewState == .searching ? viewModel.filteredCounters : viewModel.counters)
+        
+        dataSource.apply(snapshot, animatingDifferences: animated)
     }
 }
 
@@ -260,7 +278,7 @@ private extension CountersViewController {
             self.updateButtonsState()
             self.totalCountLabel.text = self.viewModel.totalCountersText
 
-            self.setTableViewDataSource(for: viewState)
+            self.applySnapshot(for: viewState)
 
             switch viewState {
             // MARK: - Loading
