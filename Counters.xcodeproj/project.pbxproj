@@ -88,6 +88,9 @@
 		00F84DB72692397000B266C5 /* MockServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F84DB22692397000B266C5 /* MockServiceTarget.swift */; };
 		00F84DB82692397000B266C5 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F84DB32692397000B266C5 /* APIClientTests.swift */; };
 		00F84DB92692397000B266C5 /* URLSessionSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F84DB52692397000B266C5 /* URLSessionSpy.swift */; };
+		E4E11993280367AA006632BC /* CounterNewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E11992280367AA006632BC /* CounterNewTableViewCell.swift */; };
+		E4E11995280367D7006632BC /* CounterCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E11994280367D7006632BC /* CounterCellContentView.swift */; };
+		E4E1199728036806006632BC /* CounterCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4E1199628036806006632BC /* CounterCellContentView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +189,9 @@
 		00F84DB22692397000B266C5 /* MockServiceTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockServiceTarget.swift; sourceTree = "<group>"; };
 		00F84DB32692397000B266C5 /* APIClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		00F84DB52692397000B266C5 /* URLSessionSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionSpy.swift; sourceTree = "<group>"; };
+		E4E11992280367AA006632BC /* CounterNewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterNewTableViewCell.swift; sourceTree = "<group>"; };
+		E4E11994280367D7006632BC /* CounterCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterCellContentView.swift; sourceTree = "<group>"; };
+		E4E1199628036806006632BC /* CounterCellContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterCellContentView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -649,6 +655,9 @@
 			children = (
 				00A103CD266556CE00E661CD /* CounterTableViewCell.swift */,
 				00A103CC266556CE00E661CD /* CounterTableViewCell.xib */,
+				E4E11992280367AA006632BC /* CounterNewTableViewCell.swift */,
+				E4E11994280367D7006632BC /* CounterCellContentView.swift */,
+				E4E1199628036806006632BC /* CounterCellContentView.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -783,6 +792,7 @@
 				00A103D7266556CE00E661CD /* CounterTableViewCell.xib in Resources */,
 				00A103042665113500E661CD /* LaunchScreen.storyboard in Resources */,
 				00A103ED26655A0400E661CD /* Colors.xcassets in Resources */,
+				E4E1199728036806006632BC /* CounterCellContentView.xib in Resources */,
 				00A103012665113500E661CD /* Assets.xcassets in Resources */,
 				00A1038826651EDC00E661CD /* WelcomeViewController.xib in Resources */,
 				002ABA3626666F5500F5B3C9 /* CreateCounterViewController.xib in Resources */,
@@ -869,6 +879,7 @@
 				00A103D8266556CE00E661CD /* CounterTableViewCell.swift in Sources */,
 				00A103D5266556CE00E661CD /* CountersRepository.swift in Sources */,
 				0075A34727383C46009B887E /* DependencyFactory.swift in Sources */,
+				E4E11993280367AA006632BC /* CounterNewTableViewCell.swift in Sources */,
 				00039F6C268210520061B2A2 /* String+Extensions.swift in Sources */,
 				00A1033E2665189A00E661CD /* Button.swift in Sources */,
 				00A103D6266556CE00E661CD /* CounterServiceTarget.swift in Sources */,
@@ -879,6 +890,7 @@
 				00A1036126651BF200E661CD /* APIError.swift in Sources */,
 				00A103932665204200E661CD /* RoundCornersView.swift in Sources */,
 				007C167026811AFD00EB74C5 /* ExampleHeaderCollectionReusableView.swift in Sources */,
+				E4E11995280367D7006632BC /* CounterCellContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

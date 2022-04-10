@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CounterCellContentView" customModule="Counters" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6U-LK-QUn">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="znk-Yb-ViR">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8P7-OO-tit">
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="818"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XtL-NL-6ov">
+                                            <rect key="frame" x="0.0" y="8" width="60" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                            <color key="textColor" name="orangeColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="4z8-Dl-5wp"/>
+                                        <constraint firstAttribute="trailing" secondItem="XtL-NL-6ov" secondAttribute="trailing" id="MHr-qh-7bZ"/>
+                                        <constraint firstItem="XtL-NL-6ov" firstAttribute="top" secondItem="8P7-OO-tit" secondAttribute="top" constant="8" id="OUv-Pz-b1H"/>
+                                        <constraint firstItem="XtL-NL-6ov" firstAttribute="leading" secondItem="8P7-OO-tit" secondAttribute="leading" id="tNK-uu-MyQ"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4EP-Ay-f7B">
+                                    <rect key="frame" x="70" y="0.0" width="1" height="818"/>
+                                    <color key="backgroundColor" name="lighterGrey"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="1" id="ZWk-n5-UgN"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eJ-3g-mLr">
+                                    <rect key="frame" x="81" y="0.0" width="333" height="818"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Cups of coffee" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="dfg-ub-kCy">
+                                            <rect key="frame" x="0.0" y="13" width="323" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tkL-rj-Nsa">
+                                            <rect key="frame" x="223" y="38" width="100" height="771"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="4kx-dg-glw"/>
+                                            </constraints>
+                                            <segments>
+                                                <segment title="" image="minus" catalog="system"/>
+                                                <segment title="" image="plus" catalog="system"/>
+                                            </segments>
+                                            <color key="selectedSegmentTintColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="tkL-rj-Nsa" firstAttribute="top" secondItem="dfg-ub-kCy" secondAttribute="bottom" constant="8" id="2qL-Tv-ABr"/>
+                                        <constraint firstAttribute="trailing" secondItem="tkL-rj-Nsa" secondAttribute="trailing" constant="10" id="Cw9-Xo-XGn"/>
+                                        <constraint firstAttribute="bottom" secondItem="tkL-rj-Nsa" secondAttribute="bottom" constant="10" id="GAl-yi-gss"/>
+                                        <constraint firstItem="dfg-ub-kCy" firstAttribute="leading" secondItem="3eJ-3g-mLr" secondAttribute="leading" id="nod-MC-wvB"/>
+                                        <constraint firstAttribute="trailing" secondItem="dfg-ub-kCy" secondAttribute="trailing" constant="10" id="tcH-Ah-MOy"/>
+                                        <constraint firstItem="dfg-ub-kCy" firstAttribute="top" secondItem="3eJ-3g-mLr" secondAttribute="top" constant="13" id="yzf-59-JIX"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="znk-Yb-ViR" secondAttribute="trailing" id="1KW-1S-7CW"/>
+                        <constraint firstItem="znk-Yb-ViR" firstAttribute="leading" secondItem="C6U-LK-QUn" secondAttribute="leading" id="6hN-kV-Imd"/>
+                        <constraint firstItem="znk-Yb-ViR" firstAttribute="top" secondItem="C6U-LK-QUn" secondAttribute="top" id="aNJ-Us-46q"/>
+                        <constraint firstAttribute="bottom" secondItem="znk-Yb-ViR" secondAttribute="bottom" id="f5o-Mt-WOV"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="C6U-LK-QUn" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="cZu-hb-r8i"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="C6U-LK-QUn" secondAttribute="bottom" id="ere-bH-r7b"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="C6U-LK-QUn" secondAttribute="trailing" id="q0J-w6-0Y6"/>
+                <constraint firstItem="C6U-LK-QUn" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="wiz-hB-Tg5"/>
+            </constraints>
+            <connections>
+                <outlet property="containerView" destination="C6U-LK-QUn" id="dmz-Dg-4NF"/>
+                <outlet property="countLabel" destination="XtL-NL-6ov" id="QOY-ky-1b0"/>
+                <outlet property="segmentControl" destination="tkL-rj-Nsa" id="jpS-Yh-Smr"/>
+                <outlet property="titleLabel" destination="dfg-ub-kCy" id="piS-X4-38S"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="151"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="minus" catalog="system" width="128" height="24"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <namedColor name="lighterGrey">
+            <color red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orangeColor">
+            <color red="1" green="0.58399999141693115" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
