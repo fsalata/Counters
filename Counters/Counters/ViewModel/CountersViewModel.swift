@@ -242,4 +242,8 @@ extension CountersViewModel {
         case delete(_ counter: Counter)
         case none
     }
+    
+    enum Sections {
+        case main
+    }
 }

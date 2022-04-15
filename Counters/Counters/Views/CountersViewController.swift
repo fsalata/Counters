@@ -203,8 +203,8 @@ extension CountersViewController {
 
 // MARK: - Diffable Datasource
 private extension CountersViewController {
-    func makeDataSource() -> UITableViewDiffableDataSource<Int, Counter> {
-        let dataSource = UITableViewDiffableDataSource<Int, Counter>(tableView: tableView) { tableView, indexPath, counter in
+    func makeDataSource() -> UITableViewDiffableDataSource<CountersViewModel.Sections, Counter> {
+        let dataSource = UITableViewDiffableDataSource<CountersViewModel.Sections, Counter>(tableView: tableView) { tableView, indexPath, counter in
             return tableView.dequeueCell(of: CounterTableViewCell.self, for: indexPath) { [weak self] cell in
                 guard let self = self else { return }
                 cell.configure(with: counter, atIndex: indexPath)
@@ -217,9 +217,9 @@ private extension CountersViewController {
     }
     
     func applySnapshot(for viewState: CountersViewModel.ViewState, animated: Bool = false) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Counter>()
+        var snapshot = NSDiffableDataSourceSnapshot<CountersViewModel.Sections, Counter>()
         
-        snapshot.appendSections([0])
+        snapshot.appendSections([CountersViewModel.Sections.main])
         snapshot.appendItems(viewState == .searching ? viewModel.filteredCounters : viewModel.counters)
         
         dataSource.apply(snapshot, animatingDifferences: animated)
