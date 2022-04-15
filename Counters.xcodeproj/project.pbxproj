@@ -89,6 +89,7 @@
 		00F84DB72692397000B266C5 /* MockServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F84DB22692397000B266C5 /* MockServiceTarget.swift */; };
 		00F84DB82692397000B266C5 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F84DB32692397000B266C5 /* APIClientTests.swift */; };
 		00F84DB92692397000B266C5 /* URLSessionSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F84DB52692397000B266C5 /* URLSessionSpy.swift */; };
+		E45F78D72809F9E200050467 /* AssertQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45F78D62809F9E200050467 /* AssertQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,6 +189,7 @@
 		00F84DB22692397000B266C5 /* MockServiceTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockServiceTarget.swift; sourceTree = "<group>"; };
 		00F84DB32692397000B266C5 /* APIClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		00F84DB52692397000B266C5 /* URLSessionSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionSpy.swift; sourceTree = "<group>"; };
+		E45F78D62809F9E200050467 /* AssertQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -452,6 +454,7 @@
 				00B3D00D2693408600A83BEC /* Common */,
 				00A1033C2665188100E661CD /* UIComponents */,
 				00A103982665206900E661CD /* Extensions */,
+				E45F78D52809F9CE00050467 /* Helpers */,
 				001978612695D1270092FFF1 /* Protocols */,
 				00A10339266517A300E661CD /* Resources */,
 				00A1038B26651EF600E661CD /* Launch */,
@@ -708,6 +711,14 @@
 			path = Cllient;
 			sourceTree = "<group>";
 		};
+		E45F78D52809F9CE00050467 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E45F78D62809F9E200050467 /* AssertQueue.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -849,6 +860,7 @@
 				00A103E62665573F00E661CD /* UIColor+Extensions.swift in Sources */,
 				00A103D2266556CE00E661CD /* CounterStrings.swift in Sources */,
 				007C16612680D48200EB74C5 /* ExamplesCoordinator.swift in Sources */,
+				E45F78D72809F9E200050467 /* AssertQueue.swift in Sources */,
 				00A1038626651EDC00E661CD /* WelcomeCoordinator.swift in Sources */,
 				001978632695D13B0092FFF1 /* UserDefaultsProtocol.swift in Sources */,
 				00A1036726651BF200E661CD /* URL+Extensions.swift in Sources */,
