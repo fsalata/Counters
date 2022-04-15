@@ -327,7 +327,7 @@ class CountersViewModelTests: XCTestCase {
     }
 
     // MARK: - Delete counter
-    func test_deleteCounter_shouldSucceed() {
+    func test_deleteCounter_shouldSucceed() async throws {
         let indexPathToDelete = [IndexPath(row: 0, section: 0)]
 
         let expectedCounters: [Counter] = expectedModel(mock: CounterMocks.deleteResponseBody)!
@@ -353,7 +353,7 @@ class CountersViewModelTests: XCTestCase {
         wait(for: [fetchExpectation], timeout: timeout)
 
         givenSession(session: session, data: CounterMocks.deleteResponseBody)
-        sut.deleteCounters(at: indexPathToDelete) {}
+        await sut.deleteCounters(at: indexPathToDelete)
 
         wait(for: [deleteExpectation], timeout: timeout)
 
@@ -369,7 +369,7 @@ class CountersViewModelTests: XCTestCase {
         XCTAssertNil(receivedError)
     }
 
-    func test_deleteMultipleCounter_shouldSucceed() {
+    func test_deleteMultipleCounter_shouldSucceed() async throws {
         let indexPathToDelete = [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0)]
 
         let expectedCounters: [Counter] = expectedModel(mock: CounterMocks.deleteResponseBody)!
@@ -395,7 +395,7 @@ class CountersViewModelTests: XCTestCase {
         wait(for: [fetchExpectation], timeout: timeout)
 
         givenSession(session: session, data: CounterMocks.deleteResponseBody)
-        sut.deleteCounters(at: indexPathToDelete) {}
+        await sut.deleteCounters(at: indexPathToDelete)
 
         wait(for: [deleteExpectation], timeout: timeout)
 
@@ -411,10 +411,10 @@ class CountersViewModelTests: XCTestCase {
         XCTAssertNil(receivedError)
     }
 
-    func test_deleteCounterCallClosure_shouldSucceed() {
+    func test_deleteCounterCallClosure_shouldSucceed() async throws {
         let indexPathToDelete = [IndexPath(row: 0, section: 0)]
 
-        var closureCalled = false
+        var deleted = false
 
         let fetchExpectation = expectation(description: "fetch success")
         let deleteExpectation = expectation(description: "delete success")
@@ -430,16 +430,15 @@ class CountersViewModelTests: XCTestCase {
         wait(for: [fetchExpectation], timeout: timeout)
 
         givenSession(session: session, data: CounterMocks.deleteResponseBody)
-        sut.deleteCounters(at: indexPathToDelete) {
-            closureCalled = true
-        }
-
+        await sut.deleteCounters(at: indexPathToDelete)
+        deleted = true
+        
         wait(for: [deleteExpectation], timeout: timeout)
 
-        XCTAssertTrue(closureCalled)
+        XCTAssertTrue(deleted)
     }
 
-    func test_deleteCounter_shouldError() {
+    func test_deleteCounter_shouldError() async throws {
         let counterToDelete = Counter(id: "kqquwv6f", title: "Coffee")
         let indexPathToDelete = [IndexPath(row: 0, section: 0)]
 
@@ -473,7 +472,7 @@ class CountersViewModelTests: XCTestCase {
 
         givenSession(session: session, data: CounterMocks.responseBody, statusCode: 500)
 
-        sut.deleteCounters(at: indexPathToDelete) {}
+        await sut.deleteCounters(at: indexPathToDelete)
 
         wait(for: [deleteExpectation], timeout: timeout)
 

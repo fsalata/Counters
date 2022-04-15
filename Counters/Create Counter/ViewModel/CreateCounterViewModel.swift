@@ -26,13 +26,12 @@ final class CreateCounterViewModel {
     // MARK: - Fetch Counters
     func save(title: String) {
         viewState = .loading
-
-        repository.save(title: title) {[weak self] result, _ in
-            guard let self = self else { return }
-            switch result {
-            case .success:
+        
+        Task {
+            do {
+                try await repository.save(title: title)
                 self.viewState = .loaded
-            case .failure:
+            } catch {
                 self.viewState = .error
             }
         }

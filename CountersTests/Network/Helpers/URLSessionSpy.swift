@@ -15,25 +15,22 @@ class URLSessionSpy: URLSessionProtocol {
     var data: Data?
     var response: URLResponse?
     var error: URLError?
-
-    func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    
+    func data(for request: URLRequest, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse) {
         url = request.url
         method = request.httpMethod
         dataTaskCallCount += 1
         dataTaskArgsRequest.append(request)
+        
+        if let error = error {
+            throw error
+        }
+        
+        guard let data = data,
+              let response = response else {
+            throw APIError.service(.clientError)
+        }
 
-        completionHandler(data, response, error)
-
-        return URLSessionDataTaskSpy()
-    }
-}
-
-class URLSessionDataTaskSpy: URLSessionDataTask {
-    var calledResume = false
-
-    override init() { }
-
-    override func resume() {
-        calledResume = true
+        return (data, response)
     }
 }

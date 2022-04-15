@@ -34,22 +34,8 @@ class APIClientTests: XCTestCase {
         XCTAssertEqual(sut.api.baseURL, expectedURL)
     }
 
-    func test_calledResume() {
-        givenSession(session: session, data: nil)
-
-        let expectation = self.expectation(description: "Resume called")
-
-        let dataTask = sut.request(target: MockGETServiceTarget.get(page: 0)) { (result: Result<Int?, APIError>, response) in
-            expectation.fulfill()
-        } as! URLSessionDataTaskSpy
-
-        wait(for: [expectation], timeout: timeout)
-
-        XCTAssertTrue(dataTask.calledResume)
-    }
-
     // MARK: GET tests
-    func test_get_shouldReturnData() {
+    func test_get_shouldReturnData() async throws {
         let expectedMethod = "GET"
         let expectedURL = "https://mock.com/get?page=5"
         let expectedResult = User(username: "fsalata",
@@ -60,15 +46,13 @@ class APIClientTests: XCTestCase {
         givenSession(session: session, data: userMock())
 
         let expectation = self.expectation(description: "Resume called")
-
-        sut.request(target: MockGETServiceTarget.get(page: 5)) { (result: Result<User, APIError>, response) in
-            switch result {
-            case .success(let user):
-                userResponse = user
-                expectation.fulfill()
-            case .failure:
-                expectation.fulfill()
-            }
+        
+        do {
+            let (user, _): (User, URLResponse) = try await sut.request(target: MockGETServiceTarget.get(page: 5))
+            userResponse = user
+            expectation.fulfill()
+        } catch {
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: timeout)
@@ -78,22 +62,20 @@ class APIClientTests: XCTestCase {
         XCTAssertEqual(userResponse, expectedResult)
     }
 
-    func test_get_shouldReturnInternalServerError() {
+    func test_get_shouldReturnInternalServerError() async throws {
         let expectedResult = APIError.service(.internalServerError)
         var errorResponse: APIError?
 
         givenSession(session: session, data: userMock(), statusCode: 500)
 
         let expectation = self.expectation(description: "Resume called")
-
-        sut.request(target: MockGETServiceTarget.get(page: 0)) { (result: Result<User, APIError>, response) in
-            switch result {
-            case .success:
-                expectation.fulfill()
-            case .failure(let error):
-                errorResponse = error
-                expectation.fulfill()
-            }
+        
+        do {
+            let (_, _): (User, URLResponse) = try await sut.request(target: MockGETServiceTarget.get(page: 0))
+            expectation.fulfill()
+        } catch let error as APIError {
+            errorResponse = error
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: timeout)
@@ -101,7 +83,7 @@ class APIClientTests: XCTestCase {
         XCTAssertEqual(errorResponse, expectedResult)
     }
 
-    func test_get_shouldReturnNotFound() {
+    func test_get_shouldReturnNotFound() async throws {
         let expectedResult = APIError.network(.notConnectedToInternet)
         var errorResponse: APIError?
 
@@ -109,14 +91,12 @@ class APIClientTests: XCTestCase {
 
         let expectation = self.expectation(description: "Resume called")
 
-        sut.request(target: MockGETServiceTarget.get(page: 0)) { (result: Result<User, APIError>, response) in
-            switch result {
-            case .success:
-                expectation.fulfill()
-            case .failure(let error):
-                errorResponse = error
-                expectation.fulfill()
-            }
+        do {
+            let (_, _): (User, URLResponse) = try await sut.request(target: MockGETServiceTarget.get(page: 0))
+            expectation.fulfill()
+        } catch let error as APIError {
+            errorResponse = error
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: timeout)
@@ -124,7 +104,7 @@ class APIClientTests: XCTestCase {
         XCTAssertEqual(errorResponse, expectedResult)
     }
 
-    func test_get_shouldReturnParseError() {
+    func test_get_shouldReturnParseError() async throws {
         let debugDescription = "No value associated with key CodingKeys(stringValue: \"username\", intValue: nil) (\"username\")."
         let expectedResult = APIError.parse(.keyNotFound(debugDescription: debugDescription))
         var errorResponse: APIError?
@@ -133,14 +113,12 @@ class APIClientTests: XCTestCase {
 
         let expectation = self.expectation(description: "Resume called")
 
-        sut.request(target: MockGETServiceTarget.get(page: 0)) { (result: Result<User, APIError>, response) in
-            switch result {
-            case .success:
-                expectation.fulfill()
-            case .failure(let error):
-                errorResponse = error
-                expectation.fulfill()
-            }
+        do {
+            let (_, _): (User, URLResponse) = try await sut.request(target: MockGETServiceTarget.get(page: 0))
+            expectation.fulfill()
+        } catch let error as APIError {
+            errorResponse = error
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: timeout)
@@ -149,7 +127,7 @@ class APIClientTests: XCTestCase {
     }
 
     // MARK: POST tests
-    func test_post_shouldReturnData() {
+    func test_post_shouldReturnData() async throws {
         let expectedMethod = "POST"
         let expectedURL = "https://mock.com/post"
         let expectedResult = User(username: "fsalata",
@@ -162,15 +140,13 @@ class APIClientTests: XCTestCase {
         let user = User(username: "fsalata", name: "Fábio Salata", age: 39)
 
         let expectation = self.expectation(description: "Resume called")
-
-        sut.request(target: MockPOSTServiceTarget.post(user: user)) { (result: Result<User, APIError>, response) in
-            switch result {
-            case .success(let user):
-                userResponse = user
-                expectation.fulfill()
-            case .failure:
-                expectation.fulfill()
-            }
+        
+        do {
+            let (user, _): (User, URLResponse) = try await sut.request(target: MockPOSTServiceTarget.post(user: user))
+            userResponse = user
+            expectation.fulfill()
+        } catch {
+            expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: timeout)

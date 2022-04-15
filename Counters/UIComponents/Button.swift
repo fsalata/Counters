@@ -64,10 +64,6 @@ private extension Button {
     }
 
     func configureUI() {
-        contentEdgeInsets = UIEdgeInsets(top: LayoutConstants.edgeInsets,
-                                         left: LayoutConstants.edgeInsets,
-                                         bottom: LayoutConstants.edgeInsets,
-                                         right: LayoutConstants.edgeInsets)
         layer.cornerRadius = LayoutConstants.cornerRadius
         backgroundColor = ColorConstants.accentColor
         setTitleColor(ColorConstants.textColor, for: .normal)

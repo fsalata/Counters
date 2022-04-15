@@ -29,11 +29,11 @@ class CountersServiceTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_fetchURL() {
+    func test_fetchURL() async throws {
         let expectedMethod = "GET"
         let expectedURL = "https://mock.com/api/v1/counters"
 
-        sut.fetch(completion: { _, _ in })
+        let (_, _) = try await sut.fetch()
 
         let httpBody = session.dataTaskArgsRequest.first?.httpBody
 
@@ -42,12 +42,12 @@ class CountersServiceTests: XCTestCase {
         XCTAssertNil(httpBody)
     }
 
-    func test_incrementURL() {
+    func test_incrementURL() async throws {
         let expectedMethod = "POST"
         let expectedURL = "https://mock.com/api/v1/counter/inc"
         let expectedBody = CounterPayload(id: "asd", title: nil)
 
-        sut.increment(id: "asd") { _, _ in }
+        let (_, _) = try await sut.increment(id: "asd")
 
         let httpBody = try? JSONDecoder().decode(CounterPayload.self, from: session.dataTaskArgsRequest.first?.httpBody ?? Data())
 
@@ -56,12 +56,12 @@ class CountersServiceTests: XCTestCase {
         XCTAssertEqual(httpBody, expectedBody)
     }
 
-    func test_decrementURL() {
+    func test_decrementURL() async throws{
         let expectedMethod = "POST"
         let expectedURL = "https://mock.com/api/v1/counter/dec"
         let expectedBody = CounterPayload(id: "asd", title: nil)
 
-        sut.decrement(id: "asd") { _, _ in }
+        let (_, _) = try await sut.decrement(id: "asd")
 
         let httpBody = try? JSONDecoder().decode(CounterPayload.self, from: session.dataTaskArgsRequest.first?.httpBody ?? Data())
 
@@ -70,12 +70,12 @@ class CountersServiceTests: XCTestCase {
         XCTAssertEqual(httpBody, expectedBody)
     }
 
-    func test_saveURL() {
+    func test_saveURL() async throws {
         let expectedMethod = "POST"
         let expectedURL = "https://mock.com/api/v1/counter"
         let expectedBody = CounterPayload(id: nil, title: "asd")
 
-        sut.save(title: "asd") { _, _ in }
+        let (_, _) = try await sut.save(title: "asd")
 
         let httpBody = try? JSONDecoder().decode(CounterPayload.self, from: session.dataTaskArgsRequest.first?.httpBody ?? Data())
 
@@ -84,12 +84,12 @@ class CountersServiceTests: XCTestCase {
         XCTAssertEqual(httpBody, expectedBody)
     }
 
-    func test_deleteURL() {
+    func test_deleteURL() async throws {
         let expectedMethod = "DELETE"
         let expectedURL = "https://mock.com/api/v1/counter"
         let expectedBody = CounterPayload(id: "asd", title: nil)
 
-        sut.delete(id: "asd") { _, _ in }
+        let (_, _) = try await sut.delete(id: "asd")
 
         let httpBody = try? JSONDecoder().decode(CounterPayload.self, from: session.dataTaskArgsRequest.first?.httpBody ?? Data())
 

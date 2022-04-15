@@ -26,29 +26,28 @@ final class CountersRepository {
 
 // MARK: - API Calls
 extension CountersRepository {
-    func fetch(completion: @escaping (Result<[Counter], APIError>, URLResponse?) -> Void) {
-        client.request(target: CounterServiceTarget.counters, completion: completion)
+    func fetch() async throws -> ([Counter], URLResponse) {
+        try await client.request(target: CounterServiceTarget.counters)
     }
 
-    func increment(id: String, completion: @escaping (Result<[Counter], APIError>, URLResponse?) -> Void) {
-        let payload = CounterPayload(id: id)
-        client.request(target: CounterServiceTarget.increment(payload: payload), completion: completion)
+    func increment(id: String) async throws -> ([Counter], URLResponse) {
+        let payload = CounterPayload(id: id, title: nil)
+        return try await client.request(target: CounterServiceTarget.increment(payload: payload))
     }
 
-    func decrement(id: String, completion: @escaping (Result<[Counter], APIError>, URLResponse?) -> Void) {
-        let payload = CounterPayload(id: id)
-        client.request(target: CounterServiceTarget.decrement(payload: payload), completion: completion)
+    func decrement(id: String) async throws -> ([Counter], URLResponse) {
+        let payload = CounterPayload(id: id, title: nil)
+        return try await client.request(target: CounterServiceTarget.decrement(payload: payload))
     }
 
-    func save(title: String, completion: @escaping (Result<[Counter], APIError>, URLResponse?) -> Void) {
-        let payload = CounterPayload(title: title)
-        client.request(target: CounterServiceTarget.save(payload: payload), completion: completion)
+    @discardableResult
+    func save(title: String) async throws -> ([Counter], URLResponse) {
+        let payload = CounterPayload(id: nil, title: title)
+        return try await client.request(target: CounterServiceTarget.save(payload: payload))
     }
 
-    func delete(id: String, completion: @escaping (Result<[Counter], APIError>, URLResponse?) -> Void) {
-        let payload = CounterPayload(id: id)
-        client.request(target: CounterServiceTarget.delete(payload: payload),
-                       completion: completion)
+    func delete(id: String) async throws -> ([Counter], URLResponse) {
+        try await client.request(target: CounterServiceTarget.delete(payload: CounterPayload(id: id, title: nil)))
     }
 }
 
