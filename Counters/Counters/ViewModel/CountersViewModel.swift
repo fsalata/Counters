@@ -92,7 +92,7 @@ extension CountersViewModel {
     func fetchCounters() {
         viewState = .loading
         
-        Task(priority: .medium) {
+        Task {
             do {
                 let (counters, _) = try await repository.fetch()
                 self.receiveValueHandler(counters)
@@ -107,7 +107,7 @@ extension CountersViewModel {
     func incrementCounter(_ counter: Counter) {
         guard let id = counter.id else { return }
         
-        Task(priority: .medium) {
+        Task {
             do {
                 let (counters, _) = try await repository.increment(id: id)
                 self.receiveValueHandler(counters)
@@ -123,7 +123,7 @@ extension CountersViewModel {
         guard let id = counter.id,
               counter.count > 0 else { return }
         
-        Task(priority: .medium) {
+        Task {
             do {
                 let (counters, _) = try await repository.decrement(id: id)
                 self.receiveValueHandler(counters)
