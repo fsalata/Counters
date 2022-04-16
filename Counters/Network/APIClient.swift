@@ -31,6 +31,8 @@ class APIClient {
             throw APIError(response)
         }
         
+        debugResponse(request: urlRequest, data: data, response: response, error: nil)
+        
         let decodedData = try JSONDecoder().decode(T.self, from: data)
         
         return (decodedData, response)

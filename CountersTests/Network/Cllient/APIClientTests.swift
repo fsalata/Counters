@@ -45,17 +45,8 @@ class APIClientTests: XCTestCase {
 
         givenSession(session: session, data: userMock())
 
-        let expectation = self.expectation(description: "Resume called")
-        
-        do {
-            let (user, _): (User, URLResponse) = try await sut.request(target: MockGETServiceTarget.get(page: 5))
-            userResponse = user
-            expectation.fulfill()
-        } catch {
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: timeout)
+        let (user, _): (User, URLResponse) = try await sut.request(target: MockGETServiceTarget.get(page: 5))
+        userResponse = user
 
         XCTAssertEqual(session.method, expectedMethod)
         XCTAssertEqual(session.url?.absoluteString, expectedURL)
@@ -67,18 +58,12 @@ class APIClientTests: XCTestCase {
         var errorResponse: APIError?
 
         givenSession(session: session, data: userMock(), statusCode: 500)
-
-        let expectation = self.expectation(description: "Resume called")
         
         do {
             let (_, _): (User, URLResponse) = try await sut.request(target: MockGETServiceTarget.get(page: 0))
-            expectation.fulfill()
         } catch let error as APIError {
             errorResponse = error
-            expectation.fulfill()
         }
-
-        wait(for: [expectation], timeout: timeout)
 
         XCTAssertEqual(errorResponse, expectedResult)
     }
@@ -89,17 +74,11 @@ class APIClientTests: XCTestCase {
 
         givenSession(session: session, data: userMock(), error: URLError(.notConnectedToInternet))
 
-        let expectation = self.expectation(description: "Resume called")
-
         do {
             let (_, _): (User, URLResponse) = try await sut.request(target: MockGETServiceTarget.get(page: 0))
-            expectation.fulfill()
-        } catch let error as APIError {
-            errorResponse = error
-            expectation.fulfill()
+        } catch {
+            errorResponse = APIError(error)
         }
-
-        wait(for: [expectation], timeout: timeout)
 
         XCTAssertEqual(errorResponse, expectedResult)
     }
@@ -111,17 +90,11 @@ class APIClientTests: XCTestCase {
 
         givenSession(session: session, data: malformedUserMock())
 
-        let expectation = self.expectation(description: "Resume called")
-
         do {
             let (_, _): (User, URLResponse) = try await sut.request(target: MockGETServiceTarget.get(page: 0))
-            expectation.fulfill()
-        } catch let error as APIError {
-            errorResponse = error
-            expectation.fulfill()
+        } catch {
+            errorResponse = APIError(error)
         }
-
-        wait(for: [expectation], timeout: timeout)
 
         XCTAssertEqual(errorResponse, expectedResult)
     }
@@ -137,19 +110,10 @@ class APIClientTests: XCTestCase {
 
         givenSession(session: session, data: userMock())
 
-        let user = User(username: "fsalata", name: "Fábio Salata", age: 39)
-
-        let expectation = self.expectation(description: "Resume called")
+        let userMock = User(username: "fsalata", name: "Fábio Salata", age: 39)
         
-        do {
-            let (user, _): (User, URLResponse) = try await sut.request(target: MockPOSTServiceTarget.post(user: user))
-            userResponse = user
-            expectation.fulfill()
-        } catch {
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: timeout)
+        let (user, _): (User, URLResponse) = try await sut.request(target: MockPOSTServiceTarget.post(user: userMock))
+        userResponse = user
 
         let httpBody = try? JSONDecoder().decode(User.self, from: session.dataTaskArgsRequest.first?.httpBody ?? Data())
 

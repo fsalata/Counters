@@ -32,6 +32,9 @@ class CountersServiceTests: XCTestCase {
     func test_fetchURL() async throws {
         let expectedMethod = "GET"
         let expectedURL = "https://mock.com/api/v1/counters"
+        
+        
+        givenSession(session: session, data: CounterMocks.responseBody)
 
         let (_, _) = try await sut.fetch()
 
@@ -46,6 +49,8 @@ class CountersServiceTests: XCTestCase {
         let expectedMethod = "POST"
         let expectedURL = "https://mock.com/api/v1/counter/inc"
         let expectedBody = CounterPayload(id: "asd", title: nil)
+        
+        givenSession(session: session, data: CounterMocks.responseBody)
 
         let (_, _) = try await sut.increment(id: "asd")
 
@@ -60,6 +65,8 @@ class CountersServiceTests: XCTestCase {
         let expectedMethod = "POST"
         let expectedURL = "https://mock.com/api/v1/counter/dec"
         let expectedBody = CounterPayload(id: "asd", title: nil)
+        
+        givenSession(session: session, data: CounterMocks.responseBody)
 
         let (_, _) = try await sut.decrement(id: "asd")
 
@@ -74,6 +81,8 @@ class CountersServiceTests: XCTestCase {
         let expectedMethod = "POST"
         let expectedURL = "https://mock.com/api/v1/counter"
         let expectedBody = CounterPayload(id: nil, title: "asd")
+        
+        givenSession(session: session, data: CounterMocks.responseBody)
 
         let (_, _) = try await sut.save(title: "asd")
 
@@ -88,6 +97,8 @@ class CountersServiceTests: XCTestCase {
         let expectedMethod = "DELETE"
         let expectedURL = "https://mock.com/api/v1/counter"
         let expectedBody = CounterPayload(id: "asd", title: nil)
+        
+        givenSession(session: session, data: CounterMocks.responseBody)
 
         let (_, _) = try await sut.delete(id: "asd")
 
