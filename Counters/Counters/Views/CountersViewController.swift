@@ -212,16 +212,16 @@ private extension CountersViewController {
                 cell.delegate = self
             }
         }
-        
+
         return dataSource
     }
-    
+
     func applySnapshot(for viewState: CountersViewModel.ViewState, animated: Bool = false) {
         var snapshot = NSDiffableDataSourceSnapshot<CountersViewModel.Sections, Counter>()
-        
+
         snapshot.appendSections([CountersViewModel.Sections.main])
         snapshot.appendItems(viewState == .searching ? viewModel.filteredCounters : viewModel.counters)
-        
+
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
 }

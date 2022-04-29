@@ -14,18 +14,18 @@ class APIClient {
         self.session = session
         self.api = api
     }
-    
+
     /// Async Request
     /// - Returns: (T: Decodable, URLResponse?)
     func request<T: Decodable>(target: ServiceTargetProtocol) async throws -> (T, URLResponse) {
         guard var urlRequest = try? URLRequest(baseURL: api.baseURL, target: target) else {
             throw APIError.network(.badURL)
         }
-        
+
         urlRequest.allHTTPHeaderFields = target.header
-        
+
         let (data, response) = try await session.data(for: urlRequest, delegate: nil)
-        
+
         if let response = response as? HTTPURLResponse,
            response.validationStatus != .success {
             throw APIError(response)
@@ -34,7 +34,7 @@ class APIClient {
         debugResponse(request: urlRequest, data: data, response: response, error: nil)
         
         let decodedData = try JSONDecoder().decode(T.self, from: data)
-        
+
         return (decodedData, response)
     }
 }

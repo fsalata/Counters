@@ -91,7 +91,7 @@ extension CountersViewModel {
     // MARK: - Fetch counters
     func fetchCounters() {
         viewState = .loading
-        
+
         Task {
             do {
                 let (counters, _) = try await repository.fetch()
@@ -102,11 +102,11 @@ extension CountersViewModel {
             }
         }
     }
-    
+
     // MARK: - Increment counter
     func incrementCounter(_ counter: Counter) {
         guard let id = counter.id else { return }
-        
+
         Task {
             do {
                 let (counters, _) = try await repository.increment(id: id)
@@ -117,12 +117,12 @@ extension CountersViewModel {
             }
         }
     }
-    
+
     // MARK: - Decrement counter
     func decrementCounter(_ counter: Counter) {
         guard let id = counter.id,
               counter.count > 0 else { return }
-        
+
         Task {
             do {
                 let (counters, _) = try await repository.decrement(id: id)
@@ -133,32 +133,54 @@ extension CountersViewModel {
             }
         }
     }
-    
+
     // MARK: - Delete counter(s)
     func deleteCounters(at indexPaths: [IndexPath]) async {
         viewState = .loading
-        
+
         let selectedCountersIds = indexPaths.compactMap {  indexPath in
             return counters[indexPath.row].id
         }
-        
+
         var remainingCounters: [Counter] = []
-        var failedToDelete: (error: APIError, counter: Counter)?
-        
-        for id in selectedCountersIds {
-            
-            do {
-                (remainingCounters, _) = try await repository.delete(id: id)
-            } catch {
-                if let counter = self.counters.first(where: { $0.id == id }) {
-                    failedToDelete = (error: APIError(error), counter: counter)
+        var failedToDelete: [(error: APIError, counter: Counter)] = []
+
+        do {
+            remainingCounters = try await withThrowingTaskGroup(of: [Counter].self) {[weak self] group -> [Counter] in
+                guard let self = self else { return [] }
+
+                for id in selectedCountersIds {
+                    group.addTask {
+                        do {
+                            return try await self.repository.delete(id: id).0
+                        } catch {
+                            if let counter = self.counters.first(where: { $0.id == id }) {
+                                throw ViewErrorType.delete(counter, APIError(error))
+                            }
+
+                            return []
+                        }
+                    }
                 }
+
+                var collectedCounters: [Counter] = []
+
+                for try await counters in group {
+                    collectedCounters = counters
+                }
+
+                return collectedCounters
             }
+        } catch ViewErrorType.delete(let counter, let error) {
+            failedToDelete.append((error, counter))
+        } catch {
+            print(error)
         }
-        
-        if let failedToDelete = failedToDelete {
-            let (error, counter) = failedToDelete
-            self.errorHandler(error, in: .delete(counter))
+
+        if failedToDelete.count > 0 {
+            if let (error, counter) = failedToDelete.last {
+                self.errorHandler(error, in: .delete(counter, error))
+            }
         } else {
             self.receiveValueHandler(remainingCounters)
         }
@@ -206,7 +228,7 @@ private extension CountersViewModel {
         case .decrement(let counter):
             title = "Couldn’t update the \"\(counter.title ?? "")\" counter to \(counter.count - 1)"
 
-        case .delete(let counter):
+        case .delete(let counter, _):
             title = "Couldn’t delete the counter \"\(counter.title ?? "")\""
 
         case .none:
@@ -235,14 +257,14 @@ extension CountersViewModel {
         let type: ViewErrorType
     }
 
-    enum ViewErrorType: Equatable {
+    enum ViewErrorType: Equatable, Error {
         case fetch
         case increment(_ counter: Counter)
         case decrement(_ counter: Counter)
-        case delete(_ counter: Counter)
+        case delete(_ counter: Counter, _ error: APIError)
         case none
     }
-    
+
     enum Sections {
         case main
     }
