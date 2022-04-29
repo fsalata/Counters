@@ -9,8 +9,7 @@ import Foundation
 
 @inline(__always) @inlinable
 public func assertQueue(_ Q: DispatchQueue,
-                        file: StaticString = #file, line: UInt = #line)
-{
+                        file: StaticString = #file, line: UInt = #line) {
   assert(_dispatchPreconditionTest(.onQueue(Q)), file: file, line: line)
 }
 @inline(__always) @inlinable

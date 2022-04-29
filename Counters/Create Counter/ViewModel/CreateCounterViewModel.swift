@@ -26,7 +26,7 @@ final class CreateCounterViewModel {
     // MARK: - Fetch Counters
     func save(title: String) {
         viewState = .loading
-        
+
         Task {
             do {
                 try await repository.save(title: title)
