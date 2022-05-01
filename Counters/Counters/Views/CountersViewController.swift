@@ -178,11 +178,10 @@ extension CountersViewController {
         let title = "Delete \(selectedIndexPaths.count) counter\(selectedIndexPaths.count > 0 ? "s" : "")"
         let deleteAction = UIAlertAction(title: title,
                                          style: .destructive) { _ in
-            Task {
-                await self.viewModel.deleteCounters(at: selectedIndexPaths)
-                await MainActor.run {
-                    self.setEditing(!self.isCountersEmpty, animated: true)
-                }
+            self.viewModel.deleteCounters(at: selectedIndexPaths)
+            
+            DispatchQueue.main.async {
+                self.setEditing(!self.isCountersEmpty, animated: true)
             }
         }
 

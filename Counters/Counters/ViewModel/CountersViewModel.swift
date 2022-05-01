@@ -135,54 +135,47 @@ extension CountersViewModel {
     }
 
     // MARK: - Delete counter(s)
-    func deleteCounters(at indexPaths: [IndexPath]) async {
+    func deleteCounters(at indexPaths: [IndexPath]) {
         viewState = .loading
 
         let selectedCountersIds = indexPaths.compactMap {  indexPath in
             return counters[indexPath.row].id
         }
 
-        var remainingCounters: [Counter] = []
-        var failedToDelete: [(error: APIError, counter: Counter)] = []
-
-        do {
-            remainingCounters = try await withThrowingTaskGroup(of: [Counter].self) {[weak self] group -> [Counter] in
-                guard let self = self else { return [] }
-
-                for id in selectedCountersIds {
-                    group.addTask {
-                        do {
-                            return try await self.repository.delete(id: id).0
-                        } catch {
-                            if let counter = self.counters.first(where: { $0.id == id }) {
-                                throw ViewErrorType.delete(counter, APIError(error))
+        Task {
+            do {
+                let remainingCounters = try await withThrowingTaskGroup(of: [Counter].self) {[weak self] group -> [Counter] in
+                    guard let self = self else { return [] }
+                    
+                    for id in selectedCountersIds {
+                        group.addTask {
+                            do {
+                                return try await self.repository.delete(id: id).0
+                            } catch {
+                                if let counter = self.counters.first(where: { $0.id == id }) {
+                                    throw ViewErrorType.delete(counter, APIError(error))
+                                }
+                                
+                                return []
                             }
-
-                            return []
                         }
                     }
+                    
+                    var collectedCounters: [Counter] = []
+                    
+                    for try await counters in group {
+                        collectedCounters = counters
+                    }
+                    
+                    return collectedCounters
                 }
-
-                var collectedCounters: [Counter] = []
-
-                for try await counters in group {
-                    collectedCounters = counters
-                }
-
-                return collectedCounters
-            }
-        } catch ViewErrorType.delete(let counter, let error) {
-            failedToDelete.append((error, counter))
-        } catch {
-            print(error)
-        }
-
-        if failedToDelete.count > 0 {
-            if let (error, counter) = failedToDelete.last {
+                
+                self.receiveValueHandler(remainingCounters)
+            } catch ViewErrorType.delete(let counter, let error) {
                 self.errorHandler(error, in: .delete(counter, error))
+            } catch {
+                print(error)
             }
-        } else {
-            self.receiveValueHandler(remainingCounters)
         }
     }
 }
