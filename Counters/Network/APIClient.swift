@@ -25,6 +25,8 @@ class APIClient {
         urlRequest.allHTTPHeaderFields = target.header
 
         let (data, response) = try await session.data(for: urlRequest, delegate: nil)
+        
+        try Task.checkCancellation()
 
         if let response = response as? HTTPURLResponse,
            response.validationStatus != .success {

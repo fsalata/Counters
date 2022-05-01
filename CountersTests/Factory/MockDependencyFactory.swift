@@ -15,7 +15,7 @@ final class MockDependencyFactory {
     lazy var session = URLSessionSpy()
     lazy var client = APIClient(session: session, api: MockAPI())
     private lazy var userDefaults = UserDefaultsMock()
-    private lazy var cache = Cache.shared
+    private lazy var cache = CacheActor.shared
     private lazy var repository = CountersRepository(client: client,
                                                      userDefaults: userDefaults,
                                                      cache: cache)

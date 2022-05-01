@@ -94,11 +94,10 @@ extension CountersViewModel {
 
         Task {
             do {
-                let (counters, _) = try await repository.fetch()
+                let counters = try await repository.fetch().0
                 self.receiveValueHandler(counters)
             } catch {
-                let apiError = APIError(error)
-                self.errorHandler(apiError, in: .fetch)
+                self.errorHandler(APIError(error), in: .fetch)
             }
         }
     }
@@ -109,11 +108,10 @@ extension CountersViewModel {
 
         Task {
             do {
-                let (counters, _) = try await repository.increment(id: id)
+                let counters = try await repository.increment(id: id).0
                 self.receiveValueHandler(counters)
             } catch {
-                let apiError = APIError(error)
-                self.errorHandler(apiError, in: .fetch)
+                self.errorHandler(APIError(error), in: .fetch)
             }
         }
     }
@@ -125,11 +123,10 @@ extension CountersViewModel {
 
         Task {
             do {
-                let (counters, _) = try await repository.decrement(id: id)
+                let counters = try await repository.decrement(id: id).0
                 self.receiveValueHandler(counters)
             } catch {
-                let apiError = APIError(error)
-                self.errorHandler(apiError, in: .fetch)
+                self.errorHandler(APIError(error), in: .fetch)
             }
         }
     }
@@ -187,7 +184,9 @@ private extension CountersViewModel {
         self.counters = counters
         updateFilteredCounters()
         viewState = counters.isEmpty ? .noContent : .hasContent
-        repository.setCacheFor(counters: counters)
+        Task {
+            await repository.setCacheFor(counters: counters)
+        }
     }
 
     func updateFilteredCounters() {
@@ -200,11 +199,13 @@ private extension CountersViewModel {
 
     // MARK: - Received completion handler
     func errorHandler(_ error: APIError, in type: ViewErrorType) {
-        if type == .fetch,
-           case .network = error,
-           let cachedCounters = self.repository.getCachedCounters() {
-            self.receiveValueHandler(cachedCounters)
-            return
+        Task {
+            if type == .fetch,
+               case .network = error,
+               let cachedCounters = await self.repository.getCachedCounters() {
+                self.receiveValueHandler(cachedCounters)
+                return
+            }
         }
 
         var title: String?

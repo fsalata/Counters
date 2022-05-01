@@ -14,7 +14,7 @@ final class DependencyFactory {
     private lazy var session = URLSession.shared
     private lazy var client = APIClient(session: session, api: api)
     private lazy var userDefaults = UserDefaults.standard
-    private lazy var cache = Cache.shared
+    private lazy var cache = CacheActor.shared
     private lazy var repository = CountersRepository(client: client,
                                                      userDefaults: userDefaults,
                                                      cache: cache)

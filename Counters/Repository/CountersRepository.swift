@@ -10,14 +10,14 @@ import Foundation
 final class CountersRepository {
     private let client: APIClient
     private let userDefaults: UserDefaultsProtocol
-    private let cache: Cache
+    private let cache: CacheActor
 
     private let firstTimeOpenKey = "FirstOpen"
     private var countersCacheKey = "counters"
 
     init(client: APIClient,
          userDefaults: UserDefaultsProtocol,
-         cache: Cache) {
+         cache: CacheActor) {
         self.client = client
         self.userDefaults = userDefaults
         self.cache = cache
@@ -72,19 +72,19 @@ extension CountersRepository {
 
 // MARK: - Cache
 extension CountersRepository {
-    func set(key: String, object: [Counter]) {
-        cache.set(key: key, object: object)
+    func set(key: String, object: [Counter]) async {
+        await cache.set(key: key, object: object)
     }
 
-    func get(key: String) -> [Counter]? {
-        return cache.get(key: key)
+    func get(key: String) async -> [Counter]? {
+        return await cache.get(key: key)
     }
 
-    func setCacheFor(counters: [Counter]) {
-        set(key: countersCacheKey, object: counters)
+    func setCacheFor(counters: [Counter]) async {
+        await set(key: countersCacheKey, object: counters)
     }
 
-    func getCachedCounters() -> [Counter]? {
-        return get(key: countersCacheKey)
+    func getCachedCounters() async -> [Counter]? {
+        return await get(key: countersCacheKey)
     }
 }

@@ -135,7 +135,9 @@ private extension CountersViewController {
     // MARK: - Subscriptions
     func bindToViewModel() {
         viewModel.didChangeState = {[weak self] viewState, error in
-            self?.update(viewState, error)
+            DispatchQueue.main.async {
+                self?.update(viewState, error)
+            }
         }
     }
 
@@ -270,68 +272,68 @@ extension CountersViewController: FeedbackViewDelegate {
 // MARK: - View States
 private extension CountersViewController {
     func update(_ viewState: CountersViewModel.ViewState, _ error: CountersViewModel.ViewStateError?) {
-        DispatchQueue.main.async {
-            self.tableView.backgroundView = nil
-            self.loadingIndicator.stopAnimating()
-            self.refreshControl.endRefreshing()
-            self.updateButtonsState()
-            self.totalCountLabel.text = self.viewModel.totalCountersText
+        assertMainQueue()
+        
+        self.tableView.backgroundView = nil
+        self.loadingIndicator.stopAnimating()
+        self.refreshControl.endRefreshing()
+        self.updateButtonsState()
+        self.totalCountLabel.text = self.viewModel.totalCountersText
 
-            self.applySnapshot(for: viewState)
+        self.applySnapshot(for: viewState)
 
-            switch viewState {
-            // MARK: - Loading
-            case .loading:
-                self.tableView.backgroundView = self.loadingIndicator
-                self.loadingIndicator.startAnimating()
+        switch viewState {
+        // MARK: - Loading
+        case .loading:
+            self.tableView.backgroundView = self.loadingIndicator
+            self.loadingIndicator.startAnimating()
 
-            // MARK: - Has Content
-            case .hasContent:
-                self.tableView.reloadData()
+        // MARK: - Has Content
+        case .hasContent:
+            self.tableView.reloadData()
 
-            // MARK: - No Content
-            case .noContent:
-                if self.isCountersEmpty {
-                    self.feedbackView.configure(title: CounterStrings.EmptyMessage.title,
-                                                message: CounterStrings.EmptyMessage.message,
-                                                buttonTitle: CounterStrings.EmptyMessage.buttonTitle)
+        // MARK: - No Content
+        case .noContent:
+            if self.isCountersEmpty {
+                self.feedbackView.configure(title: CounterStrings.EmptyMessage.title,
+                                            message: CounterStrings.EmptyMessage.message,
+                                            buttonTitle: CounterStrings.EmptyMessage.buttonTitle)
 
-                    self.tableView.backgroundView = self.feedbackView
-                }
-
-                self.tableView.reloadData()
-
-            // MARK: - Searching
-            case .searching:
-                if self.isSearchEmpty && !(self.searchController.searchBar.text?.isEmpty ?? true) {
-                    self.feedbackView.configure(title: nil,
-                                                message: "No results",
-                                                buttonTitle: nil)
-
-                    self.tableView.backgroundView = self.feedbackView
-                }
-
-                self.tableView.reloadData()
-
-            // MARK: - Error
-            case .error:
-                self.tableView.reloadData()
-
-                guard let error = error else { return }
-
-                guard error.type != .fetch else {
-                    guard let title = error.title,
-                          let message = error.message else { return }
-
-                    self.feedbackView.configure(title: title,
-                                                message: message,
-                                                buttonTitle: CounterStrings.retryButtontitle)
-                    self.tableView.backgroundView = self.feedbackView
-                    return
-                }
-
-                self.handleError(title: error.title, message: error.message, type: error.type)
+                self.tableView.backgroundView = self.feedbackView
             }
+
+            self.tableView.reloadData()
+
+        // MARK: - Searching
+        case .searching:
+            if self.isSearchEmpty && !(self.searchController.searchBar.text?.isEmpty ?? true) {
+                self.feedbackView.configure(title: nil,
+                                            message: "No results",
+                                            buttonTitle: nil)
+
+                self.tableView.backgroundView = self.feedbackView
+            }
+
+            self.tableView.reloadData()
+
+        // MARK: - Error
+        case .error:
+            self.tableView.reloadData()
+
+            guard let error = error else { return }
+
+            guard error.type != .fetch else {
+                guard let title = error.title,
+                      let message = error.message else { return }
+
+                self.feedbackView.configure(title: title,
+                                            message: message,
+                                            buttonTitle: CounterStrings.retryButtontitle)
+                self.tableView.backgroundView = self.feedbackView
+                return
+            }
+
+            self.handleError(title: error.title, message: error.message, type: error.type)
         }
     }
 

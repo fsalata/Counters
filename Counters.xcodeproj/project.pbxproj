@@ -80,7 +80,7 @@
 		00A103E62665573F00E661CD /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103E32665573F00E661CD /* UIColor+Extensions.swift */; };
 		00A103E72665573F00E661CD /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A103E42665573F00E661CD /* UITableView+Extensions.swift */; };
 		00A103ED26655A0400E661CD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00A103EC26655A0400E661CD /* Colors.xcassets */; };
-		00B3D00F2693409B00A83BEC /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D00E2693409B00A83BEC /* Cache.swift */; };
+		00B3D00F2693409B00A83BEC /* CacheActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D00E2693409B00A83BEC /* CacheActor.swift */; };
 		00C421C3269DC678008565F3 /* CountersViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C421C2269DC678008565F3 /* CountersViewControllerTests.swift */; };
 		00CF700C269CB7D100F5AB5E /* ExamplesCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF700B269CB7D100F5AB5E /* ExamplesCollectionViewDataSource.swift */; };
 		00ECFF872693878B005A1F24 /* ExamplesViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ECFF862693878B005A1F24 /* ExamplesViewControllerTests.swift */; };
@@ -179,7 +179,7 @@
 		00A103E32665573F00E661CD /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		00A103E42665573F00E661CD /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		00A103EC26655A0400E661CD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		00B3D00E2693409B00A83BEC /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		00B3D00E2693409B00A83BEC /* CacheActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheActor.swift; sourceTree = "<group>"; };
 		00C421C2269DC678008565F3 /* CountersViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersViewControllerTests.swift; sourceTree = "<group>"; };
 		00CF700B269CB7D100F5AB5E /* ExamplesCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		00ECFF862693878B005A1F24 /* ExamplesViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesViewControllerTests.swift; sourceTree = "<group>"; };
@@ -659,7 +659,7 @@
 		00B3D00D2693408600A83BEC /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				00B3D00E2693409B00A83BEC /* Cache.swift */,
+				00B3D00E2693409B00A83BEC /* CacheActor.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -839,7 +839,7 @@
 				00A103942665204200E661CD /* FeedbackView.swift in Sources */,
 				00A1038526651EDC00E661CD /* WelcomeViewModel.swift in Sources */,
 				00A1036626651BF200E661CD /* API.swift in Sources */,
-				00B3D00F2693409B00A83BEC /* Cache.swift in Sources */,
+				00B3D00F2693409B00A83BEC /* CacheActor.swift in Sources */,
 				00A103D4266556CE00E661CD /* CounterActions.swift in Sources */,
 				007C16692680F9B100EB74C5 /* ExamplesModel.swift in Sources */,
 				00A103952665204200E661CD /* FeedbackMessage.swift in Sources */,

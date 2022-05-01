@@ -12,12 +12,12 @@ protocol Cacheable {
     associatedtype Key
     associatedtype Object
 
-    func set(key: Key, object: Object)
-    func get(key: Key) -> Object?
+    func set(key: Key, object: Object) async
+    func get(key: Key) async -> Object?
 }
 
-final class Cache: Cacheable {
-    static var shared: Cache = Cache()
+@globalActor final actor CacheActor: Cacheable {
+    static let shared = CacheActor()
 
     private var cache: NSCache<NSString, StructWrapper<[Counter]>>
 
@@ -25,13 +25,13 @@ final class Cache: Cacheable {
         self.cache = NSCache()
     }
 
-    func set(key: String, object: [Counter]) {
+    nonisolated func set(key: String, object: [Counter]) async {
         let counterWrapper = StructWrapper(object)
-        cache.setObject(counterWrapper, forKey: NSString(string: key))
+        await cache.setObject(counterWrapper, forKey: NSString(string: key))
     }
 
-    func get(key: String) -> [Counter]? {
-        let counterWrapper = cache.object(forKey: NSString(string: key))
+    nonisolated func get(key: String) async -> [Counter]? {
+        let counterWrapper = await cache.object(forKey: NSString(string: key))
         return counterWrapper?.value
     }
 }
