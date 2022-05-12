@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkLayer
 
 enum CounterServiceTarget {
     case counters

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkLayer
 
 final class CountersRepository {
     private let client: APIClient

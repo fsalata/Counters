@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkLayer
 
 final class CountersViewModel {
     private let repository: CountersRepository

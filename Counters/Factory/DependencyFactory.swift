@@ -5,8 +5,8 @@
 //  Created by Fabio Cezar Salata on 07/11/21.
 //
 
-import Foundation
 import UIKit
+import NetworkLayer
 
 final class DependencyFactory {
     lazy var navigationController = UINavigationController()

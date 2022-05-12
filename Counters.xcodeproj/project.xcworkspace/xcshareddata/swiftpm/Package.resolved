@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "networklayerpackage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fsalata/NetworkLayerPackage",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f0c479b93d68a969628aff1302564fc0e90ba52d"
+      }
+    }
+  ],
+  "version" : 2
+}
